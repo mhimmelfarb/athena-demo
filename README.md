@@ -7,8 +7,9 @@ Interactive demos for Remidi Works - Building Revenue Model Excellence.
 ## URLs
 
 - `/` - Landing page with both demo options
-- `/user` - Portfolio Company view (case study walkthrough)
-- `/investor` - Investor Portfolio dashboard
+- `/user` - Portfolio Company demo (default case study)
+- `/user?client=skupreme` - Custom company demo
+- `/investor` - Investor Portfolio dashboard (default)
 - `/investor?client=fundname` - Custom investor view
 
 ## Core Value Proposition
@@ -17,14 +18,78 @@ Interactive demos for Remidi Works - Building Revenue Model Excellence.
 - **SO WHAT:** Know what's broken (diagnosed gaps)
 - **NOW WHAT:** Fix what matters (prioritized action)
 
-## Adding New Investors
+---
+
+## Adding Custom Company Demos
 
 ### Step 1: Create a JSON file
 
-Create a new file in `src/data/` named after the investor (lowercase, hyphens for spaces):
+Create a new file in `src/data/` named after the company (lowercase, hyphens for spaces):
+- `skupreme.json`
+- `dataforge-ai.json`
+- `cloudsync-pro.json`
+
+### Step 2: Use this template
+
+```json
+{
+  "company": "SKUpreme",
+  "industry": "Retail Analytics Platform",
+  "arr": "$8M",
+  "stage": "Series A",
+  "website": "skupreme.com",
+  "scores": {
+    "valueArticulation": 5.2,
+    "pricingArchitecture": 4.8,
+    "competitivePositioning": 6.1,
+    "salesEnablement": 3.9,
+    "customerROI": 5.5
+  },
+  "actionPlan": [
+    { "name": "CFO-Ready Value Story", "priority": "High", "weeks": 2, "dimension": "customerROI" },
+    { "name": "Pricing Page Overhaul", "priority": "High", "weeks": 2, "dimension": "pricingArchitecture" },
+    { "name": "Sales Enablement Toolkit", "priority": "High", "weeks": 3, "dimension": "salesEnablement" },
+    { "name": "Competitive Battlecards", "priority": "Medium", "weeks": 1, "dimension": "competitivePositioning" },
+    { "name": "ROI Calculator", "priority": "Medium", "weeks": 2, "dimension": "customerROI" }
+  ]
+}
+```
+
+### Field Definitions - Company Demo
+
+| Field | Description |
+|-------|-------------|
+| `company` | Company name (displayed in header and situation text) |
+| `industry` | Industry/sector description |
+| `arr` | Annual recurring revenue (e.g., "$8M") |
+| `stage` | Funding stage (e.g., "Series A") |
+| `scores` | Object with 5 dimension scores (0-10 scale) |
+| `actionPlan` | Array of prioritized workstreams |
+
+### Action Plan Item Fields
+
+| Field | Description |
+|-------|-------------|
+| `name` | Workstream name |
+| `priority` | "High", "Medium", or "Low" |
+| `weeks` | Estimated duration |
+| `dimension` | Which score dimension this addresses |
+
+### Step 3: Share the custom URL
+
+```
+https://remidiworks.com/user?client=skupreme
+```
+
+---
+
+## Adding Custom Investor Demos
+
+### Step 1: Create a JSON file
+
+Create a new file in `src/data/` named after the investor:
 - `jump-capital.json`
 - `insight-partners.json`
-- `summit-partners.json`
 
 ### Step 2: Use this template
 
@@ -39,7 +104,6 @@ Create a new file in `src/data/` named after the investor (lowercase, hyphens fo
       "name": "Company Name",
       "sector": "Industry/Sector",
       "stage": "Series A/B/C",
-      "website": "company.com",
       "healthScore": 6.5,
       "relativeScore": 0.7,
       "valueArticulation": 6.8,
@@ -50,13 +114,13 @@ Create a new file in `src/data/` named after the investor (lowercase, hyphens fo
       "status": "average",
       "invested": 2023,
       "topGaps": ["Pricing Architecture"],
-      "observation": "One-line observation about the company"
+      "observation": "One-line observation"
     }
   ]
 }
 ```
 
-### Field Definitions
+### Field Definitions - Investor Demo
 
 | Field | Description |
 |-------|-------------|
@@ -72,7 +136,7 @@ Create a new file in `src/data/` named after the investor (lowercase, hyphens fo
 https://remidiworks.com/investor?client=jump-capital
 ```
 
-The `?client=` value must match the filename (without `.json`).
+---
 
 ## Development
 

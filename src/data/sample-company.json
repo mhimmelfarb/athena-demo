@@ -1,0 +1,21 @@
+{
+  "company": "Sample Corp",
+  "industry": "B2B SaaS",
+  "arr": "$10M",
+  "stage": "Series B",
+  "website": "samplecorp.com",
+  "scores": {
+    "valueArticulation": 5.5,
+    "pricingArchitecture": 6.0,
+    "competitivePositioning": 5.2,
+    "salesEnablement": 4.8,
+    "customerROI": 5.0
+  },
+  "actionPlan": [
+    { "name": "CFO-Ready Value Story", "priority": "High", "weeks": 2, "dimension": "customerROI" },
+    { "name": "Competitive Battlecards", "priority": "High", "weeks": 1, "dimension": "competitivePositioning" },
+    { "name": "Sales Enablement Toolkit", "priority": "Medium", "weeks": 3, "dimension": "salesEnablement" },
+    { "name": "Pricing Page Optimization", "priority": "Medium", "weeks": 2, "dimension": "pricingArchitecture" },
+    { "name": "Case Study Development", "priority": "Low", "weeks": 4, "dimension": "customerROI" }
+  ]
+}

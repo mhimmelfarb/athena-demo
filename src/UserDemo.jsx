@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const colors = {
   navy: '#3D5A80',
@@ -12,20 +12,38 @@ const colors = {
   red: '#C1292E'
 };
 
-const caseStudy = {
+// Default company data (used if no client param)
+const defaultCompany = {
   company: 'Aqfer',
-  role: 'Jordan Chen, VP Marketing',
   industry: 'Customer Data Platform',
   arr: '$12M',
-  stage: 'Series B'
+  stage: 'Series B',
+  website: 'aqfer.com',
+  scores: {
+    valueArticulation: 6.2,
+    pricingArchitecture: 7.5,
+    competitivePositioning: 5.8,
+    salesEnablement: 4.5,
+    customerROI: 6.0
+  },
+  actionPlan: [
+    { name: 'CFO-Ready Value Story', priority: 'High', weeks: 2, dimension: 'customerROI' },
+    { name: 'Competitive Battlecards', priority: 'High', weeks: 1, dimension: 'competitivePositioning' },
+    { name: 'Sales Enablement Toolkit', priority: 'Medium', weeks: 3, dimension: 'salesEnablement' },
+    { name: 'Pricing Page Optimization', priority: 'Medium', weeks: 2, dimension: 'pricingArchitecture' },
+    { name: 'Case Study Development', priority: 'Low', weeks: 4, dimension: 'customerROI' }
+  ]
 };
 
-const initialScores = {
-  valueArticulation: 6.2,
-  pricingArchitecture: 7.5,
-  competitivePositioning: 5.8,
-  salesEnablement: 4.5,
-  customerROI: 6.0
+// Dynamic import for client data files
+const loadClientData = async (clientId) => {
+  try {
+    const module = await import(`./data/${clientId}.json`);
+    return module.default;
+  } catch (e) {
+    console.log(`No data file found for client: ${clientId}, using default`);
+    return null;
+  }
 };
 
 const diagnosticQuestions = [
@@ -61,14 +79,6 @@ const diagnosticQuestions = [
   }
 ];
 
-const actionPlan = [
-  { id: 1, name: 'CFO-Ready Value Story', priority: 'High', status: 'ready', dimension: 'customerROI', weeks: 2 },
-  { id: 2, name: 'Competitive Battlecards', priority: 'High', status: 'ready', dimension: 'competitivePositioning', weeks: 1 },
-  { id: 3, name: 'Sales Enablement Toolkit', priority: 'Medium', status: 'ready', dimension: 'salesEnablement', weeks: 3 },
-  { id: 4, name: 'Pricing Page Optimization', priority: 'Medium', status: 'locked', dimension: 'pricingArchitecture', weeks: 2 },
-  { id: 5, name: 'Case Study Development', priority: 'Low', status: 'locked', dimension: 'customerROI', weeks: 4 },
-];
-
 const StepIndicator = ({ current, total }) => (
   <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginBottom: 24 }}>
     {Array.from({ length: total }, (_, i) => (
@@ -84,11 +94,59 @@ const StepIndicator = ({ current, total }) => (
 );
 
 export default function UserDemo() {
+  const [searchParams] = useSearchParams();
+  const [companyData, setCompanyData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [step, setStep] = useState(0);
-  const [scores, setScores] = useState(initialScores);
+  const [scores, setScores] = useState(null);
+  const [initialScores, setInitialScores] = useState(null);
   const [answers, setAnswers] = useState({});
   const [typing, setTyping] = useState(false);
   const [typedText, setTypedText] = useState('');
+
+  // Load client data based on URL parameter
+  useEffect(() => {
+    const loadData = async () => {
+      const clientId = searchParams.get('client');
+      
+      if (clientId) {
+        const clientData = await loadClientData(clientId);
+        if (clientData) {
+          setCompanyData(clientData);
+          setScores({ ...clientData.scores });
+          setInitialScores({ ...clientData.scores });
+        } else {
+          setCompanyData(defaultCompany);
+          setScores({ ...defaultCompany.scores });
+          setInitialScores({ ...defaultCompany.scores });
+        }
+      } else {
+        setCompanyData(defaultCompany);
+        setScores({ ...defaultCompany.scores });
+        setInitialScores({ ...defaultCompany.scores });
+      }
+      setLoading(false);
+    };
+    
+    loadData();
+  }, [searchParams]);
+
+  if (loading || !companyData || !scores) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        fontFamily: "'Inter', sans-serif"
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: 24, fontWeight: 600, color: colors.navy, marginBottom: 8 }}>Loading...</div>
+          <div style={{ color: '#6b7280' }}>Preparing diagnostic</div>
+        </div>
+      </div>
+    );
+  }
 
   const avgScore = Object.values(scores).reduce((a, b) => a + b, 0) / Object.keys(scores).length;
 
@@ -117,8 +175,8 @@ export default function UserDemo() {
   };
 
   const handleNext = () => {
-    if (step === 3) {
-      simulateTyping("Analyzing your responses and generating personalized recommendations...", () => {
+    if (step === 4) {
+      simulateTyping("Analyzing your responses and generating recommendations...", () => {
         setTimeout(() => setStep(step + 1), 500);
       });
     } else {
@@ -148,31 +206,53 @@ export default function UserDemo() {
   );
 
   const steps = [
-    // Step 0: Meet Jordan
-    <div key="intro" style={{ textAlign: 'center', padding: 40 }}>
-      <div style={{ fontSize: 48, marginBottom: 16 }}>👋</div>
-      <h2 style={{ fontSize: 28, fontWeight: 600, color: colors.darkNavy, marginBottom: 16 }}>
-        Meet Jordan Chen
-      </h2>
-      <p style={{ fontSize: 16, color: '#6b7280', marginBottom: 24, maxWidth: 500, margin: '0 auto 24px' }}>
-        VP of Marketing at {caseStudy.company}, a {caseStudy.industry} company at {caseStudy.arr} ARR. 
-        Jordan's team needs to improve win rates and reduce discounting.
-      </p>
+    // Step 0: The Situation
+    <div key="situation" style={{ padding: 20 }}>
       <div style={{ 
-        display: 'inline-flex', gap: 24, padding: 16, 
-        backgroundColor: '#f9fafb', borderRadius: 12 
+        fontSize: 13, 
+        fontWeight: 600, 
+        color: colors.coral, 
+        marginBottom: 16,
+        textTransform: 'uppercase',
+        letterSpacing: '0.5px'
       }}>
-        <div style={{ textAlign: 'left' }}>
-          <div style={{ fontSize: 12, color: '#6b7280' }}>Company</div>
-          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{caseStudy.company}</div>
+        The Situation
+      </div>
+      
+      <div style={{ 
+        fontSize: 18, 
+        color: colors.darkNavy, 
+        lineHeight: 1.7,
+        marginBottom: 32
+      }}>
+        <strong>{companyData.company}</strong> is missing pipeline targets. The board suspects the root cause isn't sales execution—it's gaps in your revenue model and commercialization fundamentals.
+        <br /><br />
+        You've tasked your CMO and Head of Sales to diagnose the problem and build an action plan. <strong>This is what they found.</strong>
+      </div>
+
+      <div style={{ 
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: 16,
+        padding: 20, 
+        backgroundColor: '#f9fafb', 
+        borderRadius: 12 
+      }}>
+        <div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>Company</div>
+          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{companyData.company}</div>
         </div>
-        <div style={{ textAlign: 'left' }}>
-          <div style={{ fontSize: 12, color: '#6b7280' }}>ARR</div>
-          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{caseStudy.arr}</div>
+        <div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>Industry</div>
+          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{companyData.industry}</div>
         </div>
-        <div style={{ textAlign: 'left' }}>
-          <div style={{ fontSize: 12, color: '#6b7280' }}>Stage</div>
-          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{caseStudy.stage}</div>
+        <div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>ARR</div>
+          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{companyData.arr}</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>Stage</div>
+          <div style={{ fontWeight: 600, color: colors.darkNavy }}>{companyData.stage}</div>
         </div>
       </div>
     </div>,
@@ -183,43 +263,41 @@ export default function UserDemo() {
         Initial Assessment
       </h2>
       <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 24 }}>
-        Based on observable data from your website, G2 reviews, and LinkedIn presence:
+        Based on observable data from {companyData.company}'s website, reviews, and market presence:
       </p>
       <div style={{ 
         display: 'grid', gridTemplateColumns: '1fr 200px', gap: 32,
         backgroundColor: '#f9fafb', borderRadius: 12, padding: 24
       }}>
         <div>
-          <ScoreBar label="Value Articulation" score={scores.valueArticulation} />
-          <ScoreBar label="Pricing Architecture" score={scores.pricingArchitecture} />
-          <ScoreBar label="Competitive Positioning" score={scores.competitivePositioning} />
-          <ScoreBar label="Sales Enablement" score={scores.salesEnablement} />
-          <ScoreBar label="Customer ROI" score={scores.customerROI} />
+          <ScoreBar label="Value Articulation" score={initialScores.valueArticulation} />
+          <ScoreBar label="Pricing Architecture" score={initialScores.pricingArchitecture} />
+          <ScoreBar label="Competitive Positioning" score={initialScores.competitivePositioning} />
+          <ScoreBar label="Sales Enablement" score={initialScores.salesEnablement} />
+          <ScoreBar label="Customer ROI" score={initialScores.customerROI} />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 48, fontWeight: 700, color: colors.coral }}>{avgScore.toFixed(1)}</div>
-          <div style={{ fontSize: 14, color: '#6b7280' }}>Overall Score</div>
-          <div style={{ 
-            marginTop: 16, padding: 12, backgroundColor: `${colors.yellow}15`, 
-            borderRadius: 8, fontSize: 13 
-          }}>
-            <strong>23% upside</strong> potential identified
+          <div style={{ fontSize: 48, fontWeight: 700, color: colors.coral }}>
+            {(Object.values(initialScores).reduce((a, b) => a + b, 0) / 5).toFixed(1)}
           </div>
+          <div style={{ fontSize: 14, color: '#6b7280' }}>Overall Score</div>
         </div>
       </div>
     </div>,
 
-    // Step 2-4: Diagnostic questions
+    // Steps 2-4: Diagnostic Questions
     ...diagnosticQuestions.map((q, idx) => (
       <div key={`q${q.id}`}>
-        <h2 style={{ fontSize: 20, fontWeight: 600, color: colors.darkNavy, marginBottom: 8 }}>
-          Quick Diagnostic ({idx + 1}/3)
+        <div style={{ fontSize: 12, color: colors.coral, fontWeight: 600, marginBottom: 8 }}>
+          QUESTION {idx + 1} OF 3
+        </div>
+        <h2 style={{ fontSize: 18, fontWeight: 600, color: colors.darkNavy, marginBottom: 24 }}>
+          {q.question}
         </h2>
-        <p style={{ fontSize: 16, color: '#6b7280', marginBottom: 24 }}>{q.question}</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {q.options.map((opt, i) => (
+          {q.options.map((opt) => (
             <button
-              key={i}
+              key={opt.label}
               onClick={() => handleAnswer(q.id, opt)}
               style={{
                 padding: 16, borderRadius: 8, textAlign: 'left',
@@ -241,7 +319,7 @@ export default function UserDemo() {
         Refined Assessment
       </h2>
       <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 24 }}>
-        Based on your inputs, here's your updated commercialization health:
+        Based on your inputs, here's {companyData.company}'s updated commercialization health:
       </p>
       <div style={{ 
         display: 'grid', gridTemplateColumns: '1fr 200px', gap: 32,
@@ -264,25 +342,25 @@ export default function UserDemo() {
     // Step 6: Action Plan
     <div key="plan">
       <h2 style={{ fontSize: 20, fontWeight: 600, color: colors.darkNavy, marginBottom: 8 }}>
-        Your Action Plan
+        {companyData.company}'s Action Plan
       </h2>
       <p style={{ fontSize: 14, color: '#6b7280', marginBottom: 24 }}>
-        Prioritized workstreams based on impact and your current gaps:
+        Prioritized workstreams based on impact and current gaps:
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {actionPlan.map((item, idx) => (
+        {companyData.actionPlan.map((item, idx) => (
           <div 
-            key={item.id}
+            key={idx}
             style={{
               display: 'flex', alignItems: 'center', gap: 16,
               padding: 16, backgroundColor: '#fff', borderRadius: 8,
               border: '1px solid #e5e7eb',
-              opacity: item.status === 'locked' ? 0.5 : 1
+              opacity: idx >= 3 ? 0.5 : 1
             }}
           >
             <div style={{ 
               width: 32, height: 32, borderRadius: '50%',
-              backgroundColor: item.status === 'ready' ? colors.coral : '#e5e7eb',
+              backgroundColor: idx < 3 ? colors.coral : '#e5e7eb',
               color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontWeight: 600, fontSize: 14
             }}>
@@ -348,7 +426,7 @@ export default function UserDemo() {
                 fontWeight: 700, color: '#fff', fontSize: 11, letterSpacing: '-0.5px'
               }}>RW</span>
               <span style={{ fontSize: 16, fontWeight: 600, color: '#fff' }}>Remidi Works</span>
-              <span style={{ fontSize: 12, color: colors.lightBlue }}>• Case Study</span>
+              <span style={{ fontSize: 12, color: colors.lightBlue }}>• {companyData.company}</span>
             </div>
           </div>
         </div>
