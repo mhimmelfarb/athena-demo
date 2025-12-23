@@ -337,7 +337,7 @@ export default function InvestorPortfolioDashboard() {
                   justifyContent: 'center',
                   fontWeight: 700,
                   color: '#fff',
-                  fontSize: '12px'
+                  fontSize: '10px'
                 }}>RW</span>
                 <span style={{ fontSize: '20px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>Remidi Works</span>
               </div>

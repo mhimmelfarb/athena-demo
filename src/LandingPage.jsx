@@ -22,21 +22,24 @@ export default function LandingPage() {
         padding: '16px 24px',
         borderBottom: `3px solid ${colors.coral}`
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ 
-            backgroundColor: colors.coral, 
-            width: '36px', 
-            height: '36px', 
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontWeight: 700,
-            color: '#fff',
-            fontSize: '14px'
-          }}>RW</span>
-          <span style={{ fontSize: '22px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>Remidi Works</span>
-          <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '8px' }}>Demo Experience</span>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ 
+              backgroundColor: colors.coral, 
+              width: '36px', 
+              height: '36px', 
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              color: '#fff',
+              fontSize: '12px'
+            }}>RW</span>
+            <span style={{ fontSize: '22px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>Remidi Works</span>
+            <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '8px' }}>Building Revenue Model Excellence</span>
+          </div>
+          <span style={{ fontSize: '12px', color: colors.lightBlue }}>RemidiWorks.com</span>
         </div>
       </header>
 
@@ -55,7 +58,7 @@ export default function LandingPage() {
             marginBottom: '24px'
           }}>
             <span style={{ fontSize: '12px', fontWeight: 600, color: colors.coral, letterSpacing: '0.5px' }}>
-              INTERACTIVE PRODUCT DEMOS
+              FOR MIDDLE MARKET PE FIRMS & PORTFOLIO COMPANIES
             </span>
           </div>
           
@@ -76,8 +79,8 @@ export default function LandingPage() {
             marginBottom: '16px',
             lineHeight: 1.6
           }}>
-            Remidi Works helps PE firms and their portfolio companies diagnose and fix revenue model gaps—
-            with peer benchmarking, prioritized action plans, and expert support when you need it.
+            Continuous benchmarking and diagnostics that identify pricing underperformers, 
+            calculate dollar upside, and prioritize fixes across your portfolio.
           </p>
           
           <p style={{ 
@@ -125,7 +128,7 @@ export default function LandingPage() {
                 <span style={{ fontSize: '28px' }}>👤</span>
               </div>
               <h2 style={{ fontSize: '24px', fontWeight: 700, color: colors.darkNavy, marginBottom: '8px' }}>
-                User Experience
+                Portfolio Company View
               </h2>
               <p style={{ fontSize: '14px', color: '#6b7280' }}>
                 For CMOs, CROs, and Marketing Leaders
@@ -160,7 +163,7 @@ export default function LandingPage() {
               }}>
                 <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Demo Company</div>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy }}>
-                  Aqfer • Customer Data Platform • Series B
+                  NovaTech • Customer Data Platform • Series B
                 </div>
               </div>
               
@@ -181,7 +184,7 @@ export default function LandingPage() {
                   gap: '8px',
                   transition: 'background-color 0.2s'
                 }}>
-                  Explore User Demo
+                  Explore Portfolio Company Demo
                   <span style={{ fontSize: '18px' }}>→</span>
                 </button>
               </Link>
@@ -215,7 +218,7 @@ export default function LandingPage() {
                 <span style={{ fontSize: '28px' }}>📊</span>
               </div>
               <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>
-                Investor Experience
+                Investor Portfolio View
               </h2>
               <p style={{ fontSize: '14px', color: colors.lightBlue }}>
                 For PE/VC Investors and Operating Partners
@@ -291,8 +294,8 @@ export default function LandingPage() {
             Why Remidi Works?
           </h3>
           <p style={{ fontSize: '16px', color: '#6b7280', marginBottom: '40px', maxWidth: '600px', margin: '0 auto 40px' }}>
-            Our work with growth-stage B2B companies consistently reveals 20-30% of potential revenue 
-            left on the table due to commercialization gaps.
+            Our research shows B2B companies leave 20-30% of potential revenue 
+            on the table due to commercialization gaps.
           </p>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
@@ -336,7 +339,7 @@ export default function LandingPage() {
             <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '4px' }}>by HG Partners</span>
           </div>
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)' }}>
-            Decision support platform for revenue model excellence
+            Data-first revenue model excellence platform for growth-stage B2B tech companies
           </p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '16px' }}>
             © 2025 HG Partners. Demo for concept testing purposes.

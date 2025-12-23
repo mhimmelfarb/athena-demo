@@ -81,7 +81,6 @@ export default function UserDemo() {
   const handleAnswer = (questionId, option) => {
     setAnswers(prev => ({ ...prev, [questionId]: option.label }));
     
-    // Update scores based on impact
     setScores(prev => {
       const newScores = { ...prev };
       Object.entries(option.scoreImpact).forEach(([key, value]) => {
@@ -90,19 +89,18 @@ export default function UserDemo() {
       return newScores;
     });
 
-    // Move to next question or assessment
     const currentQuestionIndex = questions.findIndex(q => q.id === questionId);
     if (currentQuestionIndex < questions.length - 1) {
       setTimeout(() => {
         typeText(questions[currentQuestionIndex + 1].text);
       }, 500);
     } else {
-      setTimeout(() => setStep(2), 500);
+      setTimeout(() => setStep(3), 500);
     }
   };
 
   useEffect(() => {
-    if (step === 1) {
+    if (step === 2) {
       typeText(questions[0].text);
     }
   }, [step]);
@@ -147,7 +145,88 @@ export default function UserDemo() {
   );
 
   const steps = [
-    // STEP 0: Dashboard Home
+    // STEP 0: The Situation
+    {
+      title: "The Situation",
+      content: (
+        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+          <div style={{
+            background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`,
+            borderRadius: 16, padding: 40, marginBottom: 32, color: '#fff',
+            textAlign: 'center',
+          }}>
+            <div style={{ fontSize: 12, letterSpacing: '0.15em', textTransform: 'uppercase', color: colors.accentSoft, marginBottom: 16 }}>
+              The Situation
+            </div>
+            <div style={{ fontSize: 28, fontWeight: 700, marginBottom: 16, lineHeight: 1.3 }}>
+              NovaTech is missing pipeline targets.
+            </div>
+            <div style={{ fontSize: 16, color: '#d1d5db', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
+              The board suspects the root cause isn't sales execution—it's gaps in your revenue model and commercialization fundamentals.
+            </div>
+          </div>
+
+          <div style={{
+            backgroundColor: '#fff',
+            borderRadius: 12,
+            padding: 32,
+            border: '1px solid #e5e7eb',
+            marginBottom: 24,
+          }}>
+            <div style={{ fontSize: 16, color: colors.primaryDark, lineHeight: 1.8, marginBottom: 24 }}>
+              You've tasked your CMO and Head of Sales to diagnose the problem and build an action plan. 
+              <strong style={{ color: colors.accent }}> This is what they found.</strong>
+            </div>
+
+            <div style={{ 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 16,
+              padding: 20, 
+              backgroundColor: '#f9fafb', 
+              borderRadius: 12 
+            }}>
+              <div>
+                <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>Company</div>
+                <div style={{ fontWeight: 600, color: colors.primaryDark }}>NovaTech</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>Industry</div>
+                <div style={{ fontWeight: 600, color: colors.primaryDark }}>Customer Data Platform</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>ARR</div>
+                <div style={{ fontWeight: 600, color: colors.primaryDark }}>$12M</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 4 }}>Stage</div>
+                <div style={{ fontWeight: 600, color: colors.primaryDark }}>Series B</div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setStep(1)}
+            style={{
+              width: '100%',
+              padding: '16px 24px',
+              background: `linear-gradient(135deg, ${colors.accent}, #f97316)`,
+              color: '#fff',
+              border: 'none',
+              borderRadius: 8,
+              fontSize: 15,
+              fontWeight: 600,
+              cursor: 'pointer',
+              boxShadow: '0 4px 12px rgba(238, 108, 77, 0.3)',
+            }}
+          >
+            See the Diagnostic Results →
+          </button>
+        </div>
+      )
+    },
+
+    // STEP 1: Dashboard Home
     {
       title: "Your Dashboard",
       content: (
@@ -162,7 +241,7 @@ export default function UserDemo() {
                 <div style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: colors.accentSoft, marginBottom: 6 }}>
                   REMIDI WORKS • Case Study Accelerator
                 </div>
-                <div style={{ fontSize: 24, fontWeight: 700 }}>Aqfer</div>
+                <div style={{ fontSize: 24, fontWeight: 700 }}>NovaTech</div>
                 <div style={{ fontSize: 13, color: '#d1d5db' }}>Customer Data Platform • Series B</div>
               </div>
               <div style={{ textAlign: 'right' }}>
@@ -257,7 +336,7 @@ export default function UserDemo() {
                   Answer 3 quick questions to sharpen this analysis with information only you know.
                 </div>
                 <button
-                  onClick={() => setStep(1)}
+                  onClick={() => setStep(2)}
                   style={{
                     width: '100%',
                     padding: '12px 16px',
@@ -299,7 +378,7 @@ export default function UserDemo() {
       )
     },
 
-    // STEP 1: Quick Diagnostic
+    // STEP 2: Quick Diagnostic
     {
       title: "Quick Diagnostic",
       content: (
@@ -311,7 +390,7 @@ export default function UserDemo() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <div style={{ fontSize: 11, letterSpacing: '0.1em', color: colors.accentSoft, marginBottom: 4 }}>REFINING ASSESSMENT</div>
-                <div style={{ fontSize: 20, fontWeight: 700 }}>Aqfer • Quick Diagnostic</div>
+                <div style={{ fontSize: 20, fontWeight: 700 }}>NovaTech • Quick Diagnostic</div>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: 11, color: colors.accentSoft }}>Current Score</div>
@@ -353,7 +432,7 @@ export default function UserDemo() {
                   width: 40, height: 40, borderRadius: '50%',
                   background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', fontWeight: 700, fontSize: '12px',
+                  color: '#fff', fontWeight: 700, fontSize: 14,
                 }}>RW</div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 600, color: colors.primaryDark }}>Remidi Works AI Coach</div>
@@ -419,7 +498,7 @@ export default function UserDemo() {
       )
     },
 
-    // STEP 2: Updated Assessment
+    // STEP 3: Updated Assessment
     {
       title: "Updated Assessment",
       content: (
@@ -497,7 +576,7 @@ export default function UserDemo() {
           </div>
 
           <button
-            onClick={() => setStep(3)}
+            onClick={() => setStep(4)}
             style={{
               width: '100%',
               padding: '16px 24px',
@@ -517,7 +596,7 @@ export default function UserDemo() {
       )
     },
 
-    // STEP 3: Action Plan
+    // STEP 4: Action Plan
     {
       title: "Your Action Plan",
       content: (
@@ -574,7 +653,7 @@ export default function UserDemo() {
                 </div>
                 {s.status === 'ready' && (
                   <button
-                    onClick={() => setStep(4)}
+                    onClick={() => setStep(5)}
                     style={{
                       padding: '8px 16px',
                       backgroundColor: colors.accent,
@@ -599,7 +678,7 @@ export default function UserDemo() {
       )
     },
 
-    // STEP 4: Executing Step 1
+    // STEP 5: Executing Step 1
     {
       title: "Identify Value Drivers",
       content: (
@@ -667,7 +746,7 @@ export default function UserDemo() {
                 { name: 'Segment', hasCalc: true, hasStudies: true, rating: 'Strong' },
                 { name: 'mParticle', hasCalc: true, hasStudies: true, rating: 'Strong' },
                 { name: 'Tealium', hasCalc: false, hasStudies: true, rating: 'Medium' },
-                { name: 'Aqfer (You)', hasCalc: false, hasStudies: false, rating: 'Weak' },
+                { name: 'NovaTech (You)', hasCalc: false, hasStudies: false, rating: 'Weak' },
               ].map((c, i) => (
                 <div key={i} style={{
                   display: 'flex',
@@ -696,7 +775,7 @@ export default function UserDemo() {
 
           <div style={{ marginTop: 24 }}>
             <button
-              onClick={() => setStep(5)}
+              onClick={() => setStep(6)}
               style={{
                 width: '100%',
                 padding: '16px 24px',
@@ -717,7 +796,7 @@ export default function UserDemo() {
       )
     },
 
-    // STEP 5: Pause & Resume
+    // STEP 6: Pause & Resume
     {
       title: "Work At Your Pace",
       content: (
@@ -775,7 +854,7 @@ export default function UserDemo() {
           </div>
 
           <button
-            onClick={() => setStep(6)}
+            onClick={() => setStep(7)}
             style={{
               width: '100%',
               padding: '16px 24px',
@@ -795,7 +874,7 @@ export default function UserDemo() {
       )
     },
 
-    // STEP 6: Why Remidi Works
+    // STEP 7: Why Remidi Works
     {
       title: "Why Remidi Works",
       content: (
@@ -863,7 +942,7 @@ export default function UserDemo() {
                 marginRight: 12,
               }}
             >
-              ← Back to Dashboard
+              ← Back to Start
             </button>
             <Link to="/" style={{ textDecoration: 'none' }}>
               <button
