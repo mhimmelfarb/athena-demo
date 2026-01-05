@@ -93,14 +93,14 @@ export default function LandingPage() {
       </section>
 
       {/* Two Paths Section */}
-      <section style={{ padding: '80px 24px', maxWidth: '1100px', margin: '0 auto' }}>
+      <section style={{ padding: '80px 24px', maxWidth: '1000px', margin: '0 auto' }}>
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
           gap: '32px' 
         }}>
           
-          {/* User Demo Card */}
+          {/* Portfolio Company Demo Card */}
           <div style={{ 
             backgroundColor: '#fff',
             borderRadius: '16px',
@@ -149,7 +149,6 @@ export default function LandingPage() {
                   <li>Real-time score refinement through AI interview</li>
                   <li>Prioritized action plan based on gaps</li>
                   <li>Step-by-step workstream execution</li>
-                  <li>Pause and resume capability</li>
                 </ul>
               </div>
               
@@ -161,7 +160,7 @@ export default function LandingPage() {
               }}>
                 <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>Demo Company</div>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy }}>
-                  NovaTech • Customer Data Platform • Series B
+                  FleetOps • Logistics Tech • Series A
                 </div>
               </div>
               
@@ -224,8 +223,8 @@ export default function LandingPage() {
             <div style={{ padding: '32px' }}>
               <p style={{ fontSize: '15px', color: '#4b5563', lineHeight: 1.7, marginBottom: '24px' }}>
                 See how investors use Remidi Works to monitor Revenue Model Health across their 
-                entire portfolio—identifying which companies need attention and benchmarking 
-                against peer funds.
+                entire portfolio—identifying which companies need attention and drilling into 
+                improvement opportunities.
               </p>
               
               <div style={{ marginBottom: '24px' }}>
@@ -235,9 +234,8 @@ export default function LandingPage() {
                 <ul style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.8, paddingLeft: '20px' }}>
                   <li>Portfolio-wide health scores from public data</li>
                   <li>Company ranking vs. 100-company universe</li>
-                  <li>Top 3 improvement priorities per underperformer</li>
-                  <li>Peer fund benchmarking</li>
-                  <li>Pathway to deeper diagnostics</li>
+                  <li>Top improvement priorities per underperformer</li>
+                  <li>Drill-down to company diagnostic workflow</li>
                 </ul>
               </div>
               

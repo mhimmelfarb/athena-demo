@@ -1,72 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-// Default company data (NovaTech)
+// Default company data (FleetOps)
 const defaultCompanyData = {
   company: {
-    name: "NovaTech",
-    industry: "Customer Data Platform",
-    arr: "$12M",
-    stage: "Series B"
+    name: "FleetOps",
+    industry: "Logistics Tech",
+    arr: "$6.8M",
+    stage: "Series A"
   },
   situation: {
-    headline: "NovaTech is missing pipeline targets.",
+    headline: "FleetOps is missing pipeline targets.",
     narrative: "The board suspects the root cause isn't sales execution—it's gaps in your revenue model and commercialization fundamentals.",
     context: "You've tasked your CMO and Head of Sales to diagnose the problem and build an action plan."
   },
   scores: {
     initial: {
-      valueArticulation: { score: 5, status: "warning" },
-      differentiation: { score: 6, status: "warning" },
-      salesEnablement: { score: 3, status: "critical" }
+      valueArticulation: { score: 3.5, status: "critical" },
+      differentiation: { score: 4.9, status: "warning" },
+      salesEnablement: { score: 3.2, status: "critical" }
     },
     postDiagnostic: {
-      valueArticulation: { score: 4.5, status: "warning" },
-      differentiation: { score: 6, status: "warning" },
-      salesEnablement: { score: 2.5, status: "critical" }
+      valueArticulation: { score: 3.2, status: "critical" },
+      differentiation: { score: 4.9, status: "warning" },
+      salesEnablement: { score: 2.8, status: "critical" }
     },
-    commercialMaturity: { initial: 4.7, postDiagnostic: 4.3, benchmark: 6.2 }
+    commercialMaturity: { initial: 4.2, postDiagnostic: 3.9, benchmark: 6.2 }
   },
   criticalGap: {
     title: "Critical Gap Detected",
     metric: "2/10",
     metricLabel: "CFO-Ready Index™",
-    description: "Your case studies score <strong>2/10</strong> on the CFO-Ready Index™. For $150-250K deals with CFO sign-off, benchmark is 7+. This gap is likely costing <strong>15-25% of winnable deals</strong>."
+    description: "Your case studies score <strong>2/10</strong> on the CFO-Ready Index™. For $100-200K deals with CFO sign-off, benchmark is 7+. This gap is likely costing <strong>15-25% of winnable deals</strong>."
   },
-  aiCoachInsight: "I've analyzed NovaTech's public footprint. Your <strong>Sales Enablement score of 3/10</strong> is your biggest blocker. I see strong value claims — '70% cloud savings', '5.5 FTEs reduced' — but they're not quantified in dollars. <strong>A few quick questions will sharpen this picture.</strong>",
+  aiCoachInsight: "I've analyzed FleetOps' public footprint. Your <strong>Sales Enablement score of 3.2/10</strong> is your biggest blocker. I see operational stats — 'delivery times', 'route efficiency' — but they're not connected to customer P&L impact. <strong>A few quick questions will sharpen this picture.</strong>",
   diagnostic: {
     q1: {
       question: "When you lose deals, is it price confusion, proof points, or something else?",
-      answer: "Prospects can't figure out what we cost. And when they ask for customer examples, we don't have strong quantified stories.",
+      answer: "Prospects don't understand our pricing model. And when they ask how much they'll save, we can't give them specific numbers.",
       insight: "→ Confirms Sales Enablement gap (pricing clarity + proof points)"
     },
     q2: {
       question: "How many case studies would you confidently share with a CFO?",
-      answer: "Maybe one or two, but they don't have the financial proof points a CFO wants.",
+      answer: "Honestly, zero. We have testimonials but nothing with hard ROI numbers.",
       insight: "→ CFO-Ready Index™ score: 2/10 (below threshold for enterprise deals)"
     },
     q3: {
       question: "What's blocking better case studies right now?",
-      answer: "No process. Nobody owns it. Not sure what questions to ask customers.",
+      answer: "No process. Nobody owns it. We know customers are saving money but haven't documented it.",
       insight: "→ Root cause: methodology gap (solvable with Remidi Works)"
     }
   },
   patternDetected: {
     title: "Pattern Detected",
-    description: "$200K ACV + CFO sign-off + no quantified proof = deals dying at decision stage",
-    source: "Based on analysis of 47 similar companies"
+    description: "$150K ACV + CFO sign-off + no quantified proof = deals dying at decision stage",
+    source: "Based on analysis of 52 similar logistics tech companies"
   },
   criticalFinding: {
-    description: "Your case studies score <strong>2/10 on the CFO-Ready Index™</strong>. For $150-250K deals with CFO sign-off, benchmark is 7+. <strong>Estimated impact:</strong> This gap is likely costing 15-25% of winnable deals."
+    description: "Your case studies score <strong>2/10 on the CFO-Ready Index™</strong>. For $100-200K deals with CFO sign-off, benchmark is 7+. <strong>Estimated impact:</strong> This gap is likely costing 15-25% of winnable deals."
   },
   priorities: [
-    { rank: 1, name: "Case Study Strategy", status: "critical", description: "Transform claims → CFO-ready proof using HGP Proof Point Protocol™", impact: "Est. +20-30% win rate" },
-    { rank: 2, name: "Pricing Clarity", status: "warning", description: "Publish pricing or ROI calculator for self-qualification" },
-    { rank: 3, name: "Differentiation Messaging", status: "good", description: "Elevate white-label advantage to headline" }
+    { rank: 1, name: "Case Study Strategy", status: "critical", description: "Transform operational stats → CFO-ready ROI proof using HGP Proof Point Protocol™", impact: "Est. +20-30% win rate" },
+    { rank: 2, name: "Pricing Clarity", status: "warning", description: "Publish pricing or ROI calculator showing fleet cost savings" },
+    { rank: 3, name: "Value Articulation", status: "critical", description: "Connect route efficiency to customer P&L impact" }
   ],
-  expertInsight: "Your '70% cloud savings' claim could be worth $1.26M annually to customers. That's a story that closes deals — if you quantify it.",
+  expertInsight: "Your 'route optimization' claims could translate to $200K+ annual savings for mid-size fleets. That's a story that closes deals — if you quantify it.",
   projectedImprovement: {
-    current: 2.5,
+    current: 2.8,
     afterProject: 6.5,
     benchmark: 7.0,
     winRateImprovement: "+15-20%"
