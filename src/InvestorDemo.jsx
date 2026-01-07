@@ -242,7 +242,68 @@ const MiniGauge = ({ score, size = 60 }) => {
 };
 
 // Score bar component
-const ScoreBar = ({ score, label, compact = false }) => {
+// Dimension tooltip content
+const dimensionTooltips = {
+  'Value Articulation': {
+    description: 'How well customer outcomes are quantified across the 9 Value Levers',
+    components: [
+      'Time Savings',
+      'Cost Displacement', 
+      'Risk Mitigation',
+      'Revenue Acceleration',
+      'Quality Improvement',
+      'Scalability',
+      'Decision Intelligence',
+      'Workforce Optimization',
+      'Competitive Advantage'
+    ]
+  },
+  'Pricing Architecture': {
+    description: 'Clarity and structure of pricing model',
+    components: [
+      'Pricing Transparency',
+      'Value-Based Model Signals',
+      'No Hidden Fees',
+      'Clear Inclusions',
+      'Low Commitment Entry Options'
+    ]
+  },
+  'Competitive Positioning': {
+    description: 'Whether competitive claims are proven with evidence',
+    components: [
+      'Differentiation Claims',
+      'Evidence Provided',
+      'Competitive Awareness',
+      'G2/Capterra Positioning'
+    ]
+  },
+  'Sales Enablement': {
+    description: 'Information completeness for buyer self-qualification',
+    components: [
+      'ICP/Persona Clarity',
+      'Product Description',
+      'Try Before Buy',
+      'Demo/Trial Access',
+      'Decision-Making Information'
+    ]
+  },
+  'Customer ROI Proof': {
+    description: 'Third-party credibility and validation',
+    components: [
+      'Customer Logos (Relevant)',
+      'Named Testimonials',
+      'Quantified Case Studies',
+      'Hard Numbers',
+      'Review Site Presence',
+      'Third-Party Validation'
+    ]
+  }
+};
+
+const ScoreBar = ({ score, label, compact = false, showTooltip = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const tooltip = dimensionTooltips[label];
+  
   const getColor = (s) => {
     if (s >= 7) return colors.green;
     if (s >= 5.5) return colors.yellow;
@@ -250,9 +311,18 @@ const ScoreBar = ({ score, label, compact = false }) => {
   };
   
   return (
-    <div style={{ marginBottom: compact ? '6px' : '10px' }}>
+    <div 
+      style={{ marginBottom: compact ? '6px' : '10px', position: 'relative' }}
+      onMouseEnter={() => showTooltip && setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-        <span style={{ fontSize: compact ? '10px' : '11px', color: '#6b7280' }}>{label}</span>
+        <span style={{ 
+          fontSize: compact ? '10px' : '11px', 
+          color: '#6b7280',
+          cursor: showTooltip ? 'help' : 'default',
+          borderBottom: showTooltip ? '1px dotted #9ca3af' : 'none'
+        }}>{label}</span>
         <span style={{ fontSize: compact ? '10px' : '11px', fontWeight: 600, color: colors.darkNavy }}>{score.toFixed(1)}</span>
       </div>
       <div style={{ height: compact ? '4px' : '6px', backgroundColor: '#e5e7eb', borderRadius: '3px', overflow: 'hidden' }}>
@@ -266,6 +336,36 @@ const ScoreBar = ({ score, label, compact = false }) => {
           }} 
         />
       </div>
+      
+      {/* Tooltip */}
+      {showTooltip && isHovered && tooltip && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          right: 0,
+          marginTop: '8px',
+          padding: '12px 14px',
+          backgroundColor: colors.darkNavy,
+          color: '#fff',
+          borderRadius: '8px',
+          fontSize: '11px',
+          zIndex: 100,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+        }}>
+          <div style={{ marginBottom: '8px', color: colors.lightBlue, fontWeight: 600 }}>
+            {tooltip.description}
+          </div>
+          <div style={{ fontSize: '10px', color: '#9ca3af', marginBottom: '6px' }}>
+            Scoring components:
+          </div>
+          <ul style={{ margin: 0, paddingLeft: '14px', lineHeight: 1.6 }}>
+            {tooltip.components.map((item, idx) => (
+              <li key={idx} style={{ color: '#e5e7eb' }}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
@@ -1102,12 +1202,13 @@ export default function InvestorPortfolioDashboard() {
                 boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
               }}>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy, marginBottom: '16px' }}>Portfolio Dimension Averages</div>
+                <div style={{ fontSize: '10px', color: '#9ca3af', marginBottom: '12px' }}>Hover over dimension names to see scoring components</div>
                 
-                <ScoreBar score={dimAverages.valueArticulation} label="Value Articulation" />
-                <ScoreBar score={dimAverages.pricingArchitecture} label="Pricing Architecture" />
-                <ScoreBar score={dimAverages.competitivePositioning} label="Competitive Positioning" />
-                <ScoreBar score={dimAverages.salesEnablement} label="Sales Enablement" />
-                <ScoreBar score={dimAverages.customerROI} label="Customer ROI Proof" />
+                <ScoreBar score={dimAverages.valueArticulation} label="Value Articulation" showTooltip={true} />
+                <ScoreBar score={dimAverages.pricingArchitecture} label="Pricing Architecture" showTooltip={true} />
+                <ScoreBar score={dimAverages.competitivePositioning} label="Competitive Positioning" showTooltip={true} />
+                <ScoreBar score={dimAverages.salesEnablement} label="Sales Enablement" showTooltip={true} />
+                <ScoreBar score={dimAverages.customerROI} label="Customer ROI Proof" showTooltip={true} />
                 
                 <div style={{ 
                   marginTop: '20px', 

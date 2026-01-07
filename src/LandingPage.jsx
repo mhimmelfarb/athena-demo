@@ -276,6 +276,243 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Commercial Model Section */}
+      <section style={{ 
+        backgroundColor: '#fff', 
+        padding: '80px 24px',
+        borderTop: '1px solid #e5e7eb'
+      }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h3 style={{ fontSize: '28px', fontWeight: 700, color: colors.darkNavy, marginBottom: '12px' }}>
+              Remidi Works Unlocks Commercial Model Excellence
+            </h3>
+            <p style={{ fontSize: '16px', color: '#6b7280' }}>
+              Data, tools and expertise so your team can deliver with confidence
+            </p>
+          </div>
+          
+          {/* Remidi Works Zone - Top */}
+          <div style={{ 
+            backgroundColor: '#3D5A80',
+            borderRadius: '12px 12px 0 0',
+            padding: '20px 24px',
+            border: '2px solid #3D5A80'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              gap: '8px',
+              marginBottom: '4px'
+            }}>
+              <span style={{ 
+                backgroundColor: colors.coral, 
+                width: '24px', 
+                height: '24px', 
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 700,
+                color: '#fff',
+                fontSize: '9px'
+              }}>RW</span>
+              <span style={{ fontSize: '14px', fontWeight: 700, color: '#fff' }}>
+                RW Modules diagnose, prioritize and fix growth opportunities
+              </span>
+            </div>
+          </div>
+          
+          {/* Strategy & Enablement Content */}
+          <div style={{ 
+            backgroundColor: colors.cream,
+            padding: '24px 32px',
+            border: '2px solid #3D5A80',
+            borderTop: 'none'
+          }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+              {/* Commercial Strategy */}
+              <div>
+                <div style={{ 
+                  fontSize: '14px', 
+                  fontWeight: 700, 
+                  color: colors.darkNavy, 
+                  marginBottom: '16px',
+                  paddingBottom: '8px',
+                  borderBottom: `2px solid ${colors.coral}`
+                }}>
+                  Commercial Strategy
+                </div>
+                <ul style={{ 
+                  fontSize: '13px', 
+                  color: '#4b5563', 
+                  lineHeight: 2,
+                  paddingLeft: '20px',
+                  margin: 0
+                }}>
+                  <li>Market Segmentation</li>
+                  <li>ICP Definition</li>
+                  <li>Value Proposition</li>
+                  <li>Competitive Positioning</li>
+                  <li>Pricing Strategy</li>
+                  <li>Packaging & Bundling</li>
+                  <li>Channel Strategy</li>
+                  <li>Messaging Architecture</li>
+                </ul>
+              </div>
+              
+              {/* Commercial Enablement */}
+              <div>
+                <div style={{ 
+                  fontSize: '14px', 
+                  fontWeight: 700, 
+                  color: colors.darkNavy, 
+                  marginBottom: '16px',
+                  paddingBottom: '8px',
+                  borderBottom: `2px solid ${colors.coral}`
+                }}>
+                  Commercial Enablement
+                </div>
+                <ul style={{ 
+                  fontSize: '13px', 
+                  color: '#4b5563', 
+                  lineHeight: 2,
+                  paddingLeft: '20px',
+                  margin: 0
+                }}>
+                  <li>Sales Enablement Strategy</li>
+                  <li>CS Enablement Strategy</li>
+                  <li>Buyer Journey Mapping</li>
+                  <li>Qualification Framework</li>
+                  <li>Competitive Intelligence System</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          {/* Connection Arrow */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            padding: '16px 0',
+            backgroundColor: '#f8fafc'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              gap: '4px'
+            }}>
+              <span style={{ fontSize: '20px', color: colors.coral }}>↓</span>
+              <span style={{ fontSize: '12px', fontWeight: 600, color: colors.navy }}>
+                Better inputs = better outputs
+              </span>
+              <span style={{ fontSize: '20px', color: colors.coral }}>↓</span>
+            </div>
+          </div>
+          
+          {/* Execution Zone - Bottom */}
+          <div style={{ 
+            backgroundColor: '#f1f5f9',
+            borderRadius: '0 0 12px 12px',
+            padding: '20px 24px',
+            border: '1px solid #e2e8f0'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              marginBottom: '16px'
+            }}>
+              <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748b' }}>
+                Enabling Your GTM Teams to Execute More Successfully
+              </span>
+              <span style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic' }}>
+                Client / Partner Execution
+              </span>
+            </div>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
+              {/* Marketing */}
+              <div>
+                <div style={{ 
+                  fontSize: '12px', 
+                  fontWeight: 600, 
+                  color: '#64748b', 
+                  marginBottom: '8px' 
+                }}>
+                  Marketing
+                </div>
+                <ul style={{ 
+                  fontSize: '11px', 
+                  color: '#94a3b8', 
+                  lineHeight: 1.8,
+                  paddingLeft: '16px',
+                  margin: 0
+                }}>
+                  <li>Demand Generation</li>
+                  <li>Channel Mix Strategy</li>
+                  <li>Campaign Execution</li>
+                  <li>Lead Scoring & Routing</li>
+                  <li>SDR/BDR Outbound</li>
+                </ul>
+              </div>
+              
+              {/* Sales */}
+              <div>
+                <div style={{ 
+                  fontSize: '12px', 
+                  fontWeight: 600, 
+                  color: '#64748b', 
+                  marginBottom: '8px' 
+                }}>
+                  Sales
+                </div>
+                <ul style={{ 
+                  fontSize: '11px', 
+                  color: '#94a3b8', 
+                  lineHeight: 1.8,
+                  paddingLeft: '16px',
+                  margin: 0
+                }}>
+                  <li>Sales Methodology</li>
+                  <li>Tools - CRM, CPQ, etc.</li>
+                  <li>Discovery</li>
+                  <li>Solution Development</li>
+                  <li>Proposal & Negotiation</li>
+                </ul>
+              </div>
+              
+              {/* Customer Success */}
+              <div>
+                <div style={{ 
+                  fontSize: '12px', 
+                  fontWeight: 600, 
+                  color: '#64748b', 
+                  marginBottom: '8px' 
+                }}>
+                  Customer Success
+                </div>
+                <ul style={{ 
+                  fontSize: '11px', 
+                  color: '#94a3b8', 
+                  lineHeight: 1.8,
+                  paddingLeft: '16px',
+                  margin: 0
+                }}>
+                  <li>Onboarding</li>
+                  <li>Ongoing Success Mgmt</li>
+                  <li>Renewal Management</li>
+                  <li>Expansion & Upsell</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Value Proposition Section */}
       <section style={{ 
         backgroundColor: '#fff', 
