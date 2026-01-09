@@ -920,7 +920,7 @@ export default function UserDemo() {
       {/* Header */}
       <div style={{ maxWidth: 1100, margin: '0 auto 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
             <div style={{
               width: 32, height: 32, borderRadius: 8,
               background: colors.accent, color: '#fff',
@@ -928,7 +928,7 @@ export default function UserDemo() {
               fontWeight: 700, fontSize: 11,
             }}>RW</div>
             <span style={{ fontSize: 18, fontWeight: 700, color: colors.primaryDark }}>Remidi Works</span>
-          </div>
+          </Link>
           <span style={{ fontSize: 12, color: colors.textMuted }}>Portfolio Company View</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

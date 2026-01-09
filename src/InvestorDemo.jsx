@@ -896,19 +896,61 @@ export default function InvestorPortfolioDashboard() {
             {activeTab === 'benchmark' && (
               <div style={{ padding: '20px' }}>
                 <div style={{ marginBottom: '24px' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy, marginBottom: '16px' }}>Fund Comparison</div>
-                  <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '16px' }}>
-                    Average Revenue Model Health Score across participating funds
+                  <div style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy, marginBottom: '8px' }}>Your Portfolio vs. Peer Average</div>
+                  <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '20px' }}>
+                    Based on 300+ companies across 22 investor portfolios
                   </div>
                   
-                  {peerFunds.map((fund, idx) => (
-                    <FundComparisonBar 
-                      key={idx} 
-                      fund={idx === 0 ? currentFund : fund} 
-                      maxHealth={8} 
-                      isCurrentFund={idx === 0}
-                    />
-                  ))}
+                  {/* Dimension Gauges */}
+                  {[
+                    { name: 'Value Articulation', yourScore: portfolioAvgScores.valueArticulation, peerAvg: 5.9 },
+                    { name: 'Pricing Architecture', yourScore: portfolioAvgScores.pricingArchitecture, peerAvg: 5.7 },
+                    { name: 'Competitive Positioning', yourScore: portfolioAvgScores.competitivePositioning, peerAvg: 6.1 },
+                    { name: 'Sales Enablement', yourScore: portfolioAvgScores.salesEnablement, peerAvg: 5.4 },
+                    { name: 'Customer ROI Proof', yourScore: portfolioAvgScores.customerROI, peerAvg: 5.8 },
+                  ].map((dim, idx) => {
+                    const diff = dim.yourScore - dim.peerAvg;
+                    const diffColor = diff >= 0.5 ? colors.green : diff <= -0.5 ? colors.red : colors.yellow;
+                    const diffSign = diff > 0 ? '+' : '';
+                    return (
+                      <div key={idx} style={{ marginBottom: '16px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                          <span style={{ fontSize: '12px', fontWeight: 500, color: colors.darkNavy }}>{dim.name}</span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <span style={{ fontSize: '11px', color: '#9ca3af' }}>Peer: {dim.peerAvg.toFixed(1)}</span>
+                            <span style={{ fontSize: '12px', fontWeight: 600, color: diffColor }}>
+                              {diffSign}{diff.toFixed(1)}
+                            </span>
+                          </div>
+                        </div>
+                        <div style={{ position: 'relative', height: '8px', backgroundColor: '#e5e7eb', borderRadius: '4px' }}>
+                          {/* Peer average marker */}
+                          <div style={{
+                            position: 'absolute',
+                            left: `${(dim.peerAvg / 10) * 100}%`,
+                            top: '-2px',
+                            width: '2px',
+                            height: '12px',
+                            backgroundColor: '#6b7280',
+                            borderRadius: '1px',
+                          }} />
+                          {/* Your score bar */}
+                          <div style={{
+                            width: `${(dim.yourScore / 10) * 100}%`,
+                            height: '100%',
+                            backgroundColor: diffColor,
+                            borderRadius: '4px',
+                            transition: 'width 0.3s ease',
+                          }} />
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
+                          <span style={{ fontSize: '10px', color: '#9ca3af' }}>0</span>
+                          <span style={{ fontSize: '11px', fontWeight: 600, color: colors.darkNavy }}>Your avg: {dim.yourScore.toFixed(1)}</span>
+                          <span style={{ fontSize: '10px', color: '#9ca3af' }}>10</span>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
                 
                 <div style={{ 

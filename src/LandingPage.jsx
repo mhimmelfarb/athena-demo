@@ -37,7 +37,7 @@ export default function LandingPage() {
               fontSize: '12px'
             }}>RW</span>
             <span style={{ fontSize: '22px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>Remidi Works</span>
-            <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '8px' }}>Building Revenue Model Excellence</span>
+            <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '8px' }}>Commercial Excellence</span>
           </div>
         </div>
       </header>
@@ -69,7 +69,7 @@ export default function LandingPage() {
             lineHeight: 1.1,
             letterSpacing: '-1px'
           }}>
-            Decision Support Platform for Revenue Model Excellence
+            The fastest, surest path to Commercial Excellence
           </h1>
           
           <p style={{ 
@@ -78,17 +78,57 @@ export default function LandingPage() {
             marginBottom: '16px',
             lineHeight: 1.6
           }}>
-            Continuous benchmarking and diagnostics that identify pricing underperformers, 
-            calculate dollar upside, and prioritize fixes across your portfolio.
+            Everyone wants Commercial Excellence. Most middle-market investors and portfolio companies 
+            struggle to define what it actually looks like—or how to get there without adding cost, 
+            complexity, or headcount.
           </p>
           
           <p style={{ 
             fontSize: '16px', 
-            color: 'rgba(255,255,255,0.7)', 
-            marginBottom: '40px'
+            color: 'rgba(255,255,255,0.85)', 
+            marginBottom: '12px',
+            lineHeight: 1.6
           }}>
-            Explore two perspectives on how Remidi Works delivers value.
+            Remidi Works is an expert system powered by real market data that helps investors and 
+            management teams define Commercial Excellence and get there fast.
           </p>
+          
+          <p style={{ 
+            fontSize: '13px', 
+            color: 'rgba(255,255,255,0.6)', 
+            marginBottom: '32px'
+          }}>
+            Built for middle-market investors and the companies they back.
+          </p>
+          
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '16px' }}>
+            <Link to="/investor" style={{ textDecoration: 'none' }}>
+              <button style={{
+                padding: '14px 28px',
+                backgroundColor: colors.coral,
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '15px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}>
+                See the System
+              </button>
+            </Link>
+            <button style={{
+              padding: '14px 28px',
+              backgroundColor: 'transparent',
+              color: '#fff',
+              border: '2px solid rgba(255,255,255,0.4)',
+              borderRadius: '8px',
+              fontSize: '15px',
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}>
+              Request a Demo
+            </button>
+          </div>
         </div>
       </section>
 
@@ -569,7 +609,7 @@ export default function LandingPage() {
             <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '4px' }}>by HG Partners</span>
           </div>
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)' }}>
-            Data-first revenue model excellence platform for growth-stage B2B tech companies
+            The fastest, surest path to Commercial Excellence for growth-stage B2B companies
           </p>
           <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '16px' }}>
             © 2025 HG Partners. Demo for concept testing purposes.
