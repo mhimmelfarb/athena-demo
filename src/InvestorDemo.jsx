@@ -903,12 +903,12 @@ export default function InvestorPortfolioDashboard() {
                   
                   {/* Dimension Gauges */}
                   {[
-                    { name: 'Value Articulation', yourScore: portfolioAvgScores.valueArticulation, peerAvg: 5.9 },
-                    { name: 'Pricing Architecture', yourScore: portfolioAvgScores.pricingArchitecture, peerAvg: 5.7 },
-                    { name: 'Competitive Positioning', yourScore: portfolioAvgScores.competitivePositioning, peerAvg: 6.1 },
-                    { name: 'Sales Enablement', yourScore: portfolioAvgScores.salesEnablement, peerAvg: 5.4 },
-                    { name: 'Customer ROI Proof', yourScore: portfolioAvgScores.customerROI, peerAvg: 5.8 },
-                  ].map((dim, idx) => {
+                    { name: 'Value Articulation', yourScore: dimAverages.valueArticulation, peerAvg: 5.9 },
+                    { name: 'Pricing Architecture', yourScore: dimAverages.pricingArchitecture, peerAvg: 5.7 },
+                    { name: 'Competitive Positioning', yourScore: dimAverages.competitivePositioning, peerAvg: 6.1 },
+                    { name: 'Sales Enablement', yourScore: dimAverages.salesEnablement, peerAvg: 5.4 },
+                    { name: 'Customer ROI Proof', yourScore: dimAverages.customerROI, peerAvg: 5.8 },
+                      ].map((dim, idx) => {
                     const diff = dim.yourScore - dim.peerAvg;
                     const diffColor = diff >= 0.5 ? colors.green : diff <= -0.5 ? colors.red : colors.yellow;
                     const diffSign = diff > 0 ? '+' : '';
