@@ -91,35 +91,6 @@ export default function LandingPage() {
             management teams define Commercial Excellence and get there fast.
           </p>
           
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '16px' }}>
-            <Link to="/investor" style={{ textDecoration: 'none' }}>
-              <button style={{
-                padding: '14px 28px',
-                backgroundColor: colors.coral,
-                color: '#fff',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '15px',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}>
-                See the System
-              </button>
-            </Link>
-            <button style={{
-              padding: '14px 28px',
-              backgroundColor: 'transparent',
-              color: '#fff',
-              border: '2px solid rgba(255,255,255,0.4)',
-              borderRadius: '8px',
-              fontSize: '15px',
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}>
-              Request a Demo
-            </button>
-          </div>
-        </div>
       </section>
 
       {/* Two Paths Section */}
