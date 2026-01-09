@@ -56,7 +56,7 @@ export default function LandingPage() {
             borderRadius: '20px',
             marginBottom: '24px'
           }}>
-            <span style={{ fontSize: '12px', fontWeight: 600, color: colors.coral, letterSpacing: '0.5px' }}>
+           <span style={{ fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px' }}>
               FOR MIDDLE MARKET PE FIRMS & PORTFOLIO COMPANIES
             </span>
           </div>
@@ -73,8 +73,8 @@ export default function LandingPage() {
           </h1>
           
           <p style={{ 
-            fontSize: '20px', 
-            color: colors.lightBlue, 
+            fontSize: '16px', 
+            color: 'rgba(255,255,255,0.7)', 
             marginBottom: '16px',
             lineHeight: 1.6
           }}>
@@ -82,21 +82,13 @@ export default function LandingPage() {
           </p>
           
           <p style={{ 
-            fontSize: '16px', 
-            color: 'rgba(255,255,255,0.85)', 
-            marginBottom: '12px',
+            fontSize: '20px', 
+            color: colors.lightBlue,
+            marginBottom: '32px',
             lineHeight: 1.6
           }}>
             Remidi Works is an expert system powered by real market data that helps investors and 
             management teams define Commercial Excellence and get there fast.
-          </p>
-          
-          <p style={{ 
-            fontSize: '13px', 
-            color: 'rgba(255,255,255,0.6)', 
-            marginBottom: '32px'
-          }}>
-            Built for middle-market investors and the companies they back.
           </p>
           
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '16px' }}>
