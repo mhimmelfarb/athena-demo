@@ -90,8 +90,8 @@ export default function LandingPage() {
             Remidi Works is an expert system powered by real market data that helps investors and 
             management teams define Commercial Excellence and get there fast.
           </p>
-          
-      </section>
+          </div>
+          </section>
 
       {/* Two Paths Section */}
       <section style={{ padding: '80px 24px', maxWidth: '1000px', margin: '0 auto' }}>
