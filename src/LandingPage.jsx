@@ -88,7 +88,7 @@ export default function LandingPage() {
             lineHeight: 1.6
           }}>
             Remidi Works is an expert system powered by real market data that helps investors and 
-            management teams define Commercial Excellence and get there fast.
+            management teams define commercial excellence and get there fast.
           </p>
           </div>
           </section>
