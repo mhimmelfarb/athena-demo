@@ -456,6 +456,7 @@ export default function InvestorPortfolioDashboard() {
   const [showBoardSlide, setShowBoardSlide] = useState(null);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [diligenceResults, setDiligenceResults] = useState(null);
+  const [selectedSector, setSelectedSector] = useState(null);
   
   // Dynamic portfolio loading from URL param
   const [portfolioData, setPortfolioData] = useState(defaultPortfolioData);
@@ -710,6 +711,22 @@ export default function InvestorPortfolioDashboard() {
                 }}
               >
                 Peer Benchmarks
+              </button>
+              <button
+                onClick={() => setActiveTab('sectors')}
+                style={{
+                  padding: '16px 24px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: activeTab === 'sectors' ? colors.navy : '#6b7280',
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  borderBottom: activeTab === 'sectors' ? `2px solid ${colors.coral}` : '2px solid transparent',
+                  cursor: 'pointer',
+                  marginBottom: '-1px'
+                }}
+              >
+                Sector Intelligence
               </button>
               <button
                 onClick={() => setActiveTab('diligence')}
@@ -1077,6 +1094,242 @@ export default function InvestorPortfolioDashboard() {
                     <div style={{ fontSize: '10px', color: '#dc2626' }}>25th %ile</div>
                   </div>
                 </div>
+              </div>
+            )}
+            
+            {activeTab === 'sectors' && (
+              <div style={{ padding: '20px' }}>
+                {/* Sector Selector */}
+                <div style={{ marginBottom: '24px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy, marginBottom: '12px' }}>Select Sector to Analyze</div>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    {[...new Set(portfolioData.map(c => c.sector))].map(sector => {
+                      const sectorCount = portfolioData.filter(c => c.sector === sector).length;
+                      return (
+                        <button
+                          key={sector}
+                          onClick={() => setSelectedSector(sector)}
+                          style={{
+                            padding: '8px 14px',
+                            borderRadius: '6px',
+                            fontSize: '12px',
+                            fontWeight: 500,
+                            border: 'none',
+                            cursor: 'pointer',
+                            backgroundColor: selectedSector === sector ? colors.navy : '#f3f4f6',
+                            color: selectedSector === sector ? 'white' : '#4b5563',
+                            transition: 'all 0.15s'
+                          }}
+                        >
+                          {sector} ({sectorCount})
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {selectedSector ? (
+                  <>
+                    {/* Sector Stats */}
+                    {(() => {
+                      const sectorCompanies = portfolioData.filter(c => c.sector === selectedSector);
+                      const sectorAvg = sectorCompanies.reduce((a, c) => a + c.healthScore, 0) / sectorCompanies.length;
+                      // Simulated cooperative sector data
+                      const cooperativeSectorData = {
+                        'DevOps/Infrastructure': { n: 23, median: 6.2, topQuartile: 7.5 },
+                        'AI/ML Platform': { n: 31, median: 5.8, topQuartile: 7.1 },
+                        'Cybersecurity': { n: 28, median: 6.8, topQuartile: 8.0 },
+                        'Logistics Tech': { n: 18, median: 5.4, topQuartile: 6.8 },
+                        'HR Tech': { n: 22, median: 6.0, topQuartile: 7.2 },
+                        'FinTech': { n: 35, median: 6.5, topQuartile: 7.8 },
+                        'HealthTech': { n: 19, median: 5.6, topQuartile: 7.0 },
+                        'Retail Analytics': { n: 14, median: 6.1, topQuartile: 7.4 },
+                        'Supply Chain': { n: 16, median: 5.7, topQuartile: 7.0 },
+                        'MarTech': { n: 27, median: 6.3, topQuartile: 7.6 }
+                      };
+                      const sectorData = cooperativeSectorData[selectedSector] || { n: 20, median: 5.8, topQuartile: 7.2 };
+                      
+                      // Calculate dimension averages for sector
+                      const sectorDimAvgs = {
+                        valueArticulation: sectorCompanies.reduce((a, c) => a + c.valueArticulation, 0) / sectorCompanies.length,
+                        pricingArchitecture: sectorCompanies.reduce((a, c) => a + c.pricingArchitecture, 0) / sectorCompanies.length,
+                        competitivePositioning: sectorCompanies.reduce((a, c) => a + c.competitivePositioning, 0) / sectorCompanies.length,
+                        salesEnablement: sectorCompanies.reduce((a, c) => a + c.salesEnablement, 0) / sectorCompanies.length,
+                        customerROI: sectorCompanies.reduce((a, c) => a + c.customerROI, 0) / sectorCompanies.length
+                      };
+
+                      return (
+                        <>
+                          {/* Sector Overview Cards */}
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '24px' }}>
+                            <div style={{ padding: '16px', backgroundColor: colors.cream, borderRadius: '8px', textAlign: 'center' }}>
+                              <div style={{ fontSize: '10px', color: '#6b7280', marginBottom: '4px' }}>Your Companies</div>
+                              <div style={{ fontSize: '24px', fontWeight: 700, color: colors.navy }}>{sectorCompanies.length}</div>
+                              <div style={{ fontSize: '10px', color: '#6b7280' }}>in {selectedSector}</div>
+                            </div>
+                            <div style={{ padding: '16px', backgroundColor: '#f9fafb', borderRadius: '8px', textAlign: 'center' }}>
+                              <div style={{ fontSize: '10px', color: '#6b7280', marginBottom: '4px' }}>Cooperative Size</div>
+                              <div style={{ fontSize: '24px', fontWeight: 700, color: colors.darkNavy }}>{sectorData.n}</div>
+                              <div style={{ fontSize: '10px', color: '#6b7280' }}>companies</div>
+                            </div>
+                            <div style={{ padding: '16px', backgroundColor: sectorAvg >= sectorData.median ? '#d1fae5' : '#fef3c7', borderRadius: '8px', textAlign: 'center' }}>
+                              <div style={{ fontSize: '10px', color: '#6b7280', marginBottom: '4px' }}>Your Sector Avg</div>
+                              <div style={{ fontSize: '24px', fontWeight: 700, color: sectorAvg >= sectorData.median ? colors.green : colors.yellow }}>{sectorAvg.toFixed(1)}</div>
+                              <div style={{ fontSize: '10px', color: sectorAvg >= sectorData.median ? '#059669' : '#d97706' }}>
+                                {sectorAvg >= sectorData.topQuartile ? 'Top Quartile' : sectorAvg >= sectorData.median ? 'Above Median' : 'Below Median'}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Sector Distribution */}
+                          <div style={{ marginBottom: '24px' }}>
+                            <div style={{ fontSize: '12px', fontWeight: 600, color: colors.darkNavy, marginBottom: '12px' }}>
+                              Your {selectedSector} Companies vs. Sector Cooperative
+                            </div>
+                            <div style={{ position: 'relative', height: '40px', borderRadius: '8px', overflow: 'hidden', background: 'linear-gradient(to right, #fecaca 0%, #fef3c7 40%, #d1fae5 100%)' }}>
+                              {/* Median marker */}
+                              <div style={{ position: 'absolute', top: 0, bottom: 0, width: '2px', backgroundColor: '#6b7280', left: `${(sectorData.median / 10) * 100}%` }}>
+                                <span style={{ position: 'absolute', bottom: '-18px', left: '50%', transform: 'translateX(-50%)', fontSize: '9px', color: '#6b7280' }}>Median</span>
+                              </div>
+                              {/* Top quartile marker */}
+                              <div style={{ position: 'absolute', top: 0, bottom: 0, width: '1px', backgroundColor: colors.green, left: `${(sectorData.topQuartile / 10) * 100}%` }}>
+                                <span style={{ position: 'absolute', bottom: '-18px', left: '50%', transform: 'translateX(-50%)', fontSize: '9px', color: colors.green }}>Top 25%</span>
+                              </div>
+                              {/* Your companies as dots */}
+                              {sectorCompanies.map((company, idx) => (
+                                <div key={company.id} style={{ 
+                                  position: 'absolute', 
+                                  top: '50%', 
+                                  left: `${(company.healthScore / 10) * 100}%`,
+                                  transform: 'translate(-50%, -50%)',
+                                  width: '14px', 
+                                  height: '14px', 
+                                  borderRadius: '50%',
+                                  backgroundColor: colors.navy,
+                                  border: '2px solid white',
+                                  boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                                  cursor: 'pointer',
+                                  zIndex: 10
+                                }} title={`${company.name}: ${company.healthScore.toFixed(1)}`} />
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Company List in Sector */}
+                          <div style={{ marginBottom: '24px' }}>
+                            <div style={{ fontSize: '12px', fontWeight: 600, color: colors.darkNavy, marginBottom: '12px' }}>Your {selectedSector} Companies</div>
+                            {sectorCompanies.sort((a, b) => b.healthScore - a.healthScore).map((company, idx) => {
+                              const vsMedian = company.healthScore - sectorData.median;
+                              return (
+                                <div key={company.id} style={{ 
+                                  display: 'flex', 
+                                  alignItems: 'center', 
+                                  justifyContent: 'space-between',
+                                  padding: '12px',
+                                  backgroundColor: idx % 2 === 0 ? '#f9fafb' : 'white',
+                                  borderRadius: '6px',
+                                  marginBottom: '4px'
+                                }}>
+                                  <div>
+                                    <div style={{ fontSize: '13px', fontWeight: 600, color: colors.darkNavy }}>{company.name}</div>
+                                    <div style={{ fontSize: '11px', color: '#6b7280' }}>{company.stage}</div>
+                                  </div>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                    <div style={{ textAlign: 'right' }}>
+                                      <div style={{ fontSize: '16px', fontWeight: 700, color: company.healthScore >= 7 ? colors.green : company.healthScore >= 5.5 ? colors.yellow : colors.red }}>
+                                        {company.healthScore.toFixed(1)}
+                                      </div>
+                                    </div>
+                                    <div style={{ 
+                                      padding: '4px 10px', 
+                                      borderRadius: '12px',
+                                      fontSize: '11px',
+                                      fontWeight: 600,
+                                      backgroundColor: vsMedian >= 0.5 ? '#d1fae5' : vsMedian >= -0.5 ? '#fef3c7' : '#fee2e2',
+                                      color: vsMedian >= 0.5 ? '#065f46' : vsMedian >= -0.5 ? '#92400e' : '#991b1b'
+                                    }}>
+                                      {vsMedian >= 0 ? '+' : ''}{vsMedian.toFixed(1)} vs sector
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Dimension Comparison */}
+                          <div style={{ marginBottom: '24px' }}>
+                            <div style={{ fontSize: '12px', fontWeight: 600, color: colors.darkNavy, marginBottom: '12px' }}>
+                              Dimension Analysis vs. {selectedSector} Cooperative
+                            </div>
+                            {[
+                              { name: 'Value Articulation', yourScore: sectorDimAvgs.valueArticulation, sectorMedian: sectorData.median + 0.1 },
+                              { name: 'Pricing Architecture', yourScore: sectorDimAvgs.pricingArchitecture, sectorMedian: sectorData.median - 0.1 },
+                              { name: 'Competitive Positioning', yourScore: sectorDimAvgs.competitivePositioning, sectorMedian: sectorData.median + 0.3 },
+                              { name: 'Sales Enablement', yourScore: sectorDimAvgs.salesEnablement, sectorMedian: sectorData.median - 0.4 },
+                              { name: 'Customer ROI Proof', yourScore: sectorDimAvgs.customerROI, sectorMedian: sectorData.median },
+                            ].map((dim, idx) => {
+                              const diff = dim.yourScore - dim.sectorMedian;
+                              const diffColor = diff >= 0.5 ? colors.green : diff <= -0.5 ? colors.red : colors.yellow;
+                              return (
+                                <div key={idx} style={{ marginBottom: '14px' }}>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                                    <span style={{ fontSize: '11px', fontWeight: 500, color: colors.darkNavy }}>{dim.name}</span>
+                                    <span style={{ fontSize: '12px', fontWeight: 700, color: diffColor }}>
+                                      {diff >= 0 ? '+' : ''}{diff.toFixed(1)}
+                                    </span>
+                                  </div>
+                                  <div style={{ position: 'relative', height: '8px', backgroundColor: '#e5e7eb', borderRadius: '4px' }}>
+                                    <div style={{
+                                      position: 'absolute',
+                                      left: `${(dim.sectorMedian / 10) * 100}%`,
+                                      top: '-2px',
+                                      width: '2px',
+                                      height: '12px',
+                                      backgroundColor: '#6b7280',
+                                    }} />
+                                    <div style={{
+                                      width: `${(dim.yourScore / 10) * 100}%`,
+                                      height: '100%',
+                                      backgroundColor: diffColor,
+                                      borderRadius: '4px',
+                                    }} />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Sector Insight */}
+                          <div style={{ 
+                            padding: '16px', 
+                            backgroundColor: '#e0f2fe', 
+                            borderRadius: '8px',
+                            borderLeft: `3px solid ${colors.lightBlue}`
+                          }}>
+                            <div style={{ fontSize: '12px', fontWeight: 600, color: '#0369a1', marginBottom: '8px' }}>
+                              Sector Insight: {selectedSector}
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#0c4a6e' }}>
+                              {sectorAvg >= sectorData.median ? (
+                                <>Your {selectedSector} companies outperform the sector median by <strong>+{(sectorAvg - sectorData.median).toFixed(1)} pts</strong>. 
+                                Focus on maintaining this advantage while improving weaker dimensions.</>
+                              ) : (
+                                <>Your {selectedSector} companies are <strong>{(sectorData.median - sectorAvg).toFixed(1)} pts below</strong> sector median. 
+                                Companies that close this gap typically see <strong>12-18% improvement</strong> in win rates within 6 months.</>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </>
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>🏭</div>
+                    <div style={{ fontSize: '14px', fontWeight: 500, marginBottom: '8px' }}>Select a sector above</div>
+                    <div style={{ fontSize: '12px' }}>See how your companies compare to sector-specific benchmarks</div>
+                  </div>
+                )}
               </div>
             )}
             
