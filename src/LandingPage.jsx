@@ -387,6 +387,7 @@ export default function LandingPage() {
                   <li>Buyer Journey Mapping</li>
                   <li>Qualification Framework</li>
                   <li>Competitive Intelligence System</li>
+                  <li>GTM Roles & Coverage Model</li>
                 </ul>
               </div>
             </div>
