@@ -1,0 +1,172 @@
+{
+  "fundName": "Parker Gale",
+  "fundType": "Lower-Middle-Market Buyout",
+  "lastUpdated": "2026-01-14",
+  "portfolio": [
+    {
+      "id": 1,
+      "name": "Widewail",
+      "sector": "Reputation Management / SaaS",
+      "stage": "Growth",
+      "website": "widewail.com",
+      "healthScore": 7.4,
+      "relativeScore": 1.6,
+      "valueArticulation": 8.2,
+      "pricingArchitecture": 5.5,
+      "competitivePositioning": 7.8,
+      "salesEnablement": 7.5,
+      "customerROI": 8.0,
+      "status": "outperformer",
+      "invested": 2022,
+      "topGaps": [
+        { "dimension": "Pricing Architecture", "score": 5.5, "issue": "No visible pricing page - 'Get custom pricing' creates friction despite strong value metrics" }
+      ],
+      "observation": "Excellent proof points (633% review volume growth, 6 of top 25 dealer groups). Strong automotive vertical focus. Hidden pricing limits self-service conversion."
+    },
+    {
+      "id": 2,
+      "name": "HiBid",
+      "sector": "Online Auctions / Marketplace",
+      "stage": "Growth",
+      "website": "hibid.com",
+      "healthScore": 7.2,
+      "relativeScore": 1.4,
+      "valueArticulation": 7.5,
+      "pricingArchitecture": 8.0,
+      "competitivePositioning": 6.8,
+      "salesEnablement": 7.0,
+      "customerROI": 6.8,
+      "status": "outperformer",
+      "invested": 2021,
+      "topGaps": [
+        { "dimension": "Competitive Positioning", "score": 6.8, "issue": "Marketplace positioning solid but competitive moat vs. LiveAuctioneers not clearly articulated" }
+      ],
+      "observation": "Transparent pricing model (rare in industry). Clear value prop for auctioneers. $95/mo entry point visible. Strong two-sided marketplace dynamics."
+    },
+    {
+      "id": 3,
+      "name": "Perceptyx",
+      "sector": "HR Tech / Employee Experience",
+      "stage": "Growth",
+      "website": "perceptyx.com",
+      "healthScore": 6.8,
+      "relativeScore": 1.0,
+      "valueArticulation": 7.5,
+      "pricingArchitecture": 5.0,
+      "competitivePositioning": 7.2,
+      "salesEnablement": 6.5,
+      "customerROI": 7.8,
+      "status": "average",
+      "invested": 2020,
+      "topGaps": [
+        { "dimension": "Pricing Architecture", "score": 5.0, "issue": "Custom pricing only - enterprise buyers have no anchor for budget discussions" },
+        { "dimension": "Sales Enablement", "score": 6.5, "issue": "No ROI calculator or self-service demo despite strong quantified outcomes" }
+      ],
+      "observation": "Strong analyst recognition (Forrester Wave Leader). Good proof (40% reduction in turnover). Enterprise-only positioning limits mid-market expansion."
+    },
+    {
+      "id": 4,
+      "name": "ePlanSoft",
+      "sector": "GovTech / Permitting",
+      "stage": "Series B",
+      "website": "eplansoft.com",
+      "healthScore": 6.5,
+      "relativeScore": 0.7,
+      "valueArticulation": 7.0,
+      "pricingArchitecture": 5.5,
+      "competitivePositioning": 6.5,
+      "salesEnablement": 6.8,
+      "customerROI": 6.8,
+      "status": "average",
+      "invested": 2023,
+      "topGaps": [
+        { "dimension": "Competitive Positioning", "score": 6.5, "issue": "Comparative guide vs. Bluebeam/Avolve exists but not prominently featured" },
+        { "dimension": "Pricing Architecture", "score": 5.5, "issue": "No pricing visibility - government procurement needs clear budget positioning" }
+      ],
+      "observation": "Solid product messaging. Good case studies (Syracuse, Montgomery County). Market position vs. Bluebeam/Adobe could be sharper."
+    },
+    {
+      "id": 5,
+      "name": "DealerBuilt",
+      "sector": "Automotive DMS / Vertical SaaS",
+      "stage": "Growth",
+      "website": "dealerbuilt.com",
+      "healthScore": 6.4,
+      "relativeScore": 0.6,
+      "valueArticulation": 6.8,
+      "pricingArchitecture": 7.0,
+      "competitivePositioning": 7.2,
+      "salesEnablement": 5.5,
+      "customerROI": 5.5,
+      "status": "average",
+      "invested": 2019,
+      "topGaps": [
+        { "dimension": "Sales Enablement", "score": 5.5, "issue": "Complex multi-product suite (Lightyear, Oplogic, Vistadash) creates buyer confusion" },
+        { "dimension": "Customer ROI Proof", "score": 5.5, "issue": "Limited visible case studies despite strong client base claims" }
+      ],
+      "observation": "Strong differentiation on data ownership and named-user pricing. Anti-CDK/Reynolds positioning resonates. Suite complexity may slow sales cycles."
+    },
+    {
+      "id": 6,
+      "name": "OpenBrand",
+      "sector": "Retail Intelligence / Data Analytics",
+      "stage": "Growth",
+      "website": "openbrand.com",
+      "healthScore": 7.0,
+      "relativeScore": 1.2,
+      "valueArticulation": 7.5,
+      "pricingArchitecture": 5.8,
+      "competitivePositioning": 7.5,
+      "salesEnablement": 7.0,
+      "customerROI": 7.2,
+      "status": "outperformer",
+      "invested": 2023,
+      "topGaps": [
+        { "dimension": "Pricing Architecture", "score": 5.8, "issue": "Subscription pricing not published despite freemium signal (MarketSignal)" }
+      ],
+      "observation": "Strong market position via NIQ partnership. 20-year data history is real moat. Free MarketSignal dashboard smart PLG move. Complex acquisition history (TraQline, Gap Intelligence) not fully integrated in messaging."
+    },
+    {
+      "id": 7,
+      "name": "Source Intelligence",
+      "sector": "Supply Chain Compliance",
+      "stage": "Growth",
+      "website": "sourceintelligence.com",
+      "healthScore": 5.8,
+      "relativeScore": 0.0,
+      "valueArticulation": 6.0,
+      "pricingArchitecture": 5.0,
+      "competitivePositioning": 5.5,
+      "salesEnablement": 6.2,
+      "customerROI": 6.2,
+      "status": "average",
+      "invested": 2021,
+      "topGaps": [
+        { "dimension": "Competitive Positioning", "score": 5.5, "issue": "Regulatory compliance positioning but competitive landscape vs. Assent not addressed" },
+        { "dimension": "Pricing Architecture", "score": 5.0, "issue": "No pricing transparency for a compliance product where budgeting is critical" }
+      ],
+      "observation": "Addresses real pain (conflict minerals, CMRT). Market tailwinds from ESG/supply chain transparency. Value quantification could be stronger."
+    },
+    {
+      "id": 8,
+      "name": "EditShare",
+      "sector": "Media Tech / Video Production",
+      "stage": "Growth",
+      "website": "editshare.com",
+      "healthScore": 5.5,
+      "relativeScore": -0.3,
+      "valueArticulation": 5.8,
+      "pricingArchitecture": 5.0,
+      "competitivePositioning": 5.5,
+      "salesEnablement": 5.0,
+      "customerROI": 5.2,
+      "status": "underperformer",
+      "invested": 2020,
+      "topGaps": [
+        { "dimension": "Value Articulation", "score": 5.8, "issue": "Technical storage/workflow messaging - missing customer ROI quantification" },
+        { "dimension": "Sales Enablement", "score": 5.0, "issue": "Complex product suite without clear buyer journey guidance" }
+      ],
+      "observation": "Niche media production vertical. Cloud + on-prem hybrid positioning. Technical messaging may miss decision-maker value narrative."
+    }
+  ]
+}
