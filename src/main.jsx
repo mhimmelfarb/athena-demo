@@ -5,6 +5,7 @@ import LandingPage from './LandingPage';
 import UserDemo from './UserDemo';
 import InvestorDemo from './InvestorDemo';
 import PEDashboard from './PEDashboard';
+import CompanyDemo from './CompanyDemo';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/user" element={<UserDemo />} />
         <Route path="/investor" element={<InvestorDemo />} />
         <Route path="/pe-dashboard" element={<PEDashboard />} />
+        <Route path="/company/:slug" element={<CompanyDemo />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
