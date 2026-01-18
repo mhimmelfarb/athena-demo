@@ -1,780 +1,442 @@
-import React from 'react';
+import React from "react";
 
 const colors = {
-  navy: '#3D5A80',
-  coral: '#EE6C4D',
-  lightBlue: '#98C1D9',
-  darkNavy: '#293241',
-  cream: '#E0FBFC',
+  navy: "#3D5A80",
+  coral: "#EE6C4D",
+  lightBlue: "#98C1D9",
+  darkNavy: "#293241",
+  cream: "#E0FBFC",
 };
 
 export default function LandingPage() {
   return (
     <div
       style={{
-        minHeight: '100vh',
-        backgroundColor: '#f8fafc',
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        minHeight: "100vh",
+        backgroundColor: "#f8fafc",
+        fontFamily:
+          "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        color: "#0f172a",
       }}
     >
-      {/* Header */}
+      {/* ================= HEADER ================= */}
       <header
         style={{
           backgroundColor: colors.navy,
-          padding: '16px 24px',
+          padding: "16px 24px",
           borderBottom: `3px solid ${colors.coral}`,
         }}
       >
         <div
           style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            maxWidth: "1200px",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div
               style={{
                 backgroundColor: colors.coral,
-                width: '36px',
-                height: '36px',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 700,
-                color: '#fff',
-                fontSize: '12px',
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontWeight: 800,
+                color: "#fff",
+                fontSize: 12,
               }}
             >
               RW
-            </span>
-            <span style={{ fontSize: '22px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>
-              Remidi Works
-            </span>
-            <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '8px' }}>
-              Commercial Excellence
-            </span>
+            </div>
+            <div>
+              <div
+                style={{
+                  fontSize: 22,
+                  fontWeight: 800,
+                  color: "#fff",
+                  letterSpacing: "-0.4px",
+                }}
+              >
+                Remidi Works
+              </div>
+              <div style={{ fontSize: 12, color: colors.lightBlue }}>
+                Commercial Excellence
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* ================= HERO ================= */}
       <section
         style={{
-          background: `linear-gradient(135deg, ${colors.darkNavy} 0%, ${colors.navy} 100%)`,
-          padding: '80px 24px',
-          textAlign: 'center',
+          background: `linear-gradient(135deg, ${colors.darkNavy}, ${colors.navy})`,
+          padding: "88px 24px",
+          textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
           <h1
             style={{
-              fontSize: '44px',
-              fontWeight: 700,
-              color: '#fff',
-              marginBottom: '24px',
-              lineHeight: 1.2,
-              letterSpacing: '-0.5px',
+              fontSize: 44,
+              fontWeight: 800,
+              color: "#fff",
+              lineHeight: 1.15,
+              marginBottom: 24,
+              letterSpacing: "-0.6px",
             }}
           >
-            Commercial Excellence shouldn't be{' '}
-            <span style={{ fontStyle: 'italic', color: colors.lightBlue }}>"I'll know it when I see it."</span>
+            Commercial Excellence should not be{" "}
+            <span style={{ fontStyle: "italic", color: colors.lightBlue }}>
+              "I'll know it when I see it."
+            </span>
           </h1>
 
           <p
             style={{
-              fontSize: '16px',
-              color: 'rgba(255,255,255,0.7)',
-              marginBottom: '16px',
+              fontSize: 18,
+              color: "rgba(255,255,255,0.75)",
               lineHeight: 1.6,
+              marginBottom: 24,
             }}
           >
-            B2B companies typically leave 20-30% of revenue on the table due to commercial model gaps in areas like
-            pricing, positioning, and sales enablement. Your metrics show you something's wrong, but not where to focus
-            or how to move the needle.
+            Most leadership teams can see when performance is lagging. What they
+            cannot see clearly is why it is happening, where the real
+            opportunities are, or which actions will actually move the needle.
           </p>
 
           <p
             style={{
-              fontSize: '20px',
-              color: '#fff',
+              fontSize: 20,
               fontWeight: 700,
-              marginBottom: '32px',
+              color: "#fff",
               lineHeight: 1.6,
             }}
           >
-            Remidi Works benchmarks your commercial model against real market data, then shows you exactly where the
-            opportunities are and how to capture them.
+            Remidi Works is a decision support platform for commercial excellence
+            that surfaces high-impact revenue and growth opportunities and helps
+            leaders act with confidence.
           </p>
         </div>
       </section>
 
-      {/* Commercial Model Section */}
-      <section style={{ backgroundColor: '#fff', padding: '80px 24px', borderTop: '1px solid #e5e7eb' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h3 style={{ fontSize: '28px', fontWeight: 700, color: colors.darkNavy, marginBottom: '12px' }}>
-              Achieve Fast, Measurable Growth
-            </h3>
-            <p style={{ fontSize: '16px', color: '#6b7280' }}>
-              Data-driven commercial strategy and enablement that empowers your teams to execute with confidence
-            </p>
-          </div>
-
-          {/* Remidi Works Zone - Top */}
-          <div
+      {/* ================= REALITY SECTION ================= */}
+      <section style={{ backgroundColor: "#fff", padding: "72px 24px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <h2
             style={{
-              backgroundColor: '#3D5A80',
-              borderRadius: '12px 12px 0 0',
-              padding: '20px 24px',
-              border: '2px solid #3D5A80',
+              fontSize: 28,
+              fontWeight: 800,
+              color: colors.darkNavy,
+              marginBottom: 20,
             }}
           >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                marginBottom: '4px',
-              }}
-            >
-              <span
+            Knowing the numbers is not the problem
+          </h2>
+
+          <p style={{ fontSize: 16, lineHeight: 1.7, color: "#475569" }}>
+            Investors and operators can read topline growth, retention, and
+            pipeline metrics. What is harder is understanding what is driving
+            those outcomes and deciding where to focus limited time and
+            resources.
+          </p>
+
+          <ul
+            style={{
+              marginTop: 24,
+              paddingLeft: 20,
+              fontSize: 16,
+              lineHeight: 1.9,
+              color: "#475569",
+            }}
+          >
+            <li>Which gaps actually matter</li>
+            <li>Which opportunities are real versus theoretical</li>
+            <li>What teams can realistically execute</li>
+            <li>What to fix first without endless debate</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ================= WHAT REMIDI DELIVERS ================= */}
+      <section
+        style={{
+          backgroundColor: colors.cream,
+          padding: "72px 24px",
+          borderTop: "1px solid #e5e7eb",
+          borderBottom: "1px solid #e5e7eb",
+        }}
+      >
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <h2
+            style={{
+              fontSize: 28,
+              fontWeight: 800,
+              color: colors.darkNavy,
+              marginBottom: 32,
+              textAlign: "center",
+            }}
+          >
+            Decision support for commercial excellence
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 32,
+            }}
+          >
+            {[
+              "Surface the highest-impact revenue and margin opportunities",
+              "Explain what is driving performance and what is holding it back",
+              "Prioritize actions across pricing, GTM, and enablement",
+              "Support confident decisions grounded in real operating context",
+            ].map((item) => (
+              <div
+                key={item}
                 style={{
-                  backgroundColor: colors.coral,
-                  width: '24px',
-                  height: '24px',
-                  borderRadius: '4px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 700,
-                  color: '#fff',
-                  fontSize: '9px',
+                  backgroundColor: "#fff",
+                  borderRadius: 12,
+                  padding: 24,
+                  boxShadow: "0 6px 24px rgba(0,0,0,0.06)",
+                  fontSize: 15,
+                  lineHeight: 1.6,
+                  color: "#334155",
                 }}
               >
-                RW
-              </span>
-              <span style={{ fontSize: '14px', fontWeight: 700, color: '#fff' }}>
-                RW Modules diagnose, prioritize and fix growth opportunities
-              </span>
-            </div>
-          </div>
-
-          {/* Strategy & Enablement Content */}
-          <div
-            style={{
-              backgroundColor: colors.cream,
-              padding: '24px 32px',
-              border: '2px solid #3D5A80',
-              borderTop: 'none',
-            }}
-          >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
-              {/* Commercial Strategy */}
-              <div>
-                <div
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: 700,
-                    color: colors.darkNavy,
-                    marginBottom: '16px',
-                    paddingBottom: '8px',
-                    borderBottom: `2px solid ${colors.coral}`,
-                  }}
-                >
-                  Commercial Strategy
-                </div>
-                <ul
-                  style={{
-                    fontSize: '13px',
-                    color: '#4b5563',
-                    lineHeight: 2,
-                    paddingLeft: '20px',
-                    margin: 0,
-                  }}
-                >
-                  <li>Market Segmentation</li>
-                  <li>ICP Definition</li>
-                  <li>Value Proposition</li>
-                  <li>Competitive Positioning</li>
-                  <li>Pricing Strategy</li>
-                  <li>Packaging & Bundling</li>
-                  <li>Channel Strategy</li>
-                  <li>Messaging Architecture</li>
-                </ul>
+                {item}
               </div>
-
-              {/* Commercial Enablement */}
-              <div>
-                <div
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: 700,
-                    color: colors.darkNavy,
-                    marginBottom: '16px',
-                    paddingBottom: '8px',
-                    borderBottom: `2px solid ${colors.coral}`,
-                  }}
-                >
-                  Commercial Enablement
-                </div>
-                <ul
-                  style={{
-                    fontSize: '13px',
-                    color: '#4b5563',
-                    lineHeight: 2,
-                    paddingLeft: '20px',
-                    margin: 0,
-                  }}
-                >
-                  <li>Sales Enablement Strategy</li>
-                  <li>CS Enablement Strategy</li>
-                  <li>Buyer Journey Mapping</li>
-                  <li>Qualification Framework</li>
-                  <li>Competitive Intelligence System</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Connection Arrow */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '16px 0',
-              backgroundColor: '#f8fafc',
-            }}
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-              <span style={{ fontSize: '20px', color: colors.coral }}>↓</span>
-              <span style={{ fontSize: '12px', fontWeight: 600, color: colors.navy }}>
-                Better inputs = better outputs
-              </span>
-              <span style={{ fontSize: '20px', color: colors.coral }}>↓</span>
-            </div>
-          </div>
-
-          {/* Execution Zone - Bottom */}
-          <div
-            style={{
-              backgroundColor: '#f1f5f9',
-              borderRadius: '0 0 12px 12px',
-              padding: '20px 24px',
-              border: '1px solid #e2e8f0',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748b' }}>
-                Enabling Your GTM Teams to Execute More Successfully
-              </span>
-              <span style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic' }}>Client / Partner Execution</span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
-              {/* Marketing */}
-              <div>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#64748b', marginBottom: '8px' }}>
-                  Marketing
-                </div>
-                <ul style={{ fontSize: '11px', color: '#94a3b8', lineHeight: 1.8, paddingLeft: '16px', margin: 0 }}>
-                  <li>Demand Generation</li>
-                  <li>Channel Mix Strategy</li>
-                  <li>Campaign Execution</li>
-                  <li>Lead Scoring & Routing</li>
-                  <li>SDR/BDR Outbound</li>
-                </ul>
-              </div>
-
-              {/* Sales */}
-              <div>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#64748b', marginBottom: '8px' }}>Sales</div>
-                <ul style={{ fontSize: '11px', color: '#94a3b8', lineHeight: 1.8, paddingLeft: '16px', margin: 0 }}>
-                  <li>Sales Methodology</li>
-                  <li>Tools - CRM, CPQ, etc.</li>
-                  <li>Discovery</li>
-                  <li>Solution Development</li>
-                  <li>Proposal & Negotiation</li>
-                </ul>
-              </div>
-
-              {/* Customer Success */}
-              <div>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#64748b', marginBottom: '8px' }}>
-                  Customer Success
-                </div>
-                <ul style={{ fontSize: '11px', color: '#94a3b8', lineHeight: 1.8, paddingLeft: '16px', margin: 0 }}>
-                  <li>Onboarding</li>
-                  <li>Ongoing Success Mgmt</li>
-                  <li>Renewal Management</li>
-                  <li>Expansion & Upsell</li>
-                </ul>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* What Makes Us Different Section */}
-      <section style={{ backgroundColor: '#fff', padding: '60px 24px', borderBottom: '1px solid #e5e7eb' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <h3
+      {/* ================= HOW IT WORKS ================= */}
+      <section style={{ backgroundColor: "#fff", padding: "72px 24px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <h2
             style={{
-              fontSize: '24px',
-              fontWeight: 700,
+              fontSize: 28,
+              fontWeight: 800,
               color: colors.darkNavy,
-              marginBottom: '40px',
-              textAlign: 'center',
+              marginBottom: 24,
             }}
           >
-            What Makes Us Different
-          </h3>
+            Built to support judgment, not replace it
+          </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '32px', marginBottom: '16px' }}>📊</div>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: colors.darkNavy, marginBottom: '8px' }}>
-                Real Market Data
-              </div>
-              <p style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.6 }}>
-                No more guessing. Benchmarks from 300+ companies show you exactly where you stand and what good looks
-                like.
-              </p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '32px', marginBottom: '16px' }}>🎯</div>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: colors.darkNavy, marginBottom: '8px' }}>
-                Expert-Guided System
-              </div>
-              <p style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.6 }}>
-                AI does the analysis. Experts validate the findings. Your team builds the muscle.
-              </p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '32px', marginBottom: '16px' }}>⚡</div>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: colors.darkNavy, marginBottom: '8px' }}>
-                Results Without the Overhead
-              </div>
-              <p style={{ fontSize: '14px', color: '#6b7280', lineHeight: 1.6 }}>
-                Actionable insights in weeks, not months. No $200K consulting engagement. No new headcount.
-              </p>
-            </div>
-          </div>
+          <p style={{ fontSize: 16, lineHeight: 1.7, color: "#475569" }}>
+            Remidi Works combines structured diagnostics, proprietary benchmarks,
+            and operating awareness to help leadership teams make better
+            commercial decisions. AI improves speed and consistency. Judgment
+            stays with the people accountable for results.
+          </p>
         </div>
       </section>
 
-      {/* What We Do Section */}
-      <section style={{ backgroundColor: '#f8fafc', padding: '60px 24px', borderBottom: '1px solid #e5e7eb' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 700, color: colors.darkNavy, marginBottom: '16px' }}>What We Do</h3>
-            <p style={{ fontSize: '16px', color: '#6b7280', lineHeight: 1.6, maxWidth: '700px', margin: '0 auto' }}>
-              We quantify what's broken, size the opportunity, and guide you through fixing it with peer benchmarks and
-              expert methodology.
+      {/* ================= TWO PATHS ================= */}
+      <section style={{ padding: "80px 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <div
+              style={{
+                display: "inline-block",
+                padding: "6px 12px",
+                borderRadius: 999,
+                backgroundColor: "#eef2ff",
+                color: colors.navy,
+                fontSize: 12,
+                fontWeight: 800,
+                marginBottom: 12,
+              }}
+            >
+              SELF-SELECT A DEMO
+            </div>
+            <h2
+              style={{
+                fontSize: 30,
+                fontWeight: 800,
+                color: colors.darkNavy,
+                marginBottom: 10,
+              }}
+            >
+              One platform. Two ways to use it.
+            </h2>
+            <p style={{ fontSize: 16, color: "#475569" }}>
+              The same decision support engine, applied to different jobs-to-be-done.
             </p>
           </div>
 
           <div
             style={{
-              backgroundColor: '#fff',
-              borderRadius: '12px',
-              padding: '24px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-              border: '1px solid #e5e7eb',
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(420px, 1fr))",
+              gap: 32,
             }}
           >
-            <img
-              src="/portfolio-dashboard.png"
-              alt="Remidi Works Portfolio Dashboard showing commercial health scores across portfolio companies"
-              style={{
-                width: '100%',
-                height: 'auto',
-                borderRadius: '8px',
-              }}
+            {/* Company */}
+            <DemoCard
+              title="Portfolio Company View"
+              subtitle="For CEOs, CMOs, CROs, and leadership teams"
+              description="Surface the most important commercial opportunities and get a clear, execution-ready path forward."
+              bullets={[
+                "Opportunity diagnostics grounded in real data",
+                "Clear prioritization across pricing and GTM",
+                "Board-ready outputs and recommendations",
+                "Confidence to act without adding headcount",
+              ]}
+              button="See Your Company Snapshot"
+              color={colors.navy}
+            />
+
+            {/* Investor */}
+            <DemoCard
+              title="Investor Portfolio View"
+              subtitle="For PE investors and operating partners"
+              description="Identify commercial risk and upside across the portfolio and focus attention where it matters most."
+              bullets={[
+                "Consistent diagnostics across companies",
+                "Early visibility into value creation opportunities",
+                "Faster triage without heroics",
+                "Repeatable decision frameworks for management teams",
+              ]}
+              button="See Your Portfolio Snapshot"
+              color={colors.coral}
             />
           </div>
         </div>
       </section>
 
-      {/* Two Paths Section */}
-      <section style={{ padding: '80px 24px', maxWidth: '1000px', margin: '0 auto' }}>
-        {/* NEW: Section intro to frame self-selection */}
-        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <div
-            style={{
-              display: 'inline-block',
-              padding: '6px 10px',
-              borderRadius: '999px',
-              backgroundColor: '#eef2ff',
-              color: colors.navy,
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.3px',
-              marginBottom: '12px',
-            }}
-          >
-            SELF-SELECT A DEMO
-          </div>
-          <h3 style={{ fontSize: '26px', fontWeight: 800, color: colors.darkNavy, margin: '0 0 10px' }}>
-            One platform. Two ways to use it.
-          </h3>
-          <p style={{ fontSize: '15px', color: '#6b7280', lineHeight: 1.7, maxWidth: '760px', margin: '0 auto' }}>
-            Remidi Works is a decision support platform for commercial excellence. Choose the view that matches your role
-            and see the outputs you can use immediately.
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-            gap: '32px',
-          }}
-        >
-          {/* Portfolio Company Demo Card */}
-          <div
-            style={{
-              backgroundColor: '#fff',
-              borderRadius: '16px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-              overflow: 'hidden',
-              border: '1px solid #e5e7eb',
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: colors.cream,
-                padding: '32px',
-                borderBottom: `4px solid ${colors.lightBlue}`,
-              }}
-            >
-              <div
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '12px',
-                  backgroundColor: colors.navy,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '20px',
-                }}
-              >
-                <span style={{ fontSize: '28px' }}>👤</span>
-              </div>
-              <h2 style={{ fontSize: '24px', fontWeight: 700, color: colors.darkNavy, marginBottom: '8px' }}>
-                Portfolio Company View
-              </h2>
-              <p style={{ fontSize: '14px', color: '#6b7280' }}>For CMOs, CROs, and Marketing Leaders</p>
-            </div>
-
-            <div style={{ padding: '32px' }}>
-              {/* NEW: Outcome-first framing */}
-              <p style={{ fontSize: '15px', color: '#111827', lineHeight: 1.7, marginBottom: '10px', fontWeight: 650 }}>
-                What leadership teams get
-              </p>
-              <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.7, marginBottom: '20px' }}>
-                A clear view of the highest-impact commercial opportunities, plus a practical path to act with confidence
-                across pricing, positioning, and enablement.
-              </p>
-
-              {/* Then demo description */}
-              <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.7, marginBottom: '22px' }}>
-                In this demo, you will see how a marketing leader uses Remidi Works to diagnose commercialization gaps and
-                turn them into board-ready deliverables, with expert support when needed.
-              </p>
-
-              <div style={{ marginBottom: '24px' }}>
-                <div
-                  style={{
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    color: colors.navy,
-                    marginBottom: '12px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
-                  }}
-                >
-                  What You'll See
-                </div>
-                <ul style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.8, paddingLeft: '20px' }}>
-                  <li>Pre-populated diagnostic from observable data</li>
-                  <li>Real-time score refinement through AI interview</li>
-                  <li>Prioritized action plan based on gaps</li>
-                  <li>Step-by-step workstream execution</li>
-                </ul>
-              </div>
-
-              <div style={{ backgroundColor: '#f8fafc', borderRadius: '8px', padding: '16px', marginBottom: '24px' }}>
-                <img
-                  src="/portfolio-company-view.png"
-                  alt="Portfolio company diagnostic view showing dimension scores and improvement priorities"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    borderRadius: '4px',
-                    border: '1px solid #e5e7eb',
-                  }}
-                />
-              </div>
-
-              <a
-                href="https://hg-partners-45784330.hubspotpagebuilder.com/-temporary-slug-7849a973-8e5e-49c0-ba54-09fbbac11513?hs_preview=IrHJGQuF-204846823727"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}
-              >
-                <button
-                  style={{
-                    width: '100%',
-                    padding: '16px 24px',
-                    backgroundColor: colors.navy,
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  See Your Company Snapshot
-                  <span style={{ fontSize: '18px' }}>→</span>
-                </button>
-              </a>
-            </div>
-          </div>
-
-          {/* Investor Demo Card */}
-          <div
-            style={{
-              backgroundColor: '#fff',
-              borderRadius: '16px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-              overflow: 'hidden',
-              border: '1px solid #e5e7eb',
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: colors.darkNavy,
-                padding: '32px',
-                borderBottom: `4px solid ${colors.coral}`,
-              }}
-            >
-              <div
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '12px',
-                  backgroundColor: colors.coral,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '20px',
-                }}
-              >
-                <span style={{ fontSize: '28px' }}>📊</span>
-              </div>
-              <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>
-                Investor Portfolio View
-              </h2>
-              <p style={{ fontSize: '14px', color: colors.lightBlue }}>For PE/VC Investors and Operating Partners</p>
-            </div>
-
-            <div style={{ padding: '32px' }}>
-              {/* NEW: Outcome-first framing */}
-              <p style={{ fontSize: '15px', color: '#111827', lineHeight: 1.7, marginBottom: '10px', fontWeight: 650 }}>
-                What investors and operating partners get
-              </p>
-              <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.7, marginBottom: '20px' }}>
-                A consistent way to spot commercial risk and upside across the portfolio, then focus time on the
-                highest-impact opportunities.
-              </p>
-
-              {/* Then demo description */}
-              <p style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.7, marginBottom: '22px' }}>
-                In this demo, you will see how investors use Remidi Works to monitor commercial health, identify where
-                attention is needed, and drill into opportunity areas.
-              </p>
-
-              <div style={{ marginBottom: '24px' }}>
-                <div
-                  style={{
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    color: colors.navy,
-                    marginBottom: '12px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
-                  }}
-                >
-                  What You'll See
-                </div>
-                <ul style={{ fontSize: '14px', color: '#4b5563', lineHeight: 1.8, paddingLeft: '20px' }}>
-                  <li>Portfolio-wide health scores from public data</li>
-                  <li>Company ranking vs. 300+ company benchmark</li>
-                  <li>Top improvement priorities per underperformer</li>
-                  <li>Drill-down to company diagnostic workflow</li>
-                </ul>
-              </div>
-
-              <div style={{ backgroundColor: '#f8fafc', borderRadius: '8px', padding: '16px', marginBottom: '24px' }}>
-                <img
-                  src="/portfolio-dashboard.png"
-                  alt="Investor portfolio dashboard showing company rankings and health scores"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    borderRadius: '4px',
-                    border: '1px solid #e5e7eb',
-                  }}
-                />
-              </div>
-
-              <a
-                href="https://hg-partners-45784330.hubspotpagebuilder.com/-temporary-slug-7849a973-8e5e-49c0-ba54-09fbbac11513?hs_preview=IrHJGQuF-204846823727"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}
-              >
-                <button
-                  style={{
-                    width: '100%',
-                    padding: '16px 24px',
-                    backgroundColor: colors.coral,
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  See Your Portfolio Snapshot
-                  <span style={{ fontSize: '18px' }}>→</span>
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* ================= CTA ================= */}
       <section
         style={{
           backgroundColor: colors.cream,
-          padding: '80px 24px',
+          padding: "80px 24px",
           borderTop: `4px solid ${colors.coral}`,
-          borderBottom: `4px solid ${colors.coral}`,
         }}
       >
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
           <h2
             style={{
-              fontSize: '36px',
-              fontWeight: 700,
+              fontSize: 36,
+              fontWeight: 800,
               color: colors.darkNavy,
-              marginBottom: '20px',
-              lineHeight: 1.2,
+              marginBottom: 20,
             }}
           >
-            Get Your Portfolio Snapshot Free
+            See where the real opportunities are
           </h2>
 
           <p
             style={{
-              fontSize: '18px',
-              color: '#4b5563',
-              marginBottom: '40px',
+              fontSize: 18,
               lineHeight: 1.6,
-              maxWidth: '600px',
-              margin: '0 auto 40px',
+              color: "#475569",
+              marginBottom: 36,
             }}
           >
-            Send us your portfolio company list. We'll analyze their commercial health and send you the results. No cost.
-            No commitment.
+            Get a live view of how Remidi Works surfaces commercial opportunities
+            and supports confident decisions.
           </p>
 
-          <a
-            href="https://hg-partners-45784330.hubspotpagebuilder.com/-temporary-slug-7849a973-8e5e-49c0-ba54-09fbbac11513?hs_preview=IrHJGQuF-204846823727"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: 'none' }}
+          <button
+            style={{
+              padding: "18px 36px",
+              backgroundColor: colors.coral,
+              color: "#fff",
+              border: "none",
+              borderRadius: 8,
+              fontSize: 16,
+              fontWeight: 800,
+              cursor: "pointer",
+            }}
           >
-            <button
-              style={{
-                padding: '18px 36px',
-                backgroundColor: colors.coral,
-                color: '#fff',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '16px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(238, 108, 77, 0.3)',
-                transition: 'all 0.2s',
-              }}
-            >
-              Get Started Free
-            </button>
-          </a>
+            Get Started
+          </button>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ backgroundColor: colors.darkNavy, padding: '32px 24px', textAlign: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              marginBottom: '16px',
-            }}
-          >
-            <span
-              style={{
-                backgroundColor: colors.coral,
-                width: '24px',
-                height: '24px',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 700,
-                color: '#fff',
-                fontSize: '10px',
-              }}
-            >
-              RW
-            </span>
-            <span style={{ fontSize: '16px', fontWeight: 600, color: '#fff' }}>Remidi Works</span>
-            <span style={{ fontSize: '12px', color: colors.lightBlue, marginLeft: '4px' }}>by HG Partners</span>
-          </div>
-          <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)' }}>
-            The fastest, surest path to Commercial Excellence for growth-stage B2B companies
-          </p>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginTop: '16px' }}>
-            © 2026 HG Partners. Demo for concept testing purposes.
-          </p>
+      {/* ================= FOOTER ================= */}
+      <footer
+        style={{
+          backgroundColor: colors.darkNavy,
+          padding: "32px 24px",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 13 }}>
+          © 2026 Remidi Works by HG Partners
         </div>
       </footer>
+    </div>
+  );
+}
+
+/* ---------- Demo Card Component ---------- */
+
+function DemoCard({ title, subtitle, description, bullets, button, color }) {
+  return (
+    <div
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: 16,
+        boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          padding: 32,
+          backgroundColor: color,
+          color: "#fff",
+        }}
+      >
+        <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 6 }}>
+          {title}
+        </h3>
+        <p style={{ fontSize: 14, opacity: 0.85 }}>{subtitle}</p>
+      </div>
+
+      <div style={{ padding: 32 }}>
+        <p style={{ fontSize: 15, color: "#334155", marginBottom: 16 }}>
+          {description}
+        </p>
+
+        <ul
+          style={{
+            paddingLeft: 20,
+            marginBottom: 24,
+            fontSize: 14,
+            lineHeight: 1.8,
+            color: "#475569",
+          }}
+        >
+          {bullets.map((b) => (
+            <li key={b}>{b}</li>
+          ))}
+        </ul>
+
+        <button
+          style={{
+            width: "100%",
+            padding: "14px 20px",
+            backgroundColor: color,
+            color: "#fff",
+            border: "none",
+            borderRadius: 8,
+            fontSize: 15,
+            fontWeight: 800,
+            cursor: "pointer",
+          }}
+        >
+          {button}
+        </button>
+      </div>
     </div>
   );
 }
