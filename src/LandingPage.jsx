@@ -368,6 +368,7 @@ export default function LandingPage() {
               ]}
               button="See Your Portfolio Snapshot"
               color={colors.coral}
+              link="https://r9bey.share.hsforms.com/2LHpECgUmSKqEhEFMW4FVHQ"
             />
           </div>
         </div>
@@ -440,7 +441,25 @@ export default function LandingPage() {
 
 /* ---------- Demo Card Component ---------- */
 
-function DemoCard({ title, subtitle, description, bullets, button, color }) {
+function DemoCard({ title, subtitle, description, bullets, button, color, link }) {
+  const buttonElement = (
+    <button
+      style={{
+        width: "100%",
+        padding: "14px 20px",
+        backgroundColor: color,
+        color: "#fff",
+        border: "none",
+        borderRadius: 8,
+        fontSize: 15,
+        fontWeight: 800,
+        cursor: "pointer",
+      }}
+    >
+      {button}
+    </button>
+  );
+
   return (
     <div
       style={{
@@ -482,21 +501,18 @@ function DemoCard({ title, subtitle, description, bullets, button, color }) {
           ))}
         </ul>
 
-        <button
-          style={{
-            width: "100%",
-            padding: "14px 20px",
-            backgroundColor: color,
-            color: "#fff",
-            border: "none",
-            borderRadius: 8,
-            fontSize: 15,
-            fontWeight: 800,
-            cursor: "pointer",
-          }}
-        >
-          {button}
-        </button>
+        {link ? (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none" }}
+          >
+            {buttonElement}
+          </a>
+        ) : (
+          buttonElement
+        )}
       </div>
     </div>
   );
