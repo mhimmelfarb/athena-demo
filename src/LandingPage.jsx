@@ -182,10 +182,7 @@ export default function LandingPage() {
                 letterSpacing: "-0.6px",
               }}
             >
-              Commercial Excellence should not be{" "}
-              <span style={{ fontStyle: "italic", color: colors.lightBlue }}>
-                "I'll know it when I see it."
-              </span>
+              You're leaving 20–30% of revenue on the table
             </h1>
 
             <p
@@ -196,9 +193,7 @@ export default function LandingPage() {
                 marginBottom: 24,
               }}
             >
-              Most leadership teams can see when performance is lagging. What
-              they cannot see clearly is why it is happening, where the real
-              opportunities are, or which actions will actually move the needle.
+              Not because your team isn't working hard. Your commercial model has gaps - pricing that doesn't match value, unclear positioning, sales teams that can't articulate ROI. The symptoms show up as stalled deals, discounting pressure, and confused buyer conversations.
             </p>
 
             <p
@@ -209,9 +204,7 @@ export default function LandingPage() {
                 lineHeight: 1.6,
               }}
             >
-              Remidi Works is a decision support platform for commercial
-              excellence that surfaces high-impact revenue and growth
-              opportunities and helps leaders act with confidence.
+              Remidi Works combines expert judgment, real market data, and AI workflows to show you exactly what's broken and how to fix it. No black-box AI answers. No slow consulting engagements. A guided system that gets you from diagnosis to action.
             </p>
           </div>
         </section>
