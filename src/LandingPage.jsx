@@ -23,6 +23,11 @@ export default function LandingPage() {
           grid-template-columns: repeat(2, 1fr);
           gap: 32px;
         }
+        .rw-grid-3col {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+        }
         .rw-hero-title {
           font-size: 44px;
         }
@@ -38,12 +43,29 @@ export default function LandingPage() {
         .rw-hero-padding {
           padding: 88px 24px;
         }
+        .rw-coming-soon {
+          display: inline-block;
+          padding: 4px 10px;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #fbbf24, #f59e0b);
+          color: #78350f;
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+          margin-left: 8px;
+          vertical-align: middle;
+        }
         @media (max-width: 900px) {
           .rw-grid-2col {
             grid-template-columns: 1fr;
             gap: 32px;
           }
           .rw-grid-cards {
+            grid-template-columns: 1fr;
+          }
+          .rw-grid-3col {
             grid-template-columns: 1fr;
           }
           .rw-hero-title {
@@ -275,12 +297,26 @@ export default function LandingPage() {
               style={{
                 fontWeight: 800,
                 color: colors.darkNavy,
-                marginBottom: 32,
+                marginBottom: 12,
                 textAlign: "center",
               }}
             >
               Decision support for commercial excellence
+              <span className="rw-coming-soon" aria-label="Coming soon">Coming Soon</span>
             </h2>
+            <p
+              style={{
+                fontSize: 16,
+                color: "#6b7280",
+                lineHeight: 1.7,
+                marginBottom: 32,
+                textAlign: "center",
+                maxWidth: 700,
+                margin: "0 auto 32px",
+              }}
+            >
+              Platform + proprietary data + expert validation. AI analyzes, experts apply judgment and organizational awareness, you execute with confidence.
+            </p>
 
             <div className="rw-grid-2col rw-grid-2col-reverse">
               <div
@@ -312,10 +348,10 @@ export default function LandingPage() {
                 }}
               >
                 {[
-                  "Surface the highest-impact revenue and margin opportunities",
-                  "Explain what is driving performance and what is holding it back",
-                  "Prioritize actions across pricing, GTM, and enablement",
-                  "Support confident decisions grounded in real operating context",
+                  "Benchmark against 300+ B2B companies using our proprietary Commercial Health Score across pricing, positioning, and enablement",
+                  "Isolate root causes—separate pricing gaps from positioning issues from enablement failures using observable market signals",
+                  "Quantify revenue opportunity with confidence intervals showing best case, likely case, and threshold for action",
+                  "Get expert guidance on navigating your organization—tactical moves like which leader to engage for case studies or how to frame changes for finance approval",
                 ].map((item) => (
                   <div
                     key={item}
@@ -355,12 +391,120 @@ export default function LandingPage() {
               Built to support judgment, not replace it
             </h2>
 
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: "#475569" }}>
+            <p style={{ fontSize: 16, lineHeight: 1.7, color: "#475569", marginBottom: 16 }}>
               Remidi Works combines structured diagnostics, proprietary
               benchmarks, and operating awareness to help leadership teams make
               better commercial decisions. AI improves speed and consistency.
               Judgment stays with the people accountable for results.
             </p>
+
+            <div
+              style={{
+                marginTop: 20,
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                borderLeft: `4px solid ${colors.navy}`,
+                borderRadius: 12,
+                padding: 16,
+                color: "#1e3a8a",
+                fontSize: 15,
+                lineHeight: 1.6,
+              }}
+            >
+              <strong style={{ color: "#1e40af", display: "block", marginBottom: 6 }}>
+                Why platform + expert beats generic AI:
+              </strong>
+              AI can analyze data and suggest next steps. The expert applies judgment 
+              on whether you're on the right path, has organizational awareness to navigate 
+              around blockers, and knows the tactical moves that actually work—like knowing 
+              which leader to engage when you need a case study or how to frame a pricing 
+              change so finance will approve it.
+            </div>
+          </div>
+        </section>
+
+        {/* Three Benefits Section */}
+        <section
+          className="rw-section-padding"
+          style={{
+            backgroundColor: "#fff",
+            borderBottom: "1px solid #e5e7eb",
+          }}
+        >
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            <h2
+              className="rw-section-title"
+              style={{
+                fontWeight: 800,
+                color: colors.darkNavy,
+                marginBottom: 40,
+                textAlign: "center",
+              }}
+            >
+              What makes us different
+            </h2>
+
+            <div className="rw-grid-3col">
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 32, marginBottom: 16 }} aria-hidden="true">📊</div>
+                <div
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: colors.darkNavy,
+                    marginBottom: 8,
+                  }}
+                >
+                  Real Market Data
+                </div>
+                <p
+                  style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.6 }}
+                >
+                  No more guessing. Benchmarks from 300+ companies show you
+                  exactly where you stand and what good looks like.
+                </p>
+              </div>
+
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 32, marginBottom: 16 }} aria-hidden="true">🎯</div>
+                <div
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: colors.darkNavy,
+                    marginBottom: 8,
+                  }}
+                >
+                  Expert-Guided System
+                </div>
+                <p
+                  style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.6 }}
+                >
+                  AI does the analysis. Experts validate the findings. Your team
+                  builds the muscle.
+                </p>
+              </div>
+
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 32, marginBottom: 16 }} aria-hidden="true">⚡</div>
+                <div
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: colors.darkNavy,
+                    marginBottom: 8,
+                  }}
+                >
+                  Results Without the Overhead
+                </div>
+                <p
+                  style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.6 }}
+                >
+                  Actionable insights in weeks, not months. No $200K consulting
+                  engagement. No new headcount.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -431,6 +575,64 @@ export default function LandingPage() {
                 color={colors.coral}
                 link="https://r9bey.share.hsforms.com/2LHpECgUmSKqEhEFMW4FVHQ"
               />
+            </div>
+          </div>
+        </section>
+
+        {/* Trust / Why Us Section */}
+        <section
+          className="rw-section-padding"
+          style={{
+            backgroundColor: "#fff",
+            borderTop: "1px solid #e5e7eb",
+          }}
+        >
+          <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
+            <h2
+              className="rw-section-title"
+              style={{
+                fontWeight: 800,
+                color: colors.darkNavy,
+                marginBottom: 20,
+              }}
+            >
+              Expert platform, proven track record
+            </h2>
+
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: "#475569",
+                marginBottom: 32,
+              }}
+            >
+              Over 50 years of combined experience improving commercial models
+              and driving growth across startups through Fortune 500 companies.
+              Serial operating partners for private equity and venture capital
+              firms, with executive leadership roles spanning Nielsen, Kellogg,
+              and multiple growth-stage B2B companies.
+            </p>
+
+            <div
+              style={{
+                display: "inline-block",
+                padding: "12px 24px",
+                backgroundColor: colors.cream,
+                borderRadius: 8,
+                border: `2px solid ${colors.navy}`,
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 14,
+                  fontWeight: 700,
+                  color: colors.darkNavy,
+                  margin: 0,
+                }}
+              >
+                Trusted by private equity and venture capital investors
+              </p>
             </div>
           </div>
         </section>
