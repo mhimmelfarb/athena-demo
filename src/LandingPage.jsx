@@ -853,31 +853,32 @@ const RemidiLandingPage = () => {
         }
 
         .cta-section {
-          background: var(--color-accent);
+          background: var(--color-white);
           padding: 5rem 2rem;
           text-align: center;
+          border-top: 1px solid var(--color-border);
         }
 
         .cta-section h2 {
-          color: var(--color-white);
+          color: var(--color-text-dark);
           margin-bottom: 1rem;
         }
 
         .cta-section p {
-          color: rgba(255, 255, 255, 0.95);
+          color: var(--color-text-gray);
           font-size: 1.25rem;
           max-width: 700px;
           margin: 0 auto 2rem;
         }
 
         .cta-section .btn-primary {
-          background: var(--color-primary);
+          background: var(--color-accent);
           font-size: 1.2rem;
           padding: 1.25rem 3rem;
         }
 
         .cta-section .btn-primary:hover {
-          background: #2a4260;
+          background: #d45a3e;
         }
 
         footer {
