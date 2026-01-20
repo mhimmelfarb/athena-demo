@@ -947,7 +947,7 @@ const RemidiLandingPage = () => {
       <section>
         <div className="container">
           <div className="section-label">The Problem</div>
-          <h2>Every company's GTM has room for improvement. The hard part is knowing which ones to fix and how.</h2>
+          <h2>Every company could improve their GTM. The hard part is knowing which problems to fix first and how.</h2>
           <p className="lead-text">Every B2B company has a list of 20+ things they could fix. New messaging. Pricing changes. Battle cards. ROI calculators. Case studies. The question isn't what's wrong—it's which problems are actually costing you revenue.</p>
           
           <div className="problem-grid">
