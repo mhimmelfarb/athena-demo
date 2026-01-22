@@ -531,13 +531,16 @@ const RemidiLandingPage = () => {
           border-radius: 16px;
           padding: 2.5rem 2rem;
           display: grid;
-          grid-template-columns: 35% 65%;
-          gap: 3rem;
+          grid-template-columns: 2fr 3fr;
+          gap: 2rem;
           align-items: start;
+          box-sizing: border-box;
         }
 
         .input-section {
           /* Left column - sliders */
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
         .input-group {
@@ -605,7 +608,9 @@ const RemidiLandingPage = () => {
           background: var(--color-light-bg);
           border: 2px solid var(--color-primary);
           border-radius: 12px;
-          padding: 1.5rem 1rem;
+          padding: 1.5rem 0.875rem;
+          max-width: 100%;
+          box-sizing: border-box;
           /* Right column - no top margin since side-by-side */
         }
 
@@ -659,7 +664,7 @@ const RemidiLandingPage = () => {
 
         .result-item {
           background: var(--color-white);
-          padding: 1rem;
+          padding: 0.875rem;
           border-radius: 8px;
         }
 
@@ -934,8 +939,8 @@ const RemidiLandingPage = () => {
         /* Tablet styles */
         @media (max-width: 1024px) {
           .calculator-body {
-            grid-template-columns: 40% 60%;
-            gap: 2rem;
+            grid-template-columns: 2fr 3fr;
+            gap: 1.5rem;
           }
 
           .pricing-grid {
