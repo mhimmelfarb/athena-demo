@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medefy - Commercial Health Rapid Scan | Remidi Works</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            page-break-after: always;
+            padding-bottom: 40px;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* PAGE 1: DASHBOARD */
+        .header {
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rw-badge {
+            background: #f97316;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .header-subtitle {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .company-meta {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .dashboard-container {
+            padding: 40px;
+        }
+
+        .score-banner {
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .score-main {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .score-number {
+            font-size: 5em;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .score-number span {
+            font-size: 0.4em;
+            opacity: 0.6;
+        }
+
+        .benchmark-note {
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+
+        .status-badge {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dimension-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dimension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .dimension-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tier-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tier-low { background: #fee2e2; color: #991b1b; }
+        .tier-medium { background: #fef3c7; color: #92400e; }
+        .tier-high { background: #d1fae5; color: #065f46; }
+
+        .dimension-score {
+            font-size: 3em;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .score-low { color: #dc2626; }
+        .score-medium { color: #d97706; }
+        .score-high { color: #059669; }
+
+        .dimension-meta {
+            font-size: 0.85em;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .critical-gap {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #fbbf24;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .critical-gap-header {
+            margin-bottom: 15px;
+        }
+
+        .critical-gap-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #92400e;
+        }
+
+        .critical-gap-content {
+            color: #78350f;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .implementation-readiness {
+            background: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .implementation-readiness h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .timeline-estimate {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        /* PAGE 2: FINDINGS */
+        .findings-header {
+            background: #1e293b;
+            color: white;
+            padding: 40px;
+        }
+
+        .findings-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .findings-header p {
+            opacity: 0.8;
+        }
+
+        .findings-container {
+            padding: 40px;
+        }
+
+        .finding {
+            margin-bottom: 50px;
+            border-left: 5px solid #e2e8f0;
+            padding-left: 30px;
+        }
+
+        .finding-number {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 900;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .finding-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 25px;
+        }
+
+        .finding-section {
+            margin-bottom: 25px;
+        }
+
+        .finding-section h4 {
+            color: #475569;
+            font-size: 0.95em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .finding-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .finding-section li {
+            padding-left: 25px;
+            margin-bottom: 12px;
+            position: relative;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .finding-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #f97316;
+            font-weight: 700;
+        }
+
+        .finding-section em {
+            color: #3b82f6;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* PAGE 3: NEXT STEPS */
+        .next-steps-container {
+            padding: 40px;
+        }
+
+        .methodology-section {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .methodology-section h3 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .methodology-section p {
+            margin-bottom: 15px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .methodology-section strong {
+            color: #1e293b;
+        }
+
+        .journey-section {
+            margin-bottom: 40px;
+        }
+
+        .journey-section h3 {
+            color: #1e293b;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+        }
+
+        .step-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .step-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .step-card:hover {
+            border-color: #f97316;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.1);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .step-card h4 {
+            color: #1e293b;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .step-card p {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cta-section h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.05em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .cta-button-primary {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+
+        .cta-button-primary:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .footer p {
+            margin-bottom: 8px;
+        }
+
+        .footer a {
+            color: #f97316;
+            text-decoration: none;
+        }
+
+        @media print {
+            body { background: white; }
+            .page { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGE 1: DASHBOARD -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-area">
+                <span class="rw-badge">RW</span>
+                <div>
+                    <div class="header-subtitle">Commercial Health Rapid Scan</div>
+                    <div style="opacity: 0.7; font-size: 0.85em;">Based on public data analysis • January 29, 2026</div>
+                </div>
+            </div>
+            <div class="company-name">Medefy</div>
+            <div class="company-meta">Healthcare Benefits Navigation • B2B2C SaaS • ~$25M Revenue</div>
+        </div>
+
+        <div class="dashboard-container">
+            <div class="score-banner">
+                <div class="score-main">
+                    <div class="score-label">Overall Commercial Health Score</div>
+                    <div class="score-number">5.9<span>/10</span></div>
+                    <div class="benchmark-note">0.0 vs. universe median (5.9 avg)</div>
+                </div>
+                <div class="status-badge">
+                    <span>⚠️</span>
+                    <span>Needs Attention</span>
+                </div>
+            </div>
+
+            <div class="dimension-grid">
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Value Articulation</div>
+                        <span class="tier-badge tier-medium">Developing</span>
+                    </div>
+                    <div class="dimension-score score-medium">6.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Strong ROI proof exists (3x-9x) but not systematically distributed</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Pricing Architecture</div>
+                        <span class="tier-badge tier-low">Needs Work</span>
+                    </div>
+                    <div class="dimension-score score-low">5.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Zero pricing transparency, packaging unclear</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Competitive Positioning</div>
+                        <span class="tier-badge tier-medium">Developing</span>
+                    </div>
+                    <div class="dimension-score score-medium">6.5<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Human-first vs AI clear, but vs Transcarent weak</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Sales Enablement</div>
+                        <span class="tier-badge tier-low">Needs Work</span>
+                    </div>
+                    <div class="dimension-score score-low">5.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">No visible marketing leadership, minimal demand gen</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Customer ROI Proof</div>
+                        <span class="tier-badge tier-high">Solid</span>
+                    </div>
+                    <div class="dimension-score score-high">7.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Strong quantified outcomes, 4.8/5 App Store rating</div>
+                </div>
+            </div>
+
+            <div class="critical-gap">
+                <div class="critical-gap-header">
+                    <div class="critical-gap-title">
+                        <span>🔴</span>
+                        <span>Urgent Opportunity: GTM Infrastructure Gap</span>
+                    </div>
+                </div>
+                <div class="critical-gap-content">
+                    Despite strong product quality (4.8/5 App Store, 70% engagement) and compelling ROI proof (3x-9x returns), <strong>there's no visible marketing leadership or systematic demand generation infrastructure.</strong> Company appears profitable ($25M revenue, 93 employees, 13-year track record) but growth-constrained. This creates fundamental challenges around pipeline predictability, sales cycle compression, and expansion revenue capture. <strong>For PE investors, severe GTM underinvestment signals significant unrealized growth potential.</strong>
+                </div>
+            </div>
+
+            <div class="implementation-readiness">
+                <h3>Estimated Time to Optimized Commercial Model</h3>
+                <div class="timeline-estimate">12-18 months with systematic execution</div>
+                <p style="margin-top: 15px; color: #64748b;">Based on addressing top 3 priorities: GTM infrastructure build, pricing transparency, and systematic demand generation. Estimated 30-40% growth acceleration achievable.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: KEY FINDINGS -->
+    <div class="page">
+        <div class="findings-header">
+            <h2>Top 3 Commercial Gaps</h2>
+            <p>Prioritized by impact on growth velocity and expansion revenue capture</p>
+        </div>
+
+        <div class="findings-container">
+            <div class="finding">
+                <div class="finding-number">1</div>
+                <div class="finding-title">GTM Infrastructure: From Channel-Dependent to Systematic Growth</div>
+                
+                <div class="finding-section">
+                    <h4>What We Observed</h4>
+                    <ul>
+                        <li>No CMO or VP Marketing visible on website or LinkedIn profiles</li>
+                        <li>Minimal content marketing infrastructure (basic FAQs, no blog, limited thought leadership)</li>
+                        <li>Customer marketing assets exist (testimonials) but no systematic demand generation</li>
+                        <li>Limited G2/Capterra review presence despite 13-year operating history</li>
+                        <li>Strong ROI proof (3x-9x returns, $4M HR savings, 70% engagement) but not weaponized for pipeline generation</li>
+                    </ul>
+                </div>
+
+                <div class="finding-section">
+                    <h4>Strategic Direction</h4>
+                    <ul>
+                        <li>Heavy reliance on broker/advisor channel creates pipeline dependency and limits scale velocity</li>
+                        <li>GTM infrastructure requires systematic build: marketing leadership, demand gen capabilities, content strategy, and review generation programs</li>
+                        <li>The gap between strong customer outcomes and minimal marketing presence suggests opportunity for 30-40% growth acceleration</li>
+                        <li>For PE positioning: demonstrate transition from channel-dependent to multi-channel acquisition with predictable pipeline generation</li>
+                        <li><em>Complete GTM roadmap, demand gen strategy, and execution timeline available in full diagnostic</em></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="finding">
+                <div class="finding-number">2</div>
+                <div class="finding-title">Pricing Architecture: Transparency Drives Qualification Efficiency</div>
+                
+                <div class="finding-section">
+                    <h4>What We Observed</h4>
+                    <ul>
+                        <li>Zero pricing transparency on website ("Contact Sales" only model)</li>
+                        <li>No packaging visible - Base/Plus/Enterprise tier structure unclear</li>
+                        <li>Per-employee pricing model implied from category norms but not published</li>
+                        <li>No self-service tier for smaller organizations (300-500 employees segment)</li>
+                        <li>MedefyRx, Virtual Care, and Behavioral Health modules exist but add-on pricing not visible</li>
+                    </ul>
+                </div>
+
+                <div class="finding-section">
+                    <h4>Strategic Direction</h4>
+                    <ul>
+                        <li>Complete pricing opacity creates unnecessary friction and extends qualification cycles</li>
+                        <li>Estimated 20-30% of qualified leads lost before sales engagement due to pricing uncertainty</li>
+                        <li>Lack of published pricing structure means upsell conversations happen reactively vs systematically</li>
+                        <li>Pricing transparency strategy requires balancing competitive intelligence, market positioning, and sales motion maturity</li>
+                        <li>Self-service tier opportunity for smaller orgs could unlock expansion market without sales overhead</li>
+                        <li><em>Pricing architecture framework, tier recommendations, and packaging strategy available in full diagnostic</em></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="finding">
+                <div class="finding-number">3</div>
+                <div class="finding-title">Value Articulation: From Proof to Systematic Distribution</div>
+                
+                <div class="finding-section">
+                    <h4>What We Observed</h4>
+                    <ul>
+                        <li>Strong ROI proof exists: "3x-9x returns", "$4M HR time savings", "70% employee engagement"</li>
+                        <li>4.8/5 App Store rating with detailed positive testimonials demonstrates product quality</li>
+                        <li>Customer quotes highlighting value realization but not prominently featured or systematically leveraged</li>
+                        <li>No ROI calculator, quantified case studies, or benchmark data publicly available</li>
+                        <li>Website focuses on feature capabilities vs economic outcomes for decision-makers</li>
+                    </ul>
+                </div>
+
+                <div class="finding-section">
+                    <h4>Strategic Direction</h4>
+                    <ul>
+                        <li>Gap between strong customer outcomes and minimal outcome-focused marketing creates sales cycle friction</li>
+                        <li>Value proof exists but requires systematic packaging and distribution infrastructure</li>
+                        <li>ROI calculator opportunity to drive lead generation while educating prospects on economic value</li>
+                        <li>Case study development framework needed to capture quantified outcomes systematically vs reactively</li>
+                        <li>Homepage messaging hierarchy requires outcome-first positioning vs feature-first approach</li>
+                        <li><em>Complete messaging framework, ROI calculator specifications, and case study templates available in full diagnostic</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: NEXT STEPS -->
+    <div class="page">
+        <div class="next-steps-container">
+            <div class="methodology-section">
+                <h3>How This Assessment Was Conducted</h3>
+                <p><strong>Data Sources:</strong> Website analysis, App Store reviews, Growjo revenue estimates, LinkedIn profiles, industry benchmarking data, competitive positioning research</p>
+                <p><strong>Methodology:</strong> Commercial Health Scoring across 5 dimensions: Value Articulation, Pricing Architecture, Competitive Positioning, Sales Enablement, and Customer ROI Proof. Each dimension scored 0-10 with confidence weighting.</p>
+                <p><strong>Limitations:</strong> This scan is based entirely on public information. A full diagnostic would incorporate internal metrics including: customer acquisition costs, sales cycle data, win/loss analysis, channel performance breakdown, expansion revenue patterns, and competitive deal dynamics.</p>
+                <p><strong>Confidence Level:</strong> High (8/10) - substantial public data across customer reviews, revenue estimates, and market positioning. Limited visibility into internal GTM metrics and strategic decision-making.</p>
+            </div>
+
+            <div class="journey-section">
+                <h3>Your Next Steps With Remidi Works</h3>
+                
+                <div class="step-cards">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Free Kickoff Call</h4>
+                        <p>30-minute calibration to validate these findings against internal metrics and channel performance. We'll discuss what you're seeing in customer acquisition and help you decide: tackle this internally, work together, or whether timing is right for intervention.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Full Diagnostic ($6K)</h4>
+                        <p>If systematic approach needed: comprehensive assessment incorporating win/loss analysis, channel economics deep-dive, GTM roadmap with specific milestones, pricing architecture recommendations, and prioritized 90-day execution plan with ARR impact estimates.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Ongoing Support ($2-3K/mo)</h4>
+                        <p>For companies executing commercial improvements: monthly strategic advisory, demand gen infrastructure build support, pricing optimization testing, sales enablement development, and continuous refinement as you scale growth velocity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>Ready to Discuss These Findings?</h3>
+                <p>Book a 30-minute calibration call to validate this assessment against your internal data and channel performance. We'll give you an honest recommendation on the best path forward - sometimes the quick wins are enough, sometimes it's worth bringing us in, sometimes it's not the right time.</p>
+                <a href="https://calendly.com/remidiworks/kickoff" class="cta-button-primary">Schedule Free Kickoff Call</a>
+            </div>
+
+            <div class="footer">
+                <p><strong>Remidi Works</strong> • Commercial Excellence for B2B SaaS • michael@remidiworks.com</p>
+                <p>This assessment is based on publicly available information and does not reflect proprietary company data or strategic plans.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
