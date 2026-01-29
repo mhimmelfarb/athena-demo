@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mercury Fund - Portfolio Intelligence | Remidi Works</title>
   
-  <!-- React and Recharts via CDN -->
+  <!-- React and ReactDOM via CDN -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/recharts@2.5.0/dist/Recharts.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <style>
     * {
@@ -21,772 +19,840 @@
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8fafc 0%, #e0fbfc 100%);
     }
     
-    #root {
-      min-height: 100vh;
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      background: #3D5A80;
+      padding: 24px 32px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: #EE6C4D;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    
+    .brand h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+    
+    .brand p {
+      font-size: 14px;
+      color: #98C1D9;
+      margin: 0;
+    }
+    
+    .fund-badge {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    
+    .tab {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    
+    .tab:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .tab.active {
+      background: #EE6C4D;
+      border-color: #EE6C4D;
+    }
+    
+    .content-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #293241;
+      margin-bottom: 8px;
+    }
+    
+    .section-subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+    
+    .company-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .company-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+      padding: 20px 24px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .company-row:hover {
+      border-color: #98C1D9;
+      box-shadow: 0 2px 8px rgba(61, 90, 128, 0.1);
+    }
+    
+    .company-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .company-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .company-name span {
+      font-size: 16px;
+      font-weight: 600;
+      color: #293241;
+    }
+    
+    .status-badge {
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    
+    .status-badge.outperformer {
+      background: rgba(45, 147, 108, 0.1);
+      color: #2D936C;
+    }
+    
+    .status-badge.average {
+      background: rgba(244, 163, 0, 0.1);
+      color: #F4A300;
+    }
+    
+    .status-badge.underperformer {
+      background: rgba(193, 41, 46, 0.1);
+      color: #C1292E;
+    }
+    
+    .company-meta {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    
+    .score-circle {
+      text-align: center;
+    }
+    
+    .score-label {
+      font-size: 11px;
+      color: #9ca3af;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    
+    .score-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #293241;
+    }
+    
+    .relative-score {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    
+    .relative-score.positive { color: #2D936C; }
+    .relative-score.neutral { color: #F4A300; }
+    .relative-score.negative { color: #C1292E; }
+    
+    .rank {
+      font-size: 24px;
+      font-weight: 700;
+      color: #293241;
+    }
+    
+    .footer-note {
+      margin-top: 40px;
+      padding: 20px;
+      background: #E0FBFC;
+      border: 1px solid #98C1D9;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+    
+    .footer-note strong {
+      color: #3D5A80;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 24px;
+    }
+    
+    .company-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .company-card:hover {
+      transform: translateY(-4px);
+      border-color: #98C1D9;
+      box-shadow: 0 8px 24px rgba(61, 90, 128, 0.15);
+    }
+    
+    .status-bar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+    }
+    
+    .status-bar.outperformer { background: #2D936C; }
+    .status-bar.average { background: #F4A300; }
+    .status-bar.underperformer { background: #C1292E; }
+    
+    .card-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #293241;
+      margin-bottom: 8px;
+    }
+    
+    .card-sector {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    
+    .card-invested {
+      font-size: 11px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    
+    .big-score {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    
+    .big-score.green { color: #2D936C; }
+    .big-score.yellow { color: #F4A300; }
+    .big-score.red { color: #C1292E; }
+    
+    .dimensions {
+      margin-bottom: 16px;
+    }
+    
+    .dimension-row {
+      margin-bottom: 8px;
+    }
+    
+    .dimension-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    
+    .dimension-header span:last-child {
+      font-weight: 600;
+    }
+    
+    .dimension-bar {
+      height: 4px;
+      background: #f3f4f6;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    .dimension-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s;
+    }
+    
+    .dimension-fill.green { background: #2D936C; }
+    .dimension-fill.yellow { background: #F4A300; }
+    .dimension-fill.red { background: #C1292E; }
+    
+    .gap-box {
+      padding: 12px;
+      background: rgba(193, 41, 46, 0.05);
+      border: 1px solid rgba(193, 41, 46, 0.2);
+      border-radius: 8px;
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    
+    .gap-title {
+      font-weight: 600;
+      color: #C1292E;
+      margin-bottom: 4px;
     }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-
-  <script type="text/babel">
-    const { useState } = React;
-    const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } = Recharts;
-
-    // RW Brand Colors
-    const colors = {
-      navy: '#3D5A80',
-      coral: '#EE6C4D',
-      lightBlue: '#98C1D9',
-      darkNavy: '#293241',
-      cream: '#E0FBFC',
-      white: '#FFFFFF',
-      red: '#C1292E',
-      yellow: '#F4A300',
-      green: '#2D936C'
-    };
-
-    const MercuryPortfolioDashboard = () => {
-      const [selectedCompany, setSelectedCompany] = useState(null);
-      const [view, setView] = useState('summary');
-
-      const portfolioData = [
-        {
-          id: 1,
-          name: 'Molecule',
-          sector: 'Energy Trading (ETRM)',
-          overallScore: 7.7,
-          relativeScore: 1.8,
-          status: 'outperformer',
-          invested: 2021,
-          dimensions: {
-            valueArticulation: 8.0,
-            pricingArchitecture: 7.5,
-            competitivePositioning: 8.5,
-            salesEnablement: 7.5,
-            customerROI: 7.0
-          },
-          topGaps: [
-            { dimension: 'Customer ROI Proof', score: 7.0, issue: 'Time savings cited but could quantify more cost impacts vs legacy ETRM systems', confidence: 'medium' }
-          ],
-          observation: 'Strongest commercial position in portfolio. Chartis Top 10, transparent pricing (rare for category), clear cloud-native differentiation vs legacy Openlink. Recent Series B validates trajectory.',
-          evidence: {
-            pricing: 'Transparent pricing guide published ($150K-$500K annually) - unusual for ETRM category',
-            competitive: 'Chartis Energy50 2024 category leader, clear positioning vs legacy systems',
-            customers: '$100B daily trade value processed, energy traders/producers/consumers',
-            reviews: 'Strong technical credibility, efficiency gains documented'
-          },
-          confidence: { overall: 'high', gaps: 'medium' }
-        },
-        {
-          id: 2,
-          name: 'Liquibase',
-          sector: 'Database DevOps/CI-CD',
-          overallScore: 7.1,
-          relativeScore: 1.2,
-          status: 'outperformer',
-          invested: 2020,
-          dimensions: {
-            valueArticulation: 7.5,
-            pricingArchitecture: 6.5,
-            competitivePositioning: 8.0,
-            salesEnablement: 6.0,
-            customerROI: 7.5
-          },
-          topGaps: [
-            { dimension: 'Sales Enablement', score: 6.0, issue: 'New VP Marketing started Jan 2026 - marketing infrastructure being built. Strong community but GTM in transition.', confidence: 'high' },
-            { dimension: 'Pricing Architecture', score: 6.5, issue: 'AWS Marketplace pricing visible ($5K-$10K/yr) but enterprise tier opaque. Mid-market packaging unclear.', confidence: 'high' }
-          ],
-          observation: '85% YoY ARR growth with strong product-market fit. Recent leadership additions (VP Marketing, International Sales, Engineering) signal scale-up phase. Marketing maturity gap presents near-term opportunity.',
-          evidence: {
-            growth: '85% new ARR growth (FY25), 15M+ community downloads',
-            pricing: 'Per-DB-target model: $5K (10 DB), $10K (20 DB) on AWS; enterprise custom',
-            competitive: '60+ databases vs Flyway 51, superior rollback, won DevOps Dozen 2025',
-            team: 'VP Marketing (ex-Astronomer) hired Jan 2026, sales leadership upgraded'
-          },
-          confidence: { overall: 'high', gaps: 'high' }
-        },
-        {
-          id: 3,
-          name: 'Polco',
-          sector: 'GovTech Civic Engagement',
-          overallScore: 6.9,
-          relativeScore: 1.0,
-          status: 'average',
-          invested: 2019,
-          dimensions: {
-            valueArticulation: 7.0,
-            pricingArchitecture: 5.5,
-            competitivePositioning: 8.0,
-            salesEnablement: 6.5,
-            customerROI: 7.5
-          },
-          topGaps: [
-            { dimension: 'Pricing Architecture', score: 5.5, issue: 'Published range $10K-$300K annually - 30x spread signals packaging confusion. Likely leaving expansion revenue on table.', confidence: 'high' },
-            { dimension: 'Sales Enablement', score: 6.5, issue: 'Long government sales cycles (9-18 months) not well-addressed in public materials. Decision-maker ROI narrative needs sharpening.', confidence: 'medium' }
-          ],
-          observation: 'Monopoly-like position in benchmarking+engagement category (1,500+ communities, 25+ years data). Network effects strong but pricing architecture messy. High win rate once engaged but enablement could compress cycles.',
-          evidence: {
-            market: '1,500+ communities, 1M+ BPC federal budget tool engagements',
-            pricing: '$10K-$300K annual range (blog post), contact sales only',
-            competitive: 'Only platform combining benchmarks + engagement + AI; CivicPlus/Granicus more general',
-            customers: 'Mid-market government (50K-500K population cities/counties)'
-          },
-          confidence: { overall: 'high', gaps: 'high' }
-        },
-        {
-          id: 4,
-          name: 'ArborXR',
-          sector: 'Enterprise XR Device Mgmt',
-          overallScore: 6.8,
-          relativeScore: 0.9,
-          status: 'average',
-          invested: 2022,
-          dimensions: {
-            valueArticulation: 7.0,
-            pricingArchitecture: 7.0,
-            competitivePositioning: 6.0,
-            salesEnablement: 6.0,
-            customerROI: 8.0
-          },
-          topGaps: [
-            { dimension: 'Competitive Positioning', score: 6.0, issue: 'Strong vs ManageXR but weak vs generic MDM providers. "Why XR-specific MDM?" not sharply articulated for CFO audience.', confidence: 'high' },
-            { dimension: 'Sales Enablement', score: 6.0, issue: 'Founder-led evangelism vs systematic demand gen. G2 focus good but case study distribution limited.', confidence: 'medium' }
-          ],
-          observation: 'Exceptional product (9.7/10 support score) with proven ROI (75% training time reduction at UPS). May be underpriced given value delivery. Marketing still emerging despite $12M Series A and 3,000+ customers.',
-          evidence: {
-            pricing: '$8/user/month, free up to 50 devices, freemium model',
-            roi: 'UPS: 75% training time reduction (8hrs → 2hrs), Koch: 50-70% reduction',
-            customers: '3,000+ companies, 50+ Fortune 500, education/healthcare/manufacturing',
-            competitive: '#1 G2 rating in category, "only purpose-built enterprise XR MDM"'
-          },
-          confidence: { overall: 'high', gaps: 'high' }
-        },
-        {
-          id: 5,
-          name: 'Medefy',
-          sector: 'Benefits Navigation',
-          overallScore: 5.9,
-          relativeScore: 0.0,
-          status: 'needs-attention',
-          invested: 2023,
-          dimensions: {
-            valueArticulation: 6.0,
-            pricingArchitecture: 5.0,
-            competitivePositioning: 6.5,
-            salesEnablement: 5.0,
-            customerROI: 7.0
-          },
-          topGaps: [
-            { dimension: 'Sales Enablement', score: 5.0, issue: 'No visible CMO/VP Marketing. Minimal public footprint despite strong ROI proof (3x-9x returns). Customer marketing only - demand gen underinvested.', confidence: 'high' },
-            { dimension: 'Pricing Architecture', score: 5.0, issue: 'Zero pricing transparency. Per-employee model implied but not published. No packaging visible - likely leaving expansion $ on table.', confidence: 'high' }
-          ],
-          observation: 'Solid product (4.8/5 App Store, 70% engagement) with compelling ROI but severe GTM underinvestment. $25M revenue, 93 employees suggests profitable but growth-constrained. Highest improvement potential in portfolio.',
-          evidence: {
-            roi: '3x-9x ROI claims from customers, 70% employee engagement (city customer)',
-            product: '4.8/5 App Store rating, human Care Guides differentiation vs AI chatbots',
-            market: '$25M revenue, 93 employees, healthcare benefits navigation B2B2C',
-            gaps: 'No CMO visible, minimal content marketing, zero pricing published'
-          },
-          confidence: { overall: 'high', gaps: 'high' }
-        }
-      ];
-
-      const getStatusColor = (status) => {
-        switch(status) {
-          case 'outperformer': return colors.green;
-          case 'average': return colors.yellow;
-          case 'needs-attention': return colors.red;
-          default: return '#6b7280';
-        }
-      };
-
-      const dimensionLabels = {
-        valueArticulation: 'Value Articulation',
-        pricingArchitecture: 'Pricing Architecture',
-        competitivePositioning: 'Competitive Positioning',
-        salesEnablement: 'Sales Enablement',
-        customerROI: 'Customer ROI Proof'
-      };
-
-      return (
-        <div style={{
-          minHeight: '100vh',
-          background: 'linear-gradient(135deg, #f8fafc 0%, #e0fbfc 100%)',
-          padding: '40px 20px',
-          color: colors.darkNavy
-        }}>
-          {/* Header */}
-          <div style={{ 
-            maxWidth: '1400px', 
-            margin: '0 auto', 
-            marginBottom: '40px',
-            padding: '24px 32px',
-            background: colors.navy,
-            borderRadius: '8px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{
-                  width: '40px',
-                  height: '40px',
-                  background: colors.coral,
-                  borderRadius: '6px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  fontWeight: '700',
-                  color: '#fff'
-                }}>
-                  RW
-                </div>
-                <div>
-                  <h1 style={{
-                    fontSize: '24px',
-                    fontWeight: '700',
-                    margin: 0,
-                    color: '#fff',
-                    letterSpacing: '-0.01em'
-                  }}>
-                    Remidi Works
-                  </h1>
-                  <p style={{
-                    fontSize: '14px',
-                    color: colors.lightBlue,
-                    margin: 0,
-                    fontWeight: '400'
-                  }}>
-                    Portfolio Intelligence
-                  </p>
-                </div>
-              </div>
-              <div style={{
-                padding: '8px 16px',
-                background: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '6px',
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#fff'
-              }}>
-                Fund: Mercury Fund
-              </div>
-            </div>
-
-            {/* View Toggle */}
-            <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
-              {[
-                { key: 'summary', label: 'Portfolio Summary' },
-                { key: 'health', label: 'Portco GTM Health' }
-              ].map(({ key, label }) => (
-                <button
-                  key={key}
-                  onClick={() => { setView(key); setSelectedCompany(null); }}
-                  style={{
-                    padding: '10px 20px',
-                    background: view === key ? colors.coral : 'rgba(255, 255, 255, 0.1)',
-                    border: view === key ? `1px solid ${colors.coral}` : '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: '6px',
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-            {/* Portfolio Summary View */}
-            {view === 'summary' && !selectedCompany && (
-              <div style={{
-                background: '#fff',
-                borderRadius: '12px',
-                padding: '32px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-              }}>
-                <div style={{ marginBottom: '24px' }}>
-                  <h2 style={{
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    marginBottom: '8px',
-                    color: colors.darkNavy
-                  }}>
-                    5 companies • Sorted by vs. Universe
-                  </h2>
-                  <p style={{
-                    fontSize: '13px',
-                    color: '#6b7280',
-                    margin: 0
-                  }}>
-                    Based on public data analysis • Confidence-weighted scoring
-                  </p>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  {portfolioData
-                    .sort((a, b) => b.relativeScore - a.relativeScore)
-                    .map((company, idx) => (
-                    <div
-                      key={company.id}
-                      onClick={() => setSelectedCompany(company)}
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                        gap: '24px',
-                        alignItems: 'center',
-                        padding: '20px 24px',
-                        background: '#fff',
-                        border: '1px solid #e5e7eb',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s'
-                      }}
-                    >
-                      {/* Company Name & Status */}
-                      <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
-                          <span style={{
-                            fontSize: '16px',
-                            fontWeight: '600',
-                            color: colors.darkNavy
-                          }}>
-                            {company.name}
-                          </span>
-                          <span style={{
-                            padding: '3px 10px',
-                            borderRadius: '4px',
-                            fontSize: '11px',
-                            fontWeight: '700',
-                            letterSpacing: '0.02em',
-                            textTransform: 'uppercase',
-                            background: company.status === 'outperformer' ? 'rgba(45, 147, 108, 0.1)' : 
-                                       company.status === 'average' ? 'rgba(244, 163, 0, 0.1)' : 
-                                       'rgba(193, 41, 46, 0.1)',
-                            color: company.status === 'outperformer' ? colors.green : 
-                                   company.status === 'average' ? colors.yellow : 
-                                   colors.red
-                          }}>
-                            {company.status === 'outperformer' ? 'OUTPERFORMER' : 
-                             company.status === 'average' ? 'ON TRACK' : 
-                             'UNDERPERFORMER'}
-                          </span>
-                        </div>
-                        <div style={{
-                          fontSize: '13px',
-                          color: '#6b7280'
-                        }}>
-                          {company.sector} • Invested {company.invested}
-                        </div>
-                      </div>
-
-                      {/* Health Score */}
-                      <div style={{ textAlign: 'center' }}>
-                        <div style={{ marginBottom: '6px', fontSize: '11px', color: '#9ca3af', fontWeight: '600' }}>
-                          Health Score
-                        </div>
-                        <div style={{ 
-                          position: 'relative', 
-                          width: '60px', 
-                          height: '60px',
-                          margin: '0 auto'
-                        }}>
-                          <svg width="60" height="60" style={{ transform: 'rotate(-90deg)' }}>
-                            <circle
-                              cx="30"
-                              cy="30"
-                              r="24"
-                              fill="none"
-                              stroke="#e5e7eb"
-                              strokeWidth="6"
-                            />
-                            <circle
-                              cx="30"
-                              cy="30"
-                              r="24"
-                              fill="none"
-                              stroke={company.overallScore >= 7.5 ? colors.green : 
-                                     company.overallScore >= 6.5 ? colors.yellow : 
-                                     colors.red}
-                              strokeWidth="6"
-                              strokeDasharray={`${(company.overallScore / 10) * 150.8} 150.8`}
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <div style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            fontSize: '18px',
-                            fontWeight: '700',
-                            color: colors.darkNavy
-                          }}>
-                            {company.overallScore.toFixed(1)}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Relative Score */}
-                      <div style={{ textAlign: 'center' }}>
-                        <div style={{ marginBottom: '6px', fontSize: '11px', color: '#9ca3af', fontWeight: '600' }}>
-                          vs. univ
-                        </div>
-                        <div style={{
-                          fontSize: '20px',
-                          fontWeight: '700',
-                          color: company.relativeScore > 0 ? colors.green : 
-                                 company.relativeScore === 0 ? colors.yellow : 
-                                 colors.red
-                        }}>
-                          {company.relativeScore > 0 ? '+' : ''}{company.relativeScore.toFixed(1)}
-                        </div>
-                      </div>
-
-                      {/* Portfolio Rank */}
-                      <div style={{ textAlign: 'center' }}>
-                        <div style={{ marginBottom: '6px', fontSize: '11px', color: '#9ca3af', fontWeight: '600' }}>
-                          Portfolio rank
-                        </div>
-                        <div style={{
-                          fontSize: '24px',
-                          fontWeight: '700',
-                          color: colors.darkNavy
-                        }}>
-                          #{idx + 1}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Portco GTM Health View */}
-            {view === 'health' && !selectedCompany && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
-                {portfolioData.map(company => (
-                  <div
-                    key={company.id}
-                    onClick={() => setSelectedCompany(company)}
-                    style={{
-                      background: '#fff',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '12px',
-                      padding: '24px',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    {/* Status indicator */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                      width: '4px',
-                      height: '100%',
-                      background: getStatusColor(company.status)
-                    }} />
-
-                    <div style={{ marginBottom: '16px' }}>
-                      <h3 style={{
-                        fontSize: '20px',
-                        fontWeight: '700',
-                        margin: '0 0 8px 0',
-                        color: colors.darkNavy
-                      }}>
-                        {company.name}
-                      </h3>
-                      <div style={{
-                        fontSize: '13px',
-                        color: '#6b7280',
-                        marginBottom: '4px'
-                      }}>
-                        {company.sector}
-                      </div>
-                      <div style={{
-                        fontSize: '11px',
-                        color: '#9ca3af',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em'
-                      }}>
-                        Invested {company.invested}
-                      </div>
-                    </div>
-
-                    {/* Overall Score */}
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      gap: '12px',
-                      marginBottom: '20px'
-                    }}>
-                      <div style={{
-                        fontSize: '48px',
-                        fontWeight: '700',
-                        color: getStatusColor(company.status),
-                        lineHeight: '1'
-                      }}>
-                        {company.overallScore.toFixed(1)}
-                      </div>
-                      <div style={{
-                        fontSize: '14px',
-                        color: '#6b7280'
-                      }}>
-                        / 10
-                      </div>
-                    </div>
-
-                    {/* Dimension Scores */}
-                    <div style={{ marginBottom: '16px' }}>
-                      {Object.entries(company.dimensions).map(([key, value]) => (
-                        <div key={key} style={{ marginBottom: '8px' }}>
-                          <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            marginBottom: '4px',
-                            fontSize: '12px',
-                            color: '#6b7280'
-                          }}>
-                            <span>{dimensionLabels[key]}</span>
-                            <span style={{ fontWeight: '600' }}>{value.toFixed(1)}</span>
-                          </div>
-                          <div style={{
-                            height: '4px',
-                            background: '#f3f4f6',
-                            borderRadius: '2px',
-                            overflow: 'hidden'
-                          }}>
-                            <div style={{
-                              height: '100%',
-                              width: `${value * 10}%`,
-                              background: value >= 7.5 ? colors.green : value >= 6.5 ? colors.yellow : colors.red,
-                              borderRadius: '2px',
-                              transition: 'width 0.5s'
-                            }} />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Top Gap */}
-                    <div style={{
-                      padding: '12px',
-                      background: 'rgba(193, 41, 46, 0.05)',
-                      border: `1px solid ${colors.red}33`,
-                      borderRadius: '8px',
-                      fontSize: '12px',
-                      color: '#6b7280',
-                      lineHeight: '1.5'
-                    }}>
-                      <div style={{ fontWeight: '600', marginBottom: '4px', color: colors.red }}>
-                        Top Gap: {company.topGaps[0].dimension}
-                      </div>
-                      <div>
-                        {company.topGaps[0].issue.substring(0, 100)}...
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Company Detail View */}
-            {selectedCompany && (
-              <div>
-                <button
-                  onClick={() => setSelectedCompany(null)}
-                  style={{
-                    marginBottom: '24px',
-                    padding: '10px 20px',
-                    background: colors.navy,
-                    border: 'none',
-                    borderRadius: '6px',
-                    color: '#fff',
-                    cursor: 'pointer',
-                    fontSize: '14px',
-                    fontWeight: '600'
-                  }}
-                >
-                  ← Back to {view === 'summary' ? 'Portfolio Summary' : 'Portco GTM Health'}
-                </button>
-
-                <div style={{
-                  background: '#fff',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '12px',
-                  padding: '40px'
-                }}>
-                  {/* Company Header */}
-                  <div style={{ marginBottom: '32px' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '12px' }}>
-                      <h2 style={{
-                        fontSize: '32px',
-                        fontWeight: '700',
-                        margin: 0,
-                        color: colors.darkNavy
-                      }}>
-                        {selectedCompany.name}
-                      </h2>
-                      <div style={{
-                        fontSize: '48px',
-                        fontWeight: '700',
-                        color: getStatusColor(selectedCompany.status)
-                      }}>
-                        {selectedCompany.overallScore.toFixed(1)}
-                      </div>
-                    </div>
-                    <div style={{ fontSize: '16px', color: '#6b7280', marginBottom: '8px' }}>
-                      {selectedCompany.sector} • Invested {selectedCompany.invested}
-                    </div>
-                    <div style={{
-                      fontSize: '14px',
-                      color: colors.darkNavy,
-                      lineHeight: '1.6',
-                      padding: '16px',
-                      background: colors.cream,
-                      borderRadius: '8px',
-                      borderLeft: `3px solid ${getStatusColor(selectedCompany.status)}`
-                    }}>
-                      {selectedCompany.observation}
-                    </div>
-                  </div>
-
-                  {/* Dimension Breakdown */}
-                  <div style={{ marginBottom: '32px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px', color: colors.darkNavy }}>
-                      Dimension Breakdown
-                    </h3>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <RadarChart data={Object.entries(selectedCompany.dimensions).map(([key, value]) => ({
-                        dimension: dimensionLabels[key],
-                        score: value,
-                        benchmark: 7.0
-                      }))}>
-                        <PolarGrid stroke="#e5e7eb" />
-                        <PolarAngleAxis dataKey="dimension" tick={{ fill: '#6b7280', fontSize: 12 }} />
-                        <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: '#9ca3af', fontSize: 11 }} />
-                        <Radar name="Score" dataKey="score" stroke={colors.navy} fill={colors.navy} fillOpacity={0.3} />
-                        <Radar name="Benchmark" dataKey="benchmark" stroke="#9ca3af" strokeDasharray="5 5" fill="transparent" />
-                      </RadarChart>
-                    </ResponsiveContainer>
-                  </div>
-
-                  {/* Gap Analysis */}
-                  <div style={{ marginBottom: '32px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px', color: colors.darkNavy }}>
-                      Identified Gaps
-                    </h3>
-                    {selectedCompany.topGaps.map((gap, idx) => (
-                      <div
-                        key={idx}
-                        style={{
-                          marginBottom: '16px',
-                          padding: '16px',
-                          background: 'rgba(193, 41, 46, 0.05)',
-                          border: `1px solid ${colors.red}33`,
-                          borderRadius: '8px'
-                        }}
-                      >
-                        <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          marginBottom: '8px'
-                        }}>
-                          <div style={{ fontSize: '14px', fontWeight: '600', color: colors.red }}>
-                            {gap.dimension} ({gap.score.toFixed(1)}/10)
-                          </div>
-                          <div style={{
-                            fontSize: '11px',
-                            color: gap.confidence === 'high' ? colors.green : gap.confidence === 'medium' ? colors.yellow : colors.red,
-                            fontWeight: '600',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em'
-                          }}>
-                            {gap.confidence} confidence
-                          </div>
-                        </div>
-                        <div style={{ fontSize: '13px', color: '#6b7280', lineHeight: '1.6' }}>
-                          {gap.issue}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Evidence */}
-                  <div>
-                    <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px', color: colors.darkNavy }}>
-                      Supporting Evidence
-                    </h3>
-                    <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                      gap: '16px'
-                    }}>
-                      {Object.entries(selectedCompany.evidence).map(([key, value]) => (
-                        <div
-                          key={key}
-                          style={{
-                            padding: '16px',
-                            background: '#f8fafc',
-                            border: '1px solid #e5e7eb',
-                            borderRadius: '8px'
-                          }}
-                        >
-                          <div style={{
-                            fontSize: '11px',
-                            color: '#9ca3af',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em',
-                            marginBottom: '8px',
-                            fontWeight: '600'
-                          }}>
-                            {key.replace(/([A-Z])/g, ' $1').trim()}
-                          </div>
-                          <div style={{ fontSize: '13px', color: '#6b7280', lineHeight: '1.5' }}>
-                            {value}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Footer Note */}
-          <div style={{
-            maxWidth: '1400px',
-            margin: '40px auto 0',
-            padding: '20px',
-            background: colors.cream,
-            border: `1px solid ${colors.lightBlue}`,
-            borderRadius: '12px',
-            fontSize: '13px',
-            color: '#6b7280',
-            lineHeight: '1.6'
-          }}>
-            <strong style={{ color: colors.navy }}>Methodology Note:</strong> Scores based on public data analysis (websites, reviews, pricing signals, competitive positioning). 
-            High-confidence assessments validated through multiple sources. To unlock full potential, 30-minute conversations with each company would validate hypotheses and surface proprietary metrics.
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div class="logo-section">
+          <div class="logo">RW</div>
+          <div class="brand">
+            <h1>Remidi Works</h1>
+            <p>Portfolio Intelligence</p>
           </div>
         </div>
-      );
-    };
+        <div class="fund-badge">Fund: Mercury Fund</div>
+      </div>
+      
+      <div class="tabs">
+        <div class="tab active" onclick="showView('summary')">Portfolio Summary</div>
+        <div class="tab" onclick="showView('health')">Portco GTM Health</div>
+      </div>
+    </div>
 
-    ReactDOM.render(<MercuryPortfolioDashboard />, document.getElementById('root'));
+    <!-- Portfolio Summary View -->
+    <div id="summary-view" class="content-card">
+      <h2 class="section-title">5 companies • Sorted by vs. Universe</h2>
+      <p class="section-subtitle">Based on public data analysis • Confidence-weighted scoring</p>
+      
+      <div class="company-list">
+        <!-- Molecule -->
+        <div class="company-row" onclick="alert('Click-through to detail view coming soon')">
+          <div class="company-info">
+            <div class="company-name">
+              <span>Molecule</span>
+              <span class="status-badge outperformer">OUTPERFORMER</span>
+            </div>
+            <div class="company-meta">Energy Trading (ETRM) • Invested 2021</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Health Score</div>
+            <div class="score-value">7.7</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">vs. univ</div>
+            <div class="relative-score positive">+1.8</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Portfolio rank</div>
+            <div class="rank">#1</div>
+          </div>
+        </div>
+
+        <!-- Liquibase -->
+        <div class="company-row" onclick="alert('Click-through to detail view coming soon')">
+          <div class="company-info">
+            <div class="company-name">
+              <span>Liquibase</span>
+              <span class="status-badge outperformer">OUTPERFORMER</span>
+            </div>
+            <div class="company-meta">Database DevOps/CI-CD • Invested 2020</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Health Score</div>
+            <div class="score-value">7.1</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">vs. univ</div>
+            <div class="relative-score positive">+1.2</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Portfolio rank</div>
+            <div class="rank">#2</div>
+          </div>
+        </div>
+
+        <!-- Polco -->
+        <div class="company-row" onclick="alert('Click-through to detail view coming soon')">
+          <div class="company-info">
+            <div class="company-name">
+              <span>Polco</span>
+              <span class="status-badge average">ON TRACK</span>
+            </div>
+            <div class="company-meta">GovTech Civic Engagement • Invested 2019</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Health Score</div>
+            <div class="score-value">6.9</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">vs. univ</div>
+            <div class="relative-score positive">+1.0</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Portfolio rank</div>
+            <div class="rank">#3</div>
+          </div>
+        </div>
+
+        <!-- ArborXR -->
+        <div class="company-row" onclick="alert('Click-through to detail view coming soon')">
+          <div class="company-info">
+            <div class="company-name">
+              <span>ArborXR</span>
+              <span class="status-badge average">ON TRACK</span>
+            </div>
+            <div class="company-meta">Enterprise XR Device Mgmt • Invested 2022</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Health Score</div>
+            <div class="score-value">6.8</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">vs. univ</div>
+            <div class="relative-score positive">+0.9</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Portfolio rank</div>
+            <div class="rank">#4</div>
+          </div>
+        </div>
+
+        <!-- Medefy -->
+        <div class="company-row" onclick="alert('Click-through to detail view coming soon')">
+          <div class="company-info">
+            <div class="company-name">
+              <span>Medefy</span>
+              <span class="status-badge underperformer">UNDERPERFORMER</span>
+            </div>
+            <div class="company-meta">Benefits Navigation • Invested 2023</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Health Score</div>
+            <div class="score-value">5.9</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">vs. univ</div>
+            <div class="relative-score neutral">0.0</div>
+          </div>
+          <div class="score-circle">
+            <div class="score-label">Portfolio rank</div>
+            <div class="rank">#5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Portco GTM Health View -->
+    <div id="health-view" class="card-grid" style="display: none;">
+      <!-- Molecule Card -->
+      <div class="company-card">
+        <div class="status-bar outperformer"></div>
+        <div class="card-header">
+          <h3>Molecule</h3>
+          <div class="card-sector">Energy Trading (ETRM)</div>
+          <div class="card-invested">Invested 2021</div>
+        </div>
+        <div class="big-score green">7.7<span style="font-size: 14px; color: #6b7280; font-weight: 400;"> / 10</span></div>
+        <div class="dimensions">
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Value Articulation</span>
+              <span>8.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Pricing Architecture</span>
+              <span>7.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Competitive Positioning</span>
+              <span>8.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Sales Enablement</span>
+              <span>7.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Customer ROI Proof</span>
+              <span>7.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 70%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gap-box">
+          <div class="gap-title">Top Gap: Customer ROI Proof</div>
+          <div>Time savings cited but could quantify more cost impacts vs legacy ETRM systems...</div>
+        </div>
+      </div>
+
+      <!-- Liquibase Card -->
+      <div class="company-card">
+        <div class="status-bar outperformer"></div>
+        <div class="card-header">
+          <h3>Liquibase</h3>
+          <div class="card-sector">Database DevOps/CI-CD</div>
+          <div class="card-invested">Invested 2020</div>
+        </div>
+        <div class="big-score green">7.1<span style="font-size: 14px; color: #6b7280; font-weight: 400;"> / 10</span></div>
+        <div class="dimensions">
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Value Articulation</span>
+              <span>7.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Pricing Architecture</span>
+              <span>6.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 65%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Competitive Positioning</span>
+              <span>8.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Sales Enablement</span>
+              <span>6.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Customer ROI Proof</span>
+              <span>7.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gap-box">
+          <div class="gap-title">Top Gap: Sales Enablement</div>
+          <div>New VP Marketing started Jan 2026 - marketing infrastructure being built. Strong community but GTM in transition...</div>
+        </div>
+      </div>
+
+      <!-- Polco Card -->
+      <div class="company-card">
+        <div class="status-bar average"></div>
+        <div class="card-header">
+          <h3>Polco</h3>
+          <div class="card-sector">GovTech Civic Engagement</div>
+          <div class="card-invested">Invested 2019</div>
+        </div>
+        <div class="big-score yellow">6.9<span style="font-size: 14px; color: #6b7280; font-weight: 400;"> / 10</span></div>
+        <div class="dimensions">
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Value Articulation</span>
+              <span>7.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Pricing Architecture</span>
+              <span>5.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 55%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Competitive Positioning</span>
+              <span>8.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Sales Enablement</span>
+              <span>6.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 65%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Customer ROI Proof</span>
+              <span>7.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gap-box">
+          <div class="gap-title">Top Gap: Pricing Architecture</div>
+          <div>Published range $10K-$300K annually - 30x spread signals packaging confusion. Likely leaving expansion revenue on table...</div>
+        </div>
+      </div>
+
+      <!-- ArborXR Card -->
+      <div class="company-card">
+        <div class="status-bar average"></div>
+        <div class="card-header">
+          <h3>ArborXR</h3>
+          <div class="card-sector">Enterprise XR Device Mgmt</div>
+          <div class="card-invested">Invested 2022</div>
+        </div>
+        <div class="big-score yellow">6.8<span style="font-size: 14px; color: #6b7280; font-weight: 400;"> / 10</span></div>
+        <div class="dimensions">
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Value Articulation</span>
+              <span>7.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Pricing Architecture</span>
+              <span>7.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 70%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Competitive Positioning</span>
+              <span>6.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Sales Enablement</span>
+              <span>6.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Customer ROI Proof</span>
+              <span>8.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill green" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gap-box">
+          <div class="gap-title">Top Gap: Competitive Positioning</div>
+          <div>Strong vs ManageXR but weak vs generic MDM providers. "Why XR-specific MDM?" not sharply articulated for CFO audience...</div>
+        </div>
+      </div>
+
+      <!-- Medefy Card -->
+      <div class="company-card">
+        <div class="status-bar underperformer"></div>
+        <div class="card-header">
+          <h3>Medefy</h3>
+          <div class="card-sector">Benefits Navigation</div>
+          <div class="card-invested">Invested 2023</div>
+        </div>
+        <div class="big-score red">5.9<span style="font-size: 14px; color: #6b7280; font-weight: 400;"> / 10</span></div>
+        <div class="dimensions">
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Value Articulation</span>
+              <span>6.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Pricing Architecture</span>
+              <span>5.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 50%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Competitive Positioning</span>
+              <span>6.5</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 65%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Sales Enablement</span>
+              <span>5.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill red" style="width: 50%"></div>
+            </div>
+          </div>
+          <div class="dimension-row">
+            <div class="dimension-header">
+              <span>Customer ROI Proof</span>
+              <span>7.0</span>
+            </div>
+            <div class="dimension-bar">
+              <div class="dimension-fill yellow" style="width: 70%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gap-box">
+          <div class="gap-title">Top Gap: Sales Enablement</div>
+          <div>No visible CMO/VP Marketing. Minimal public footprint despite strong ROI proof (3x-9x returns). Customer marketing only - demand gen underinvested...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+      <strong>Methodology Note:</strong> Scores based on public data analysis (websites, reviews, pricing signals, competitive positioning). 
+      High-confidence assessments validated through multiple sources. To unlock full potential, 30-minute conversations with each company would validate hypotheses and surface proprietary metrics.
+    </div>
+  </div>
+
+  <script>
+    function showView(view) {
+      // Update tab active state
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Show/hide views
+      const summaryView = document.getElementById('summary-view');
+      const healthView = document.getElementById('health-view');
+      
+      if (view === 'summary') {
+        summaryView.style.display = 'block';
+        healthView.style.display = 'none';
+      } else {
+        summaryView.style.display = 'none';
+        healthView.style.display = 'grid';
+      }
+    }
   </script>
 </body>
 </html>
