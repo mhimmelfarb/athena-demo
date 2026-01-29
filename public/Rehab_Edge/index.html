@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rehab Edge Pro - Commercial Health Rapid Scan | Remidi Works</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            page-break-after: always;
+            padding-bottom: 40px;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* PAGE 1: DASHBOARD */
+        .header {
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rw-badge {
+            background: #f97316;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .header-subtitle {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .company-meta {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .dashboard-container {
+            padding: 40px;
+        }
+
+        .score-banner {
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .score-main {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .score-number {
+            font-size: 5em;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .score-number span {
+            font-size: 0.4em;
+            opacity: 0.6;
+        }
+
+        .benchmark-note {
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+
+        .status-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dimension-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dimension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .dimension-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tier-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tier-low { background: #fee2e2; color: #991b1b; }
+        .tier-medium { background: #fef3c7; color: #92400e; }
+
+        .dimension-score {
+            font-size: 3em;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .score-low { color: #dc2626; }
+        .score-medium { color: #f59e0b; }
+
+        .dimension-meta {
+            font-size: 0.8em;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .critical-gap {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .critical-gap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .critical-gap-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #991b1b;
+        }
+
+        .critical-gap-content {
+            font-size: 1.05em;
+            color: #7f1d1d;
+            line-height: 1.7;
+        }
+
+        .critical-gap-content strong {
+            color: #991b1b;
+        }
+
+        .implementation-readiness {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .implementation-readiness h3 {
+            font-size: 1.3em;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        .timeline-estimate {
+            display: inline-block;
+            background: white;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #1e40af;
+            margin-top: 10px;
+        }
+
+        /* PAGE 2: FINDINGS */
+        .findings-header {
+            background: #1e293b;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        .findings-header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .findings-header p {
+            opacity: 0.8;
+            font-size: 1.05em;
+        }
+
+        .findings-container {
+            padding: 40px;
+        }
+
+        .finding {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .finding-number {
+            display: inline-block;
+            background: #1e293b;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .finding-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .finding-section {
+            margin-bottom: 25px;
+        }
+
+        .finding-section h4 {
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .finding-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .finding-section li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            color: #475569;
+        }
+
+        .finding-section li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #f97316;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        /* PAGE 3: NEXT STEPS */
+        .next-steps-container {
+            padding: 40px;
+        }
+
+        .methodology-section {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .methodology-section h3 {
+            font-size: 1.4em;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .methodology-section p {
+            color: #475569;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .journey-section {
+            margin-bottom: 30px;
+        }
+
+        .journey-section h3 {
+            font-size: 1.6em;
+            color: #1e293b;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .step-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .step-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .step-card h4 {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .step-card p {
+            color: #64748b;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: #1e293b;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.05em;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .cta-button-primary {
+            background: #f97316;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05em;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .cta-button-primary:hover {
+            background: #ea580c;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 25px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85em;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .score-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+            .step-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGE 1: DASHBOARD -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-area">
+                <span class="rw-badge">RW</span>
+                <span>Remidi Works • Rapid Commercial Scan</span>
+            </div>
+            <div class="header-subtitle">Healthcare SaaS Assessment</div>
+            <div class="company-name">Rehab Edge Pro</div>
+            <div class="company-meta">Referral Analytics Platform • PT/OT/Wellness Providers • Clarendon Hills, IL • Seed Stage</div>
+        </div>
+
+        <div class="dashboard-container">
+            <div class="score-banner">
+                <div class="score-main">
+                    <div class="score-label">Commercial Maturity Score™</div>
+                    <div class="score-number">3.2<span>/10</span></div>
+                    <div class="benchmark-note">Early-stage SaaS benchmark: 4.5-5.5</div>
+                </div>
+                <div class="status-badge">
+                    ⏳ Pre-Launch Assessment
+                </div>
+            </div>
+
+            <div class="dimension-grid">
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Value Articulation</div>
+                        <span class="tier-badge tier-low">Needs Attention</span>
+                    </div>
+                    <div class="dimension-score score-low">2.5<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Features clear, outcomes missing</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Target Market Clarity</div>
+                        <span class="tier-badge tier-low">Needs Attention</span>
+                    </div>
+                    <div class="dimension-score score-low">2.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">8 verticals = unclear focus</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Pricing Architecture</div>
+                        <span class="tier-badge tier-low">Needs Attention</span>
+                    </div>
+                    <div class="dimension-score score-low">1.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Not visible on website</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">GTM Readiness</div>
+                        <span class="tier-badge tier-medium">Developing</span>
+                    </div>
+                    <div class="dimension-score score-medium">4.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">Founder-led, beta language visible</div>
+                </div>
+
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <div class="dimension-name">Customer Proof</div>
+                        <span class="tier-badge tier-low">Needs Attention</span>
+                    </div>
+                    <div class="dimension-score score-low">2.0<span style="font-size: 0.4em; opacity: 0.5;">/10</span></div>
+                    <div class="dimension-meta">No case studies or metrics visible</div>
+                </div>
+            </div>
+
+            <div class="critical-gap">
+                <div class="critical-gap-header">
+                    <div class="critical-gap-title">
+                        <span>🔴</span>
+                        <span>Urgent Opportunity: ICP Definition</span>
+                    </div>
+                </div>
+                <div class="critical-gap-content">
+                    The website lists <strong>8 different target audiences</strong> (PT, OT, Speech, Psychologists, Home Health, Strength & Conditioning, Chiropractors, Wellness). This creates several challenges: different pain points, budgets, sales cycles, and CAC profiles. <strong>For VC fundraising, this signals pre-PMF uncertainty.</strong> The three bullet questions on the homepage are PT-specific, suggesting you already know who needs this most.
+                </div>
+            </div>
+
+            <div class="implementation-readiness">
+                <h3>Estimated Time to Fundraise-Ready Position</h3>
+                <div class="timeline-estimate">8-12 weeks with focused execution</div>
+                <p style="margin-top: 15px; color: #64748b;">Based on addressing top 3 priorities: ICP clarity, economic outcome messaging, and pricing visibility</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: KEY FINDINGS -->
+    <div class="page">
+        <div class="findings-header">
+            <h2>Top 3 Commercial Gaps</h2>
+            <p>Prioritized by impact on fundraising and early customer acquisition</p>
+        </div>
+
+        <div class="findings-container">
+            <div class="finding">
+                <div class="finding-number">1</div>
+                <div class="finding-title">ICP Clarity: Pick ONE Market to Dominate</div>
+                
+                <div class="finding-section">
+                    <h4>What We Observed</h4>
+                    <ul>
+                        <li>Website lists 8 different practitioner types as target customers</li>
+                        <li>Founder credentials and podcast content are PT-focused</li>
+                        <li>Three homepage questions reference PT-specific pain points (training camps, sponsorships, provider referrals)</li>
+                        <li>EquityNet funding goal shows early-stage ($25K raised of $500K goal)</li>
+                    </ul>
+                </div>
+
+                <div class="finding-section">
+                    <h4>Strategic Direction</h4>
+                    <ul>
+                        <li>Consider narrowing to independent PT/OT clinics ($500K-$2M annual revenue, 1-3 locations) as beachhead market</li>
+                        <li>Different verticals have fundamentally different referral models - psychologists get referrals differently than PT clinics</li>
+                        <li>VCs will ask "Who's your ICP?" - saying "all healthcare providers with referrals" signals you haven't found product-market fit yet</li>
+                        <li>A focused ICP enables: repeatable sales motion, specific messaging, relevant case studies, and defensible positioning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="finding">
+                <div class="finding-number">2</div>
+                <div class="finding-title">Value Articulation: What's the Dollar Impact?</div>
+                
+                <div class="finding-section">
+                    <h4>What We Observed</h4>
+                    <ul>
+                        <li>Hero headline asks a curiosity question ("Do You Know Where Your Referrals Are Coming From?") without establishing urgency</li>
+                        <li>Features section lists "Real-time marketing ROI insights" and "AI-enabled forecasting" but doesn't connect to business outcomes</li>
+                        <li>Interactive dashboard is well-executed, but lacks outcome context (e.g., "This clinic cut $2K/month waste")</li>
+                        <li>No visible customer testimonials quantifying ROI or results</li>
+                    </ul>
+                </div>
+
+                <div class="finding-section">
+                    <h4>Strategic Direction</h4>
+                    <ul>
+                        <li>Consider reframing from curiosity ("Do you know?") to urgency ("You're spending $5K-$10K/month on marketing - which parts fill your schedule?")</li>
+                        <li>Connect features to outcomes: "Real-time ROI insights" → "Stop wasting 40% of marketing budget on channels that don't convert"</li>
+                        <li>Add economic context to examples: "Most clinics waste $50K-$150K annually" or similar anchoring</li>
+                        <li>Beta customers likely have early insights - consider even qualitative early wins to demonstrate value</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="finding">
+                <div class="finding-number">3</div>
+                <div class="finding-title">Pricing Visibility: Build Confidence Through Transparency</div>
+                
+                <div class="finding-section">
+                    <h4>What We Observed</h4>
+                    <ul>
+                        <li>No pricing visible on website - appears to be "contact us" model</li>
+                        <li>Beta/pilot language suggests you're still validating pricing</li>
+                        <li>No pricing tiers, seat-based models, or usage indicators</li>
+                        <li>For fundraising: VCs will ask about ACV, segmentation strategy, and pricing confidence</li>
+                    </ul>
+                </div>
+
+                <div class="finding-section">
+                    <h4>Strategic Direction</h4>
+                    <ul>
+                        <li>Consider publishing pricing tiers once you have validation from beta customers (e.g., Basic $199/mo, Professional $499/mo, Enterprise "Call us")</li>
+                        <li>Pricing visibility signals market confidence and helps qualify leads</li>
+                        <li>Early-stage companies often fear losing deals by showing pricing, but transparent pricing actually improves conversion by pre-qualifying buyers</li>
+                        <li>For investor conversations: be prepared to discuss pricing strategy, ACV targets, and what drives expansion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: NEXT STEPS -->
+    <div class="page">
+        <div class="next-steps-container">
+            <div class="methodology-section">
+                <h3>How This Assessment Was Conducted</h3>
+                <p><strong>Data Sources:</strong> Website content, Alignable profile, podcast mentions, LinkedIn analysis, founder background research</p>
+                <p><strong>Methodology:</strong> Commercial Health Scoring across 5 dimensions: Value Articulation, ICP Clarity, Pricing Architecture, GTM Readiness, and Customer Proof</p>
+                <p><strong>Limitations:</strong> This scan is based entirely on public information. A full diagnostic would incorporate internal metrics like: beta customer feedback, pricing tests, conversion data, referral partner insights, and competitive win/loss analysis.</p>
+                <p><strong>Confidence Level:</strong> Medium (6/10) - sufficient public data to identify patterns, but limited visibility into beta results and internal decision-making</p>
+            </div>
+
+            <div class="journey-section">
+                <h3>Your Next Steps With Remidi Works</h3>
+                
+                <div class="step-cards">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Free Kickoff Call</h4>
+                        <p>30-minute calibration to validate these findings against your internal reality. We'll discuss what you're seeing in pilot conversations and help you decide: tackle this yourself, work together, or wait until you have more traction.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Full Diagnostic ($6K)</h4>
+                        <p>If the quick wins aren't enough: comprehensive assessment incorporating beta customer feedback, competitive positioning deep-dive, messaging framework, and prioritized 90-day roadmap with specific implementation guidance.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Ongoing Support ($2-3K/mo)</h4>
+                        <p>For companies executing on commercial improvements: monthly check-ins, strategic advisory, pitch deck refinement, investor Q&A prep, and continuous optimization as you scale from pilot to production.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h3>Ready to Discuss These Findings?</h3>
+                <p>Book a 30-minute calibration call to validate this assessment against your internal metrics and pilot feedback. We'll give you an honest recommendation on the best path forward - sometimes the quick wins are enough, sometimes it's worth bringing us in, sometimes it's not the right time.</p>
+                <a href="https://calendly.com/remidiworks/kickoff" class="cta-button-primary">Schedule Free Kickoff Call</a>
+            </div>
+
+            <div class="footer">
+                <p><strong>Remidi Works</strong> • Commercial Excellence for B2B SaaS • michael@remidiworks.com</p>
+                <p>This assessment is based on publicly available information and is provided for strategic planning purposes only.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
