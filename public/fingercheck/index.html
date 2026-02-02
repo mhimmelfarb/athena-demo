@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingercheck - 90-Day Marketing Strategy & Enablement Growth Plan | HG Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rw-badge {
+            background: #f97316;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .header-subtitle {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .company-meta {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        /* DASHBOARD */
+        .dashboard-container {
+            padding: 40px;
+        }
+
+        .score-banner {
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .score-main {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .score-number {
+            font-size: 5em;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .score-number span {
+            font-size: 0.4em;
+            opacity: 0.6;
+        }
+
+        .benchmark-note {
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+
+        .status-badge {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        .revenue-upside-box {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            padding: 15px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .revenue-label {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            color: #065f46;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .revenue-amount {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #047857;
+            margin-bottom: 8px;
+        }
+
+        .methodology-link {
+            background: none;
+            border: none;
+            color: #065f46;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .methodology-link:hover {
+            color: #047857;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            font-weight: 300;
+            color: #64748b;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #1e293b;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.3em;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-right: 40px;
+        }
+
+        .methodology-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .scenario-col {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .scenario-title {
+            font-weight: 700;
+            font-size: 1em;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .funnel-calc {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.8;
+            color: #1e293b;
+            white-space: pre-line;
+        }
+
+        .methodology-note {
+            font-size: 0.9em;
+            color: #64748b;
+            font-style: italic;
+            padding: 15px;
+            background: #fef3c7;
+            border-radius: 6px;
+        }
+
+        /* CRITICAL INSIGHT BOX */
+        .critical-insight {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .critical-insight-title {
+            font-weight: 700;
+            color: #991b1b;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .critical-insight-content {
+            color: #7f1d1d;
+            line-height: 1.7;
+        }
+
+        /* DIMENSION CARDS */
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dimension-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            padding-top: 50px;
+            position: relative;
+        }
+
+        .tier-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+        }
+
+        .tier-needs-work {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        .tier-building {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .tier-strong {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .dimension-title {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .dimension-score {
+            font-size: 3em;
+            font-weight: 900;
+            color: #1e293b;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .dimension-score span {
+            font-size: 0.4em;
+            color: #94a3b8;
+        }
+
+        .dimension-finding {
+            font-size: 0.9em;
+            color: #475569;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* CONFIDENCE TOGGLE */
+        .confidence-toggle {
+            background: none;
+            border: none;
+            color: #3b82f6;
+            cursor: pointer;
+            font-size: 0.85em;
+            margin-top: 12px;
+            padding: 0;
+            text-decoration: underline;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .confidence-toggle:hover {
+            color: #2563eb;
+        }
+
+        .arrow {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .confidence-toggle.expanded .arrow {
+            transform: rotate(90deg);
+        }
+
+        .confidence-basis {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            margin-top: 12px;
+        }
+
+        .confidence-basis.expanded {
+            max-height: 800px;
+        }
+
+        .confidence-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .confidence-level {
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #475569;
+        }
+
+        .confidence-score {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .confidence-score span {
+            font-size: 0.6em;
+            color: #94a3b8;
+        }
+
+        .confidence-section {
+            margin-bottom: 10px;
+        }
+
+        .confidence-title {
+            font-weight: 600;
+            font-size: 0.8em;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .confidence-item {
+            font-size: 0.85em;
+            color: #475569;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .confidence-item .icon {
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+
+        .confidence-item.has .icon {
+            color: #10b981;
+        }
+
+        .confidence-item.unknown .icon {
+            color: #f59e0b;
+        }
+
+        /* COMPETITOR TABLE */
+        .competitor-section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .competitor-table th {
+            background: #f1f5f9;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .competitor-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9em;
+        }
+
+        .competitor-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .score-tied {
+            background: #fef3c7;
+            font-weight: 700;
+            color: #92400e;
+        }
+
+        .score-behind {
+            background: #fecaca;
+            font-weight: 700;
+            color: #991b1b;
+        }
+
+        .score-ahead {
+            background: #d1fae5;
+            font-weight: 700;
+            color: #065f46;
+        }
+
+        /* DATA INVENTORY */
+        .data-inventory {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .data-inventory-title {
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .data-inventory-subtitle {
+            font-size: 0.95em;
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .data-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .data-column {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .data-column-title {
+            font-weight: 700;
+            font-size: 1em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-column-title.have {
+            color: #047857;
+        }
+
+        .data-column-title.need {
+            color: #c2410c;
+        }
+
+        .data-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .checkbox {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .checkbox.checked {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+
+        .data-cta {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        /* CONTENT SECTIONS */
+        .content-section {
+            padding: 40px;
+        }
+
+        .section-header {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f97316;
+        }
+
+        .disclaimer {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #78350f;
+        }
+
+        .subsection {
+            margin: 30px 0;
+        }
+
+        .subsection-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+
+        .finding-item {
+            background: #f8fafc;
+            border-left: 4px solid #94a3b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .finding-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .finding-text {
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .recommendation-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .recommendation-title {
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-text {
+            color: #047857;
+            line-height: 1.6;
+        }
+
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .priority-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .priority-number {
+            background: #f97316;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .priority-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .priority-description {
+            font-size: 0.9em;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .quick-wins-box {
+            background: #f0fdfa;
+            border: 2px solid #14b8a6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .quick-wins-title {
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #0f766e;
+            margin-bottom: 15px;
+        }
+
+        .quick-wins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .quick-win-item {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #14b8a6;
+        }
+
+        .quick-win-title {
+            font-weight: 700;
+            font-size: 0.9em;
+            color: #0f766e;
+            margin-bottom: 5px;
+        }
+
+        .quick-win-time {
+            font-size: 0.75em;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .quick-win-desc {
+            font-size: 0.85em;
+            color: #475569;
+            line-height: 1.4;
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+            }
+            .page:last-child {
+                page-break-after: auto;
+            }
+            .modal {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- METHODOLOGY MODAL -->
+    <div class="modal" id="methodologyModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeMethodology()">&times;</button>
+            <div class="modal-title">📊 How We Calculated Revenue Upside</div>
+            <div class="methodology-content">
+                <div class="scenario-col">
+                    <div class="scenario-title">Conservative Scenario: $4.2M</div>
+                    <div class="funnel-calc">CURRENT STATE:
+7,285 leads × 25% = 1,821 opps
+1,821 opps × 50% = 911 wins
+911 wins × $7K ACV = $6.4M
+
+TARGET (Retention Fix + Modest Lifts):
+• Fix GRR: 89% → 95% (retain 20 more customers)
+• Improve lead→opp: 25% → 30% (+5pts)
+• Improve win rate: 50% → 55% (+5pts)
+• Modest ACV lift: $7K → $7.5K
+
+7,285 leads × 30% = 2,186 opps
+2,186 opps × 55% = 1,202 wins
+1,202 wins × $7.5K = $9.0M
++ Retention saves: ~$1.6M
+
+INCREMENTAL: $4.2M</div>
+                </div>
+                <div class="scenario-col">
+                    <div class="scenario-title">Aggressive Scenario: $7.8M</div>
+                    <div class="funnel-calc">CURRENT STATE:
+(same as conservative)
+
+TARGET (Best-in-Class Execution):
+• Fix GRR to 95%+ (benchmark)
+• Fix NRR to 106%+ (expansion working)
+• Lead→opp: 25% → 35% (+10pts)
+• Win rate: 50% → 60% (+10pts)
+• Value-based pricing: $7K → $9K
+
+7,285 leads × 35% = 2,550 opps
+2,550 opps × 60% = 1,530 wins
+1,530 wins × $9K = $13.8M
++ Expansion revenue: ~$0.4M
+
+INCREMENTAL: $7.8M</div>
+                </div>
+            </div>
+            <div class="methodology-note">
+                <strong>Assumptions:</strong> Lead volume estimated from ARR ($25.5M) working backwards through funnel. Benchmarks sourced from HG Partners proprietary database of 200+ B2B SaaS companies in the $20-30M ARR band. Conservative scenario aligns with reaching 7.0 score; aggressive with 7.5+ score.
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 1: EXECUTIVE DASHBOARD -->
+    <div class="page">
+        <div class="header">
+            <div class="logo-area">
+                <span class="rw-badge">HG PARTNERS</span>
+            </div>
+            <div class="header-subtitle">90-Day Marketing Strategy & Enablement Growth Plan</div>
+            <div class="company-name">Fingercheck</div>
+            <div class="company-meta">fingercheck.com • Payroll & HR for Mobile Workforces • $25.5M ARR</div>
+        </div>
+
+        <div class="dashboard-container">
+            <!-- SCORE BANNER -->
+            <div class="score-banner">
+                <div class="score-main">
+                    <div class="score-label">Overall Marketing Health Score</div>
+                    <div class="score-number">5.2<span>/10</span></div>
+                    <div class="benchmark-note">Below peer average for $20-30M ARR companies</div>
+                </div>
+                <div>
+                    <div class="status-badge">FOUNDATIONAL WORK NEEDED<br>1-2 Month Timeline</div>
+                </div>
+                <div class="revenue-upside-box">
+                    <div class="revenue-label">Revenue Upside Potential</div>
+                    <div class="revenue-amount">$4.2M – $7.8M</div>
+                    <button class="methodology-link" onclick="openMethodology()">See calculation methodology →</button>
+                </div>
+            </div>
+
+            <!-- CRITICAL INSIGHT -->
+            <div class="critical-insight">
+                <div class="critical-insight-title">⚠️ Strategic Priority: Address Retention Before Scaling Acquisition</div>
+                <div class="critical-insight-content">
+                    Your 89% gross retention rate is significantly below the 95%+ benchmark for companies at your stage ($20-30M ARR). At 93% net retention vs. a 106-110% industry standard, you're losing 13-17 percentage points of potential expansion revenue annually. This retention gap must be addressed before investing heavily in demand generation—otherwise, you're filling a leaky bucket. The good news: fixing retention is a marketing enablement problem (value communication, onboarding, customer success materials) not just a product issue.
+                </div>
+            </div>
+
+            <!-- DIMENSION CARDS -->
+            <h2 class="section-title">The Six Dimensions</h2>
+            <div class="dimension-grid">
+                <!-- Value Articulation -->
+                <div class="dimension-card">
+                    <span class="tier-badge tier-building">BUILDING</span>
+                    <div class="dimension-title">1. Value Articulation</div>
+                    <div class="dimension-score">5.7<span>/10</span></div>
+                    <div class="dimension-finding">Coverage of 9 value levers is good (7/9), but quantification is weak. "Save time" claims lack specifics.</div>
+                    <button class="confidence-toggle" onclick="toggleConfidence(this)">
+                        <span class="arrow">▶</span>
+                        <span>See confidence basis</span>
+                    </button>
+                    <div class="confidence-basis">
+                        <div class="confidence-header">
+                            <div class="confidence-level">Data Confidence</div>
+                            <div class="confidence-score">7<span>/10</span></div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Based on:</div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Sales playbook analysis (60 pages)</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Website messaging audit</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Case studies review</span>
+                            </div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Need from you (to refine):</div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Customer ROI survey data</span>
+                            </div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Time savings benchmarking study</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Differentiation -->
+                <div class="dimension-card">
+                    <span class="tier-badge tier-building">BUILDING</span>
+                    <div class="dimension-title">2. Differentiation</div>
+                    <div class="dimension-score">6.0<span>/10</span></div>
+                    <div class="dimension-finding">Mobile workforce positioning exists but isn't the lead message. Needs to be centerpiece of your story.</div>
+                    <button class="confidence-toggle" onclick="toggleConfidence(this)">
+                        <span class="arrow">▶</span>
+                        <span>See confidence basis</span>
+                    </button>
+                    <div class="confidence-basis">
+                        <div class="confidence-header">
+                            <div class="confidence-level">Data Confidence</div>
+                            <div class="confidence-score">6<span>/10</span></div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Based on:</div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Competitive positioning in playbook</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Website homepage audit</span>
+                            </div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Need from you (to refine):</div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Win/loss analysis by competitor</span>
+                            </div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Customer interviews: "Why did you choose us?"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buyer Enablement -->
+                <div class="dimension-card">
+                    <span class="tier-badge tier-building">BUILDING</span>
+                    <div class="dimension-title">3. Buyer Enablement</div>
+                    <div class="dimension-score">6.0<span>/10</span></div>
+                    <div class="dimension-finding">Pricing visible on website (rare!), but ROI calculator and comparison tools missing.</div>
+                    <button class="confidence-toggle" onclick="toggleConfidence(this)">
+                        <span class="arrow">▶</span>
+                        <span>See confidence basis</span>
+                    </button>
+                    <div class="confidence-basis">
+                        <div class="confidence-header">
+                            <div class="confidence-level">Data Confidence</div>
+                            <div class="confidence-score">8<span>/10</span></div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Based on:</div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Website self-service audit</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Pricing page analysis</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Demo flow evaluation</span>
+                            </div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Need from you (to refine):</div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Sales assist rate (how often buyers need help)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Proof -->
+                <div class="dimension-card">
+                    <span class="tier-badge tier-building">BUILDING</span>
+                    <div class="dimension-title">4. Social Proof</div>
+                    <div class="dimension-score">6.1<span>/10</span></div>
+                    <div class="dimension-finding">Good G2/Capterra ratings (4.7-4.8), but case studies lack financial results.</div>
+                    <button class="confidence-toggle" onclick="toggleConfidence(this)">
+                        <span class="arrow">▶</span>
+                        <span>See confidence basis</span>
+                    </button>
+                    <div class="confidence-basis">
+                        <div class="confidence-header">
+                            <div class="confidence-level">Data Confidence</div>
+                            <div class="confidence-score">9<span>/10</span></div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Based on:</div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>G2 review data (342 reviews, 4.7-4.8 stars)</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Capterra review data (52 reviews, 4.5 stars)</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Case study audit from playbook</span>
+                            </div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Need from you (to refine):</div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Permission to create quantified case studies</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buyer Trust -->
+                <div class="dimension-card">
+                    <span class="tier-badge tier-needs-work">NEEDS WORK</span>
+                    <div class="dimension-title">5. Buyer Trust</div>
+                    <div class="dimension-score">4.4<span>/10</span></div>
+                    <div class="dimension-finding">Major gap: No transparent roadmap, limited security/compliance visibility, pricing structure has hidden fees.</div>
+                    <button class="confidence-toggle" onclick="toggleConfidence(this)">
+                        <span class="arrow">▶</span>
+                        <span>See confidence basis</span>
+                    </button>
+                    <div class="confidence-basis">
+                        <div class="confidence-header">
+                            <div class="confidence-level">Data Confidence</div>
+                            <div class="confidence-score">7<span>/10</span></div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Based on:</div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Website trust signals audit</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Pricing transparency review</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>Sales playbook hidden fees analysis</span>
+                            </div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Need from you (to refine):</div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>SOC 2 / security certification status</span>
+                            </div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Rationale for wire/draft/rush fees</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Satisfaction -->
+                <div class="dimension-card">
+                    <span class="tier-badge tier-needs-work">NEEDS WORK</span>
+                    <div class="dimension-title">6. Customer Satisfaction</div>
+                    <div class="dimension-score">3.3<span>/10</span></div>
+                    <div class="dimension-finding">Strong reviews offset by concerning retention: 89% GRR vs. 95%+ benchmark. 93% NRR shows minimal expansion.</div>
+                    <button class="confidence-toggle" onclick="toggleConfidence(this)">
+                        <span class="arrow">▶</span>
+                        <span>See confidence basis</span>
+                    </button>
+                    <div class="confidence-basis">
+                        <div class="confidence-header">
+                            <div class="confidence-level">Data Confidence</div>
+                            <div class="confidence-score">5<span>/10</span></div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Based on:</div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>GRR: 89% (provided by client)</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>NRR: 93% (provided by client)</span>
+                            </div>
+                            <div class="confidence-item has">
+                                <span class="icon">✓</span>
+                                <span>G2/Capterra review ratings</span>
+                            </div>
+                        </div>
+                        <div class="confidence-section">
+                            <div class="confidence-title">Need from you (to refine):</div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>CSAT survey data (currently not tracked)</span>
+                            </div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Churn analysis by customer segment</span>
+                            </div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Retention by industry vertical (construction vs. delivery vs. other)</span>
+                            </div>
+                            <div class="confidence-item unknown">
+                                <span class="icon">?</span>
+                                <span>Exit interview data: why are customers leaving?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPETITOR COMPARISON -->
+            <div class="competitor-section">
+                <h2 class="section-title">Competitive Position</h2>
+                <p style="margin-bottom: 20px; color: #475569;">Based on public information analysis of top 3 competitors using the same scoring framework:</p>
+                <table class="competitor-table">
+                    <thead>
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Fingercheck</th>
+                            <th>ADP</th>
+                            <th>Rippling</th>
+                            <th>Gusto</th>
+                            <th>Gap Analysis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>OVERALL SCORE</strong></td>
+                            <td class="score-tied">5.2</td>
+                            <td>5.5</td>
+                            <td>7.1</td>
+                            <td>7.8</td>
+                            <td>ADP +0.3 pts. Rippling +1.9 pts. Gusto +2.6 pts ahead.</td>
+                        </tr>
+                        <tr>
+                            <td>Value Articulation</td>
+                            <td>5.7</td>
+                            <td>5.0</td>
+                            <td>7.5</td>
+                            <td>8.5</td>
+                            <td>Gusto's "152 hrs/yr saved" quantification is best-in-class</td>
+                        </tr>
+                        <tr>
+                            <td>Differentiation</td>
+                            <td>6.0</td>
+                            <td>4.0</td>
+                            <td>8.0</td>
+                            <td>7.0</td>
+                            <td>Rippling's platform consolidation is clear; your mobile workforce angle is buried</td>
+                        </tr>
+                        <tr>
+                            <td>Buyer Enablement</td>
+                            <td>6.0</td>
+                            <td>4.0</td>
+                            <td>7.0</td>
+                            <td>9.0</td>
+                            <td>Gusto's self-service experience is exceptional</td>
+                        </tr>
+                        <tr>
+                            <td>Social Proof</td>
+                            <td>6.1</td>
+                            <td>7.0</td>
+                            <td>8.0</td>
+                            <td>8.5</td>
+                            <td>Volume gap: ADP has brand, Rippling has 9,710 G2 reviews</td>
+                        </tr>
+                        <tr>
+                            <td>Buyer Trust</td>
+                            <td>4.4</td>
+                            <td>6.0</td>
+                            <td>7.0</td>
+                            <td>8.0</td>
+                            <td>Your hidden fees are a major trust gap vs. transparent competitors</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Satisfaction</td>
+                            <td>3.3</td>
+                            <td>4.0</td>
+                            <td>6.5</td>
+                            <td>7.0</td>
+                            <td>Retention data unavailable for competitors, scored on reviews only</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: DETAILED FINDINGS -->
+    <div class="page">
+        <div class="content-section">
+            <h1 class="section-header">Detailed Findings & Recommendations</h1>
+
+            <div class="disclaimer">
+                <strong>Note:</strong> These findings are based on publicly available information and client-provided metrics (GRR: 89%, NRR: 93%, LTV:CAC: 2:1, NPS: 52). Analysis can be refined through additional discovery including segmented retention data, customer interviews, and CSAT tracking.
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Refine Customer Segmentation to Improve Retention</h2>
+                <div class="critical-insight">
+                    <div class="critical-insight-title">🎯 Hypothesis: Your Retention Problem May Be a Segmentation Problem</div>
+                    <div class="critical-insight-content">
+                        <p style="margin-bottom: 15px;">Your 89% gross retention rate is an <em>average</em> across all customer segments. This likely masks significant variance:</p>
+                        <p style="margin-bottom: 15px;"><strong>Scenario A:</strong> All segments churn at ~11% for similar reasons (onboarding issues, poor value realization, support gaps) → <strong>This is an execution problem.</strong> Fix: Invest in CS enablement, onboarding, value communication.</p>
+                        <p style="margin-bottom: 15px;"><strong>Scenario B:</strong> One segment (e.g., construction companies 20-100 employees) has 95% retention, but another segment (e.g., delivery companies <20 employees) has 75% retention → <strong>This is a segmentation problem.</strong> Fix: Refine your ICP, deprioritize low-retention segments, double down on high-retention segments.</p>
+                        <p style="margin-bottom: 15px;"><strong>Key insight:</strong> If Scenario B is true, you're spending the same CAC to acquire customers with wildly different LTVs. At a 2:1 LTV:CAC ratio (already below the 4.5-5× benchmark), you cannot afford to acquire low-retention customers.</p>
+                        <p><strong>Recommendation:</strong> Before investing in demand generation, run a retention segmentation analysis in Salesforce. Identify which customer cohorts have the best retention, highest LTV, and easiest sales cycles. Then refine your ICP and messaging to attract more of those customers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">1. Value Articulation (5.7/10)</h2>
+
+                <div class="finding-item">
+                    <div class="finding-title">✓ Strengths</div>
+                    <div class="finding-text">
+                        • Good coverage of value levers (7 of 9): Time Savings, Cost Displacement, Risk Mitigation, Workforce Optimization are all present in messaging<br>
+                        • Case studies exist (Camp Barnabas, Focus Health Network) showing real customer stories<br>
+                        • Competitive comparison documents show awareness of value drivers
+                    </div>
+                </div>
+
+                <div class="finding-item">
+                    <div class="finding-title">✗ Gaps</div>
+                    <div class="finding-text">
+                        • <strong>Quantification is weak:</strong> Claims like "save time" and "reduce errors" are generic. No "152 hours/year saved" equivalent (like Gusto has)<br>
+                        • <strong>Missing value levers:</strong> Decision Intelligence and Revenue Acceleration not addressed (e.g., how does better workforce data improve business decisions?)<br>
+                        • <strong>Case studies lack hard numbers:</strong> Camp Barnabas story is qualitative ("streamlined"), not quantitative ("saved $47K in first year")<br>
+                        • <strong>No ROI calculator:</strong> Buyers can't self-calculate their specific savings
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">→ Recommended Actions</div>
+                    <div class="recommendation-text">
+                        1. <strong>Customer ROI study:</strong> Survey 20-30 customers to quantify time savings, cost avoidance, and error reduction. Goal: Develop "typical customer saves X hours/month and $Y/year" claim<br>
+                        2. <strong>Rebuild case studies with numbers:</strong> Partner with 3-5 customers willing to share financial results. Format: "Challenge → Solution → Results ($X saved, Y hours saved, Z% error reduction)"<br>
+                        3. <strong>Create ROI calculator:</strong> Simple web tool where prospects input # of employees, current payroll method, and see estimated savings<br>
+                        4. <strong>Add missing value levers:</strong> How does better workforce data help construction companies make smarter staffing decisions? (Decision Intelligence). How does faster payroll processing help with cash flow? (Revenue Acceleration)
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">2. Differentiation (6.0/10)</h2>
+
+                <div class="finding-item">
+                    <div class="finding-title">✓ Strengths</div>
+                    <div class="finding-text">
+                        • <strong>Clear positioning exists:</strong> "Built for mobile workforces" (construction, delivery, field services) is a legitimate differentiation angle<br>
+                        • GPS time tracking, mobile app, and biometric clock-in features support the mobile workforce narrative<br>
+                        • Competitive playbook shows awareness of how you differ from ADP, Rippling, Gusto
+                    </div>
+                </div>
+
+                <div class="finding-item">
+                    <div class="finding-title">✗ Gaps</div>
+                    <div class="finding-text">
+                        • <strong>Positioning isn't front-and-center:</strong> "Mobile workforce" should be the FIRST thing prospects see, not buried in feature lists<br>
+                        • <strong>No proof of mobile-specific value:</strong> What makes you better for construction companies than Gusto or Rippling? Need evidence-based claims<br>
+                        • <strong>Competitive claims are generic:</strong> "Easier to use" and "better support" are unproven assertions. Where's the head-to-head comparison data?
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">→ Recommended Actions</div>
+                    <div class="recommendation-text">
+                        1. <strong>Lead with mobile workforce positioning:</strong> Homepage hero section should say "Payroll & HR Built for Construction, Delivery, and Field Service Teams" (not generic "All-in-one payroll")<br>
+                        2. <strong>Prove the mobile workforce claim:</strong> Create comparison table: "Why General-Purpose HR Tools Fail Mobile Workforces" showing how Gusto/Rippling lack GPS tracking, offline clock-in, etc.<br>
+                        3. <strong>Develop mobile-specific case studies:</strong> "How [Construction Company] Eliminated Timesheet Fraud with GPS Tracking and Saved $92K"<br>
+                        4. <strong>Win/loss analysis:</strong> Interview 10 recent wins and 10 recent losses to understand what really differentiates you vs. competitors
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">3. Buyer Enablement (6.0/10)</h2>
+
+                <div class="finding-item">
+                    <div class="finding-title">✓ Strengths</div>
+                    <div class="finding-text">
+                        • <strong>Pricing is public:</strong> Rare in B2B SaaS and highly appreciated by buyers<br>
+                        • Multiple pricing tiers give buyers options<br>
+                        • Demo is available without requiring sales contact first
+                    </div>
+                </div>
+
+                <div class="finding-item">
+                    <div class="finding-title">✗ Gaps</div>
+                    <div class="finding-text">
+                        • <strong>No self-qualification tools:</strong> No "Am I a good fit?" quiz or ICP description<br>
+                        • <strong>Missing ROI calculator:</strong> Buyers can't calculate their specific value before talking to sales<br>
+                        • <strong>No comparison tools:</strong> No "Fingercheck vs. Gusto" or "Fingercheck vs. ADP" comparison pages<br>
+                        • <strong>Upgrade path unclear:</strong> How do I know when to move from Basic to Standard to Premium?
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">→ Recommended Actions</div>
+                    <div class="recommendation-text">
+                        1. <strong>Create ROI calculator:</strong> "Calculate Your Savings" tool on pricing page<br>
+                        2. <strong>Build comparison pages:</strong> SEO-optimized "Fingercheck vs. [Competitor]" pages for Gusto, ADP, Rippling, Paychex<br>
+                        3. <strong>Add ICP qualifier:</strong> "Best for construction, delivery, and field service companies with 10-200 employees"<br>
+                        4. <strong>Tier recommendation wizard:</strong> "Which plan is right for me?" interactive tool based on # of employees, features needed
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">4. Social Proof (6.1/10)</h2>
+
+                <div class="finding-item">
+                    <div class="finding-title">✓ Strengths</div>
+                    <div class="finding-text">
+                        • <strong>Excellent review ratings:</strong> 4.7-4.8 on G2 (342 reviews), 4.5 on Capterra (52 reviews)<br>
+                        • Customer logos are present and relevant to ICP<br>
+                        • Testimonials exist on website
+                    </div>
+                </div>
+
+                <div class="finding-item">
+                    <div class="finding-title">✗ Gaps</div>
+                    <div class="finding-text">
+                        • <strong>Case studies lack hard numbers:</strong> Stories are qualitative, not quantitative<br>
+                        • <strong>No third-party validation:</strong> No analyst coverage, awards, or industry recognition visible<br>
+                        • <strong>Volume gap vs. competitors:</strong> Rippling has 9,710 G2 reviews; you have 342 (still good, but shows market share gap)<br>
+                        • <strong>Testimonials are generic:</strong> Need named customers with specific results, not anonymous "Great product!"
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">→ Recommended Actions</div>
+                    <div class="recommendation-text">
+                        1. <strong>Rebuild 5 case studies with financials:</strong> "Challenge → Solution → $X saved, Y hours saved, Z% improvement"<br>
+                        2. <strong>Launch customer review campaign:</strong> Target 1,000 G2 reviews within 12 months (incentivize with gift cards or donations)<br>
+                        3. <strong>Pursue industry recognition:</strong> Apply for HR Tech awards, seek construction/field service industry publication features<br>
+                        4. <strong>Create video testimonials:</strong> 60-90 second customer videos with named contacts and specific results
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: MORE FINDINGS -->
+    <div class="page">
+        <div class="content-section">
+            <div class="subsection">
+                <h2 class="subsection-title">5. Buyer Trust (4.4/10)</h2>
+
+                <div class="finding-item">
+                    <div class="finding-title">✓ Strengths</div>
+                    <div class="finding-text">
+                        • Pricing is transparent (major trust signal)<br>
+                        • Free trial available<br>
+                        • Privacy policy and terms are accessible
+                    </div>
+                </div>
+
+                <div class="finding-item">
+                    <div class="finding-title">✗ Gaps (MAJOR ISSUES)</div>
+                    <div class="finding-text">
+                        • <strong>Hidden fees:</strong> $35 wire fee, $50 ACH draft fee, $150 rush payroll fee are not disclosed on pricing page. This creates trust crisis when discovered later<br>
+                        • <strong>No public roadmap:</strong> Buyers can't see what features are coming<br>
+                        • <strong>Security/compliance unclear:</strong> No visible SOC 2, GDPR, or state-level payroll compliance certifications<br>
+                        • <strong>No SLA commitments:</strong> What happens if payroll is late? No guarantees visible<br>
+                        • <strong>Contract terms unclear:</strong> What's the cancellation policy? Data export process?
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">→ Recommended Actions (URGENT)</div>
+                    <div class="recommendation-text">
+                        1. <strong>Eliminate or disclose hidden fees:</strong> Either remove wire/draft/rush fees OR disclose them prominently on pricing page. Hidden fees discovered during implementation destroy trust and drive churn<br>
+                        2. <strong>Publish security/compliance status:</strong> Create "Security & Compliance" page showing SOC 2 status, state certifications, data handling practices<br>
+                        3. <strong>Launch public roadmap:</strong> Simple "What we're building" page with upcoming features (shows you're investing in the product)<br>
+                        4. <strong>Add service level commitments:</strong> "99.9% uptime guarantee" or "Payroll processed on time or your money back"<br>
+                        5. <strong>Clarify contract terms:</strong> "Cancel anytime, export your data in 48 hours" (if true)
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">6. Customer Satisfaction (3.3/10)</h2>
+
+                <div class="finding-item">
+                    <div class="finding-title">✓ Strengths</div>
+                    <div class="finding-text">
+                        • <strong>Excellent review ratings:</strong> 4.7-4.8 on G2, 4.5 on Capterra indicates customers who stay are happy<br>
+                        • Positive sentiment in reviews: "Easy to use," "Great support," "Saves time"<br>
+                        • NPS of 52 (December) is in the "good" range
+                    </div>
+                </div>
+
+                <div class="finding-item">
+                    <div class="finding-title">✗ Gaps (CRITICAL BUSINESS ISSUE)</div>
+                    <div class="finding-text">
+                        • <strong>89% GRR = 11% annual churn:</strong> At your stage ($20-30M ARR), best-in-class is 95%+ GRR. You're losing 6 percentage points more customers than you should<br>
+                        • <strong>93% NRR vs. 106-110% benchmark:</strong> You're losing 13-17 percentage points of potential expansion revenue. NRR should be >100% (customers expanding), but yours is barely covering churn<br>
+                        • <strong>Only 4-point spread (NRR - GRR):</strong> This means expansion revenue is barely happening. Best-in-class companies see 10-15 point spreads<br>
+                        • <strong>LTV:CAC of 2:1 vs. 4.5-5× benchmark:</strong> You're making less than half the return on customer acquisition investment compared to peers<br>
+                        • <strong>No CSAT tracking:</strong> NPS alone is insufficient (it's a lagging indicator and doesn't correlate well with retention)<br>
+                        • <strong>No segmented retention data:</strong> Do construction companies retain better than delivery companies? Do larger customers churn less? Unknown.
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">→ Recommended Actions (TOP PRIORITY)</div>
+                    <div class="recommendation-text">
+                        1. <strong>Churn analysis (Week 1-2):</strong> Interview 20 recent churned customers. Code reasons by segment. Identify patterns.<br>
+                        2. <strong>Retention segmentation (Week 2-3):</strong> Calculate GRR/NRR by customer vertical, size band, acquisition channel in Salesforce. Identify high-retention vs. low-retention cohorts.<br>
+                        3. <strong>ICP refinement (Week 3-4):</strong> Based on retention data, refine ICP. Which customer segments should you target more? Which should you deprioritize?<br>
+                        4. <strong>Implement CSAT tracking (Month 2):</strong> Quarterly CSAT surveys at key touchpoints (post-onboarding, post-support interaction, quarterly check-ins)<br>
+                        5. <strong>Build CS enablement materials (Month 2-3):</strong> Onboarding playbooks, value realization templates, best practice guides, ROI tracking tools for customers<br>
+                        6. <strong>Fix expansion motion (Month 3):</strong> Make upgrade paths visible, create expansion ROI calculators, train CS team on upsell value communication<br>
+                        7. <strong>Set retention targets:</strong> Goal = 95% GRR within 12 months, 105% NRR within 18 months
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Prioritized Opportunity Ranking</h2>
+                <p style="margin-bottom: 20px; color: #475569;">Based on impact to revenue and effort required, here are your top priorities:</p>
+
+                <div class="priority-grid">
+                    <div class="priority-card">
+                        <div class="priority-number">1</div>
+                        <div class="priority-title">Fix Retention Through Segmentation</div>
+                        <div class="priority-description">
+                            <strong>Impact:</strong> Highest. Moving GRR from 89% to 95% saves $1.6M+ annually. Segmentation analysis reveals which customers to acquire.<br>
+                            <strong>Effort:</strong> Medium. Requires Salesforce analysis, churn interviews, CS enablement, ICP refinement.<br>
+                            <strong>Timeline:</strong> Start Week 1, see results in 6 months
+                        </div>
+                    </div>
+
+                    <div class="priority-card">
+                        <div class="priority-number">2</div>
+                        <div class="priority-title">Eliminate Hidden Fees / Rebuild Trust</div>
+                        <div class="priority-description">
+                            <strong>Impact:</strong> High. Hidden fees drive buyer trust score down and likely contribute to churn.<br>
+                            <strong>Effort:</strong> Low. Pricing page update + policy decision on fees.<br>
+                            <strong>Timeline:</strong> Week 1-2
+                        </div>
+                    </div>
+
+                    <div class="priority-card">
+                        <div class="priority-number">3</div>
+                        <div class="priority-title">Lead with Mobile Workforce Differentiation</div>
+                        <div class="priority-description">
+                            <strong>Impact:</strong> High. Clearer positioning improves win rates and attracts better-fit customers.<br>
+                            <strong>Effort:</strong> Medium. Requires website redesign, messaging overhaul, case study development.<br>
+                            <strong>Timeline:</strong> Month 1-2
+                        </div>
+                    </div>
+
+                    <div class="priority-card">
+                        <div class="priority-number">4</div>
+                        <div class="priority-title">Quantify Value with Customer ROI Study</div>
+                        <div class="priority-description">
+                            <strong>Impact:</strong> Medium-High. Proven ROI improves win rates and justifies price increases.<br>
+                            <strong>Effort:</strong> Medium. Requires customer surveys, data analysis, case study rebuilds.<br>
+                            <strong>Timeline:</strong> Month 2-3
+                        </div>
+                    </div>
+
+                    <div class="priority-card">
+                        <div class="priority-number">5</div>
+                        <div class="priority-title">Build Buyer Self-Service Tools</div>
+                        <div class="priority-description">
+                            <strong>Impact:</strong> Medium. ROI calculator, comparison pages, tier wizard reduce sales cycle.<br>
+                            <strong>Effort:</strong> Medium. Requires development resources.<br>
+                            <strong>Timeline:</strong> Month 2-3
+                        </div>
+                    </div>
+
+                    <div class="priority-card">
+                        <div class="priority-number">6</div>
+                        <div class="priority-title">Scale Social Proof</div>
+                        <div class="priority-description">
+                            <strong>Impact:</strong> Medium. More reviews and quantified case studies improve conversion.<br>
+                            <strong>Effort:</strong> Medium-High (ongoing). Requires customer cooperation and campaign execution.<br>
+                            <strong>Timeline:</strong> Month 3+ (continuous)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: ROADMAP -->
+    <div class="page">
+        <div class="content-section">
+            <h1 class="section-header">90-Day Implementation Roadmap</h1>
+
+            <!-- QUICK WINS -->
+            <div class="quick-wins-box">
+                <div class="quick-wins-title">⚡ Week 1 Quick Wins (Start Here)</div>
+                <div class="quick-wins-grid">
+                    <div class="quick-win-item">
+                        <div class="quick-win-title">Disclose All Fees</div>
+                        <div class="quick-win-time">1 day</div>
+                        <div class="quick-win-desc">Add wire, draft, and rush fees to pricing page footer with clear disclosure</div>
+                    </div>
+                    <div class="quick-win-item">
+                        <div class="quick-win-title">Add ICP Qualifier</div>
+                        <div class="quick-win-time">1 day</div>
+                        <div class="quick-win-desc">Update homepage: "Best for construction, delivery, field service companies with 10-200 employees"</div>
+                    </div>
+                    <div class="quick-win-item">
+                        <div class="quick-win-title">Pull Retention Report</div>
+                        <div class="quick-win-time">2 days</div>
+                        <div class="quick-win-desc">Export Salesforce data: GRR/NRR by vertical, company size, channel</div>
+                    </div>
+                    <div class="quick-win-item">
+                        <div class="quick-win-title">Schedule Churn Interviews</div>
+                        <div class="quick-win-time">1 week</div>
+                        <div class="quick-win-desc">Identify and schedule calls with 20 churned customers from last 6 months</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Month 1: Foundation & Retention Diagnosis</h2>
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 1-2: Retention Deep Dive</div>
+                    <div class="recommendation-text">
+                        • Interview 20 churned customers (last 6 months). Code churn reasons by segment.<br>
+                        • Analyze GRR/NRR by vertical (construction, delivery, field services, other), company size (<20, 20-50, 50-200 employees), acquisition channel<br>
+                        • Identify high-retention vs. low-retention cohorts<br>
+                        • <strong>Deliverable:</strong> Retention segmentation report with recommended ICP refinements
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 2-3: Trust Rebuild</div>
+                    <div class="recommendation-text">
+                        • Policy decision: Eliminate hidden fees OR disclose them prominently on pricing page<br>
+                        • Update pricing page with all-in costs<br>
+                        • Create "Security & Compliance" page (SOC 2 status, state certifications, data handling)<br>
+                        • Add service level commitments to website<br>
+                        • <strong>Deliverable:</strong> Updated pricing page and trust signals live on site
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 3-4: Messaging Overhaul</div>
+                    <div class="recommendation-text">
+                        • Redesign homepage hero to lead with "Payroll & HR Built for Mobile Workforces"<br>
+                        • Create ICP qualifier: "Best for construction, delivery, field service companies with 10-200 employees"<br>
+                        • Draft new value proposition based on mobile workforce differentiation<br>
+                        • <strong>Deliverable:</strong> New homepage and messaging framework document
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Month 2: Customer Success Enablement & Proof</h2>
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 5-6: CS Enablement Materials</div>
+                    <div class="recommendation-text">
+                        • Build onboarding playbook (30-60-90 day customer success plan)<br>
+                        • Create value realization templates (how to track ROI from Fingercheck)<br>
+                        • Develop best practice guides for construction, delivery, field services<br>
+                        • Implement quarterly CSAT surveys<br>
+                        • <strong>Deliverable:</strong> CS enablement library + CSAT survey launched
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 7-8: Customer ROI Study</div>
+                    <div class="recommendation-text">
+                        • Survey 30-50 customers to quantify time savings, cost avoidance, error reduction<br>
+                        • Analyze survey data to develop "typical customer saves X hours/month and $Y/year" claim<br>
+                        • Identify 5 customers willing to participate in quantified case studies<br>
+                        • <strong>Deliverable:</strong> ROI benchmarking report + 5 customer partners identified
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Month 3: Proof Points & Self-Service Tools</h2>
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 9-10: Case Study Development</div>
+                    <div class="recommendation-text">
+                        • Conduct interviews with 5 customer partners<br>
+                        • Write case studies in "Challenge → Solution → Results" format with hard numbers<br>
+                        • Create 2-3 video testimonials (60-90 seconds)<br>
+                        • <strong>Deliverable:</strong> 5 quantified case studies + 3 video testimonials published
+                    </div>
+                </div>
+
+                <div class="recommendation-box">
+                    <div class="recommendation-title">Week 11-12: Buyer Enablement Tools</div>
+                    <div class="recommendation-text">
+                        • Build ROI calculator ("Calculate Your Savings" tool)<br>
+                        • Create comparison pages: "Fingercheck vs. Gusto," "vs. ADP," "vs. Rippling"<br>
+                        • Develop tier recommendation wizard ("Which plan is right for me?")<br>
+                        • Launch public roadmap (simple "What we're building" page)<br>
+                        • <strong>Deliverable:</strong> Self-service tools live on website
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Success Metrics (Track Monthly)</h2>
+                <table class="competitor-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Current</th>
+                            <th>3-Month Target</th>
+                            <th>6-Month Target</th>
+                            <th>12-Month Target</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Overall Score</strong></td>
+                            <td>5.2 / 10</td>
+                            <td>6.0 / 10</td>
+                            <td>7.0 / 10</td>
+                            <td>7.5 / 10</td>
+                        </tr>
+                        <tr>
+                            <td>Gross Retention Rate</td>
+                            <td>89%</td>
+                            <td>91%</td>
+                            <td>93%</td>
+                            <td>95%</td>
+                        </tr>
+                        <tr>
+                            <td>Net Retention Rate</td>
+                            <td>93%</td>
+                            <td>96%</td>
+                            <td>100%</td>
+                            <td>105%</td>
+                        </tr>
+                        <tr>
+                            <td>Lead → Opp Conversion</td>
+                            <td>25%</td>
+                            <td>27%</td>
+                            <td>30%</td>
+                            <td>32%</td>
+                        </tr>
+                        <tr>
+                            <td>Opp → Win Conversion</td>
+                            <td>50%</td>
+                            <td>52%</td>
+                            <td>55%</td>
+                            <td>58%</td>
+                        </tr>
+                        <tr>
+                            <td>Average Contract Value</td>
+                            <td>$7,000</td>
+                            <td>$7,200</td>
+                            <td>$7,500</td>
+                            <td>$8,400</td>
+                        </tr>
+                        <tr>
+                            <td>LTV:CAC Ratio</td>
+                            <td>2.0×</td>
+                            <td>2.5×</td>
+                            <td>3.5×</td>
+                            <td>4.5×</td>
+                        </tr>
+                        <tr>
+                            <td>G2 Reviews</td>
+                            <td>342</td>
+                            <td>450</td>
+                            <td>600</td>
+                            <td>1,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- DATA INVENTORY -->
+            <div class="data-inventory">
+                <div class="data-inventory-title">📋 Data Inventory & Refinement Opportunity</div>
+                <div class="data-inventory-subtitle">
+                    This assessment is based on the sources shown below. To deliver a more precise, actionable roadmap, we recommend gathering the additional data points marked as needed.
+                </div>
+                <div class="data-sections">
+                    <div class="data-column">
+                        <div class="data-column-title have">✓ Data Sources We Used</div>
+                        <div class="data-item">
+                            <div class="checkbox checked">✓</div>
+                            <div>Sales playbook (60 pages, confidential internal doc)</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox checked">✓</div>
+                            <div>Website and public materials audit</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox checked">✓</div>
+                            <div>G2 and Capterra review data</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox checked">✓</div>
+                            <div>High-level metrics: GRR (89%), NRR (93%), LTV:CAC (2:1), NPS (52)</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox checked">✓</div>
+                            <div>Conversion metrics: Lead→Opp (25%), Win rate (50%), ACV ($7K)</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox checked">✓</div>
+                            <div>Competitive positioning materials</div>
+                        </div>
+                    </div>
+                    <div class="data-column">
+                        <div class="data-column-title need">? Additional Data Needed</div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>Segmented retention:</strong> GRR/NRR by vertical, size, channel</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>Churn analysis:</strong> Top 3 reasons by segment with exit interview data</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>CSAT survey data:</strong> Post-onboarding and quarterly satisfaction scores</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>Customer ROI data:</strong> Quantified time savings, cost avoidance from surveys</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>Win/loss themes:</strong> Detailed analysis by competitor and reason</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>ICP performance:</strong> Which segments have highest LTV and easiest sales?</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>Expansion metrics:</strong> Upgrade rate, time to upsell, expansion ARR</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="checkbox"></div>
+                            <div><strong>Security/compliance:</strong> SOC 2, GDPR, state payroll certifications status</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <a href="#" class="data-cta">📞 Refine This Analysis: 30-min call + updated report ($8K)</a>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h2 class="subsection-title">Investment Required</h2>
+                <p style="margin-bottom: 20px; color: #475569;">Estimated resource allocation for 90-day plan:</p>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e2e8f0;"><strong>Customer Success / Marketing:</strong> 1 FTE (dedicated CS enablement manager)</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e2e8f0;"><strong>Product Marketing:</strong> 0.5 FTE (messaging, case studies, ROI study)</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e2e8f0;"><strong>Web Development:</strong> 0.5 FTE (website updates, tools development)</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e2e8f0;"><strong>Customer Research:</strong> $10-15K (churn interviews, ROI surveys, incentives)</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e2e8f0;"><strong>Video Production:</strong> $5-8K (case study videos)</li>
+                    <li style="padding: 10px 0;"><strong>Total Cash Investment:</strong> ~$15-25K + internal team time</li>
+                </ul>
+            </div>
+
+            <div class="subsection" style="margin-top: 40px; padding-top: 30px; border-top: 3px solid #f97316;">
+                <h2 class="subsection-title">Next Steps</h2>
+                <div class="recommendation-box">
+                    <div class="recommendation-title">To Proceed with This Roadmap:</div>
+                    <div class="recommendation-text">
+                        1. <strong>Review findings with executive team</strong> (CEO, CMO, VP Customer Success)<br>
+                        2. <strong>Run segmented retention analysis:</strong> Export Salesforce data to understand which cohorts retain best<br>
+                        3. <strong>Policy decision on hidden fees:</strong> Eliminate or disclose?<br>
+                        4. <strong>Resource allocation:</strong> Assign owners to each workstream<br>
+                        5. <strong>Optional: 30-minute refinement call</strong> to gather additional data and customize roadmap ($8K add-on)
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; padding: 30px; background: #f8fafc; border-radius: 8px; text-align: center;">
+                <p style="font-size: 0.9em; color: #64748b; margin-bottom: 10px;">Prepared by HG Partners</p>
+                <p style="font-size: 0.85em; color: #94a3b8;">Based on HG Partners Marketing Strategy & Enablement Health Scoring Model v3.1 | February 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleConfidence(button) {
+            const card = button.closest('.dimension-card');
+            const basis = card.querySelector('.confidence-basis');
+
+            button.classList.toggle('expanded');
+            basis.classList.toggle('expanded');
+        }
+
+        function openMethodology() {
+            document.getElementById('methodologyModal').classList.add('active');
+        }
+
+        function closeMethodology() {
+            document.getElementById('methodologyModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('methodologyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMethodology();
+            }
+        });
+    </script>
+</body>
+</html>
