@@ -33,21 +33,16 @@
             margin-bottom: 25px;
         }
 
+        .rw-logo {
+            height: 40px;
+            margin-bottom: 15px;
+        }
+
         .brand {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 20px;
-        }
-
-        .rw-badge {
-            background: #f97316;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9em;
-            letter-spacing: 0.5px;
         }
 
         .company-name {
@@ -515,6 +510,54 @@
             color: #78350f;
         }
 
+        /* Quick Hits Section */
+        .quick-hits {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #86efac;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .quick-hits h3 {
+            color: #166534;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-hits .subtitle-text {
+            color: #15803d;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+
+        .quick-hit-item {
+            background: white;
+            border-left: 4px solid #22c55e;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .quick-hit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .quick-hit-title {
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 5px;
+        }
+
+        .quick-hit-description {
+            color: #15803d;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
         /* Journey Section */
         .journey-intro {
             margin-bottom: 30px;
@@ -656,10 +699,7 @@
     <div class="container">
         <!-- PAGE 1: DASHBOARD -->
         <div class="header">
-            <div class="brand">
-                <span class="rw-badge">RW</span>
-                <span>Remidi Works • Rapid Commercial Scan</span>
-            </div>
+            <img src="../rw-logo.png" alt="Remidi Works" class="rw-logo">
             <div class="company-name">Peak Technologies</div>
             <div class="company-meta">Digital Supply Chain & Mobile Workforce Solutions • Columbia, MD • PE Portfolio (Sole Source Capital)</div>
             <div class="subtitle">$121.9M Revenue • Founded 1981 • Roll-Up Consolidation Play (18 Acquisitions Since 2021)</div>
@@ -668,7 +708,7 @@
         <div class="score-banner">
             <div class="overall-score">
                 <div class="score-main">
-                    <div class="score-number">53</div>
+                    <div class="score-number">61</div>
                     <div>
                         <div class="score-label">Commercial Maturity Score™</div>
                     </div>
@@ -701,71 +741,71 @@
                         <div class="confidence-section">
                             <h4>Based on:</h4>
                             <ul class="confidence-list">
-                                <li>Website messaging: "ROI-driven, customizable managed mobility technology services"</li>
-                                <li>Also positioned as "industry's largest provider of end-to-end solutions"</li>
-                                <li>Multiple sub-brands post-acquisition (VisionID, Siena, ISG, Coridian, etc.)</li>
+                                <li>Dual messaging: "ROI-driven, customizable managed mobility services" vs. "industry's largest end-to-end solutions"</li>
+                                <li>Multiple sub-brands post-acquisition (VisionID, Siena, ISG, Coridian, etc.) create confusion</li>
                                 <li>No quantified outcome metrics visible on homepage or public materials</li>
+                                <li>Broad ICP: manufacturing, retail, warehousing, healthcare, logistics, field services</li>
                             </ul>
                         </div>
                         <div class="confidence-section">
                             <h4>Need from you (kickoff call):</h4>
                             <ul class="confidence-list questions">
                                 <li>Post-acquisition brand integration strategy: consolidate vs. maintain sub-brands?</li>
-                                <li>ICP prioritization: retail vs. warehousing vs. field services vs. manufacturing?</li>
+                                <li>ICP prioritization: which vertical drives most revenue/margin?</li>
                                 <li>Customer outcome data: average ROI, uptime improvement, cost reduction metrics</li>
-                                <li>Differentiation vs. direct implementation (e.g., Zebra selling direct to enterprise)</li>
+                                <li>Differentiation vs. Zebra direct sales</li>
                             </ul>
                         </div>
                         <div class="improvement-note">
-                            Messaging clarity is muddled by dual positioning (managed services + solutions integrator) and multiple acquired brands. With unified messaging and 3-5 quantified customer outcomes, score could reach 68-75.
+                            With unified messaging framework and 3-5 quantified customer outcomes, score could reach 68-75.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Buyer Trust -->
+            <!-- Pricing Architecture -->
             <div class="dimension-card">
                 <div class="dimension-header">
-                    <div class="dimension-name">Buyer Trust</div>
-                    <div class="tier-badge tier-low">T1 Low</div>
+                    <div class="dimension-name">Pricing Architecture</div>
+                    <div class="tier-badge tier-medium">T2 Medium</div>
                 </div>
-                <div class="dimension-score score-low">35</div>
+                <div class="dimension-score score-medium">55</div>
                 <div class="benchmark-meta">Peer avg: 52 | Top 25%: 68</div>
                 <button class="confidence-toggle" onclick="toggleConfidence(this)">
                     <span class="arrow">▶</span> See confidence basis
                 </button>
                 <div class="confidence-content">
                     <div class="confidence-inner">
-                        <div class="confidence-score">Data Confidence: 7/10</div>
+                        <div class="confidence-score">Data Confidence: 5/10</div>
                         <div class="confidence-section">
                             <h4>Based on:</h4>
                             <ul class="confidence-list">
-                                <li>Website has no pricing information visible</li>
+                                <li>No pricing information visible on website (strategic choice for enterprise-focused model)</li>
                                 <li>Enterprise "contact sales" model implied throughout</li>
-                                <li>No pricing tiers, ranges, or guidance for self-qualification</li>
-                                <li>Managed mobility services typically custom-priced by device count and SLA</li>
+                                <li>CRO confirms deal-by-deal negotiation approach works for their business model</li>
+                                <li>Managed mobility services typically custom-priced by device count and SLA level</li>
                             </ul>
                         </div>
                         <div class="confidence-section">
                             <h4>Need from you (kickoff call):</h4>
                             <ul class="confidence-list questions">
                                 <li>Typical deal sizes by segment (SMB vs. mid-market vs. enterprise)</li>
-                                <li>Pricing model: per-device, per-user, per-location, or hybrid?</li>
-                                <li>Willingness to publish indicative pricing ranges for SMB/mid-market</li>
+                                <li>Pricing model structure: per-device, per-user, per-location, or hybrid?</li>
+                                <li>Win rate and margin impact of current negotiation-based approach</li>
                                 <li>Sales cycle data: qualification to close timeline by segment</li>
                             </ul>
                         </div>
                         <div class="improvement-note">
-                            Complete pricing opacity creates qualification friction. Publishing indicative ranges ("Starting at $X/device/month for 100-500 devices") could increase inbound quality and reduce sales cycle by 20-30%, lifting score to 55-62.
+                            Current model aligns with enterprise sales motion. Score reflects strategic fit for their go-to-market approach.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Differentiation -->
+            <!-- Competitive Positioning -->
             <div class="dimension-card">
                 <div class="dimension-header">
-                    <div class="dimension-name">Differentiation</div>
+                    <div class="dimension-name">Competitive Positioning</div>
                     <div class="tier-badge tier-medium">T2 Medium</div>
                 </div>
                 <div class="dimension-score score-medium">48</div>
@@ -779,10 +819,10 @@
                         <div class="confidence-section">
                             <h4>Based on:</h4>
                             <ul class="confidence-list">
-                                <li>Zebra Technologies Premier Partner (reseller + implementer, not competitor)</li>
+                                <li>Zebra Technologies Premier Partner (reseller + implementer)</li>
                                 <li>"Industry's largest provider" claim unsubstantiated publicly</li>
                                 <li>18 acquisitions since 2021 PE buyout signals roll-up consolidation strategy</li>
-                                <li>Competitors: Hub Group, NFI Industries, Kontakt, Omni-ID per Tracxn data</li>
+                                <li>Competitors: Hub Group, NFI Industries, Kontakt, Omni-ID per market data</li>
                             </ul>
                         </div>
                         <div class="confidence-section">
@@ -790,24 +830,24 @@
                             <ul class="confidence-list questions">
                                 <li>Zebra partner ambiguity: how do you position vs. Zebra selling direct?</li>
                                 <li>Market share data or basis for "largest provider" claim</li>
-                                <li>Win/loss analysis: when do you win vs. lose vs. Honeywell implementers?</li>
+                                <li>Win/loss analysis: when do you win vs. lose and against whom?</li>
                                 <li>Differentiation beyond scale: proprietary tech, vertical expertise, service model?</li>
                             </ul>
                         </div>
                         <div class="improvement-note">
-                            Roll-up strategy creates scale advantage but lacks clear differentiation narrative. Articulating category ownership (e.g., "Enterprise Mobility Operations Platform") with proof points could lift score to 62-68.
+                            Articulating category ownership with proof points could lift score to 62-68.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Buyer Enablement -->
+            <!-- Sales Enablement -->
             <div class="dimension-card">
                 <div class="dimension-header">
-                    <div class="dimension-name">Buyer Enablement</div>
-                    <div class="tier-badge tier-medium">T2 Medium</div>
+                    <div class="dimension-name">Sales Enablement</div>
+                    <div class="tier-badge tier-high">T3 High</div>
                 </div>
-                <div class="dimension-score score-medium">52</div>
+                <div class="dimension-score score-high">68</div>
                 <div class="benchmark-meta">Peer avg: 56 | Top 25%: 70</div>
                 <button class="confidence-toggle" onclick="toggleConfidence(this)">
                     <span class="arrow">▶</span> See confidence basis
@@ -818,9 +858,9 @@
                         <div class="confidence-section">
                             <h4>Based on:</h4>
                             <ul class="confidence-list">
-                                <li>Limited public-facing sales content (case studies exist but not prominent)</li>
+                                <li>CRO confirms strong sales motion and execution despite website gaps</li>
                                 <li>PE-backed roll-up suggests strong sales infrastructure and playbook</li>
-                                <li>60,000 sq ft Littleton facility with Executive Briefing Center (launched 2025)</li>
+                                <li>60,000 sq ft Executive Briefing Center in Littleton, MA (launched 2025)</li>
                                 <li>NRF 2024 presence and industry event participation visible</li>
                             </ul>
                         </div>
@@ -834,16 +874,16 @@
                             </ul>
                         </div>
                         <div class="improvement-note">
-                            Functional sales infrastructure likely exists but lacks public visibility. Publishing case studies prominently, creating industry-specific solution pages, and building ROI tools could increase score to 64-70.
+                            Strong sales team execution indicates effective enablement infrastructure. Score reflects internal strength despite limited public visibility.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Social Proof -->
+            <!-- Customer ROI Proof -->
             <div class="dimension-card">
                 <div class="dimension-header">
-                    <div class="dimension-name">Social Proof</div>
+                    <div class="dimension-name">Customer ROI Proof</div>
                     <div class="tier-badge tier-low">T1 Low</div>
                 </div>
                 <div class="dimension-score score-low">42</div>
@@ -859,7 +899,7 @@
                             <ul class="confidence-list">
                                 <li>Limited public customer success stories or case studies</li>
                                 <li>No quantified ROI metrics visible on website (uptime, cost savings, productivity)</li>
-                                <li>Some G2 reviews mention "ease of use" but lack outcome quantification</li>
+                                <li>G2 reviews mention "ease of use" but lack outcome quantification</li>
                                 <li>Fortune 500 customer claims but no named logos or specific results</li>
                             </ul>
                         </div>
@@ -873,7 +913,7 @@
                             </ul>
                         </div>
                         <div class="improvement-note">
-                            Minimal public proof points despite Fortune 500 customer base. Developing 5-8 quantified case studies with industry-specific outcomes could dramatically increase credibility and lift score to 65-75.
+                            Developing 5-8 quantified case studies with industry-specific outcomes could dramatically increase credibility and lift score to 65-75.
                         </div>
                     </div>
                 </div>
@@ -881,8 +921,8 @@
         </div>
 
         <div class="critical-gap">
-            <h3><span>⚠️</span> Critical Gap: Employee Sentiment Crisis</h3>
-            <p>Glassdoor rating of <strong>3.1/5</strong> with only <strong>42% of employees recommending</strong> the company signals significant internal challenges that create GTM execution risk. Reviews reveal systematic issues: <strong>high turnover, low morale, PE-driven layoffs</strong> (multiple waves since Sole Source Capital acquisition), rampant nepotism and cronyism in advancement decisions, and <strong>essential employees being laid off with work dumped on remaining staff</strong>. The aggressive M&A strategy (18 acquisitions since 2021) appears to prioritize scale over integration, creating cultural fragmentation visible in employee feedback. For a services business dependent on technical talent retention and customer relationship continuity, this represents a <strong>fundamental execution risk</strong> that undermines commercial positioning—prospects notice when account teams churn and service quality suffers.</p>
+            <h3><span>⚠️</span> Critical Gap: Website & Digital Presence Deficit</h3>
+            <p>Despite a strong sales organization (confirmed by CRO), Peak Technologies' website fails to effectively communicate value proposition, differentiation, and customer proof points. The site presents <strong>dual messaging confusion</strong> (managed services vs. transformation partner), lacks quantified customer outcomes, and provides no clarity on the Zebra partner relationship vs. direct sales. With <strong>18 acquired companies</strong> (VisionID, Siena Analytics, ISG, Coridian, etc.), the brand architecture lacks integration—visitors can't determine if these operate as distinct offerings or integrated solutions. For a <strong>$121.9M business serving Fortune 500 customers</strong>, the absence of named customer logos, case studies with metrics, or industry-specific solution pages represents a significant credibility gap. This creates unnecessary friction in the buyer journey and forces the sales team to compensate for weak digital positioning, extending sales cycles and increasing customer acquisition costs.</p>
         </div>
 
         <div class="cta-box">
@@ -894,23 +934,23 @@
 
         <!-- PAGE 2: KEY FINDINGS -->
         <div class="page-break">
-            <h2 class="page-title">Key Findings</h2>
+            <h2 class="page-title">Top 4 Commercial Gaps</h2>
 
-            <!-- Finding 1: Employee Sentiment (Hero) -->
+            <!-- Finding 1: Website & Digital Presence -->
             <div class="finding-card">
                 <div class="finding-header">
                     <div class="finding-title">
-                        <span class="finding-icon">👥</span>
-                        <span class="finding-name">Employee Sentiment Crisis</span>
+                        <span class="finding-icon">🌐</span>
+                        <span class="finding-name">Website & Digital Presence Deficit</span>
                     </div>
                     <div class="priority-badge priority-high">HIGH PRIORITY</div>
                 </div>
-                <div class="score-line">Impact: GTM execution, customer retention, service delivery quality • Glassdoor: 3.1/5 (42% recommend)</div>
+                <div class="score-line">Impact: Sales cycle, lead quality, competitive differentiation • Multiple dimensions affected</div>
 
                 <div class="finding-section section-observed">
                     <div class="section-label">WHAT WE OBSERVED</div>
                     <div class="section-content">
-                        Peak Technologies' Glassdoor profile reveals systematic employee dissatisfaction that creates operational risk. With a 3.1/5 rating and only 42% of employees recommending the company to a friend, the data shows work-life balance at 3.1, culture/values at 2.8, and career opportunities at 2.7. Employee reviews describe "high turnover and very low morale," with "nepotism and cronyism rampant" where only "favored ones" receive advancement while "hard work and customer service dedication means little to management." The PE ownership structure shows through clearly: "the company has gone through multiple waves of layoffs" with "management keeping it quiet rather than being transparent," and "essential employees being laid off with their work dumped on others." The CEO is described as "elusive" with most employees only seeing or hearing from him in town halls. Specific complaints mention an "incompetent and dysfunctional HR department" assembled under the previous CEO. This pattern is particularly concerning for a services business where customer relationships depend on account team continuity and technical expertise retention. The aggressive M&A activity (18 acquisitions since 2021) appears to prioritize scale over integration, creating cultural fragmentation across VisionID, Siena, ISG, Coridian, and other acquired entities.
+                        Peak Technologies' website reflects a company that has grown through acquisition without corresponding digital investment. Despite serving Fortune 500 customers with $121.9M in revenue, the site presents dual value propositions without integration: "ROI-driven, customizable managed mobility technology services" emphasizes operational efficiency, while "industry's largest provider of end-to-end solutions that modernize the factory, optimize the warehouse, revolutionize the retail experience" positions as transformation partner. These represent fundamentally different buyer journeys. The homepage lacks quantified customer outcomes—no uptime percentages, cost reduction figures, productivity improvements, or ROI data that would substantiate either positioning. The multiple acquired sub-brands (VisionID, Siena Analytics, ISG Technologies, Coridian, Miles Data, Inovity) create confusion about the offering structure. No customer logos appear despite Fortune 500 claims, no case studies are prominently featured, and industry-specific solution pages are minimal. The Zebra Premier Partner relationship is highlighted throughout but without addressing when prospects should choose Peak vs. Zebra direct sales—a critical positioning gap that creates buyer uncertainty and sales friction.
                     </div>
                 </div>
 
@@ -918,11 +958,11 @@
                     <div class="section-label">STRATEGIC DIRECTION</div>
                     <div class="section-content">
                         <ul>
-                            <li>Employee sentiment in services businesses directly correlates with customer satisfaction, retention, and revenue quality—low morale creates execution risk across the GTM motion</li>
-                            <li>PE roll-up strategies require systematic cultural integration and retention programs, not just financial consolidation, to preserve customer relationship continuity</li>
-                            <li>The gap between scale ambitions (18 acquisitions) and integration reality (fragmented cultures, nepotism complaints) suggests execution capacity constraints</li>
-                            <li>Talent retention challenges in technical services roles increase customer-facing risks including knowledge loss, service quality degradation, and relationship churn</li>
-                            <li><em>Full organizational health diagnostic, retention strategy framework, and cultural integration playbook available in complete assessment</em></li>
+                            <li>Digital presence gaps create disproportionate burden on sales teams to establish credibility and communicate differentiation in every conversation</li>
+                            <li>Post-acquisition brand integration requires strategic choice: maintain specialist sub-brands for credibility or consolidate for unified market presence</li>
+                            <li>Customer proof points transform abstract positioning into concrete credibility—particularly critical in services businesses where relationship quality drives outcomes</li>
+                            <li>Dual messaging requires segmentation strategy: different homepage experiences for operational buyers vs. strategic transformation buyers, or clear navigation paths for each</li>
+                            <li><em>Full website optimization roadmap, brand architecture strategy, and customer proof development program available in complete diagnostic</em></li>
                         </ul>
                     </div>
                 </div>
@@ -930,26 +970,26 @@
                 <div class="finding-section section-unlock">
                     <div class="section-label">🔓 UNLOCK FULL DIAGNOSTIC</div>
                     <div class="section-content">
-                        Paid tier includes: Employee Sentiment Deep-Dive with comparison to industry benchmarks, Retention Risk Analysis identifying flight risk in key accounts, Cultural Integration Assessment across acquired entities, Leadership Communication Audit, and Talent Strategy Framework to improve Glassdoor ratings and reduce turnover.
+                        Paid tier includes: Website Conversion Audit with heatmap analysis, Messaging Architecture Framework segmented by buyer type, Brand Integration Strategy for acquired portfolio, Customer Proof Point Development Playbook, and SEO/Content Strategy for industry-specific pages.
                     </div>
                 </div>
             </div>
 
-            <!-- Finding 2: Differentiation -->
+            <!-- Finding 2: Brand Portfolio Confusion -->
             <div class="finding-card">
                 <div class="finding-header">
                     <div class="finding-title">
-                        <span class="finding-icon">🎯</span>
-                        <span class="finding-name">Partner-Competitor Ambiguity</span>
+                        <span class="finding-icon">🏢</span>
+                        <span class="finding-name">Brand Portfolio Confusion</span>
                     </div>
                     <div class="priority-badge priority-high">HIGH PRIORITY</div>
                 </div>
-                <div class="score-line">Score: 48/100 • Weight: 30% • Impact: Win rate, sales cycle, pricing power</div>
+                <div class="score-line">Impact: Value Articulation (55/100) • Market positioning clarity</div>
 
                 <div class="finding-section section-observed">
                     <div class="section-label">WHAT WE OBSERVED</div>
                     <div class="section-content">
-                        Peak Technologies occupies a complex position as a Zebra Technologies Premier Partner, which creates strategic ambiguity in market positioning. The website prominently features Zebra partnership content and positions Peak as the implementer of Zebra mobile workforce solutions, yet Zebra also sells directly to enterprise customers and has its own professional services organization. This creates a partner-competitor dynamic that lacks clear articulation: when should a prospect choose Peak vs. Zebra direct? The "industry's largest provider of end-to-end solutions" claim is unsubstantiated publicly—no market share data, analyst reports, or third-party validation visible. The aggressive roll-up strategy (18 acquisitions since 2021 PE buyout by Sole Source Capital) positions Peak as a category consolidator attempting to create scale advantages, but the differentiation narrative is unclear. Competitors listed by Tracxn include Hub Group and NFI Industries (both logistics providers, not mobility solutions), Kontakt, and Omni-ID, suggesting category confusion or broad market definition. The company hasn't defined a clear category ownership position—are they "Enterprise Mobility Operations Platform," "Managed Mobility Services Leader," or "Supply Chain Technology Integrator"? Each requires different positioning strategies.
+                        The aggressive M&A strategy (18 acquisitions since Sole Source Capital's 2021 buyout) has created a complex brand architecture without clear integration principles. VisionID, Siena Analytics, ISG Technologies, Coridian Technologies, Miles Data, Inovity, Supply Chain Services, Bar Code Direct, Avalon Integration, DBK, North Coast Technical, and Graphic Label all operate under the Peak umbrella, but their relationship to each other and to the parent brand remains undefined publicly. Do these represent distinct vertical solutions, complementary capabilities, or legacy brands awaiting consolidation? The website provides no clarity. This matters because buyers seek simplicity: they want to understand what they're buying and from whom. The confusion extends to market positioning—is Peak a managed services provider, a solutions integrator, a digital transformation partner, or a hardware reseller? Each acquired company may have brought different positioning, and without integration, the collective market presence becomes muddled. Competitors with clearer category positioning can articulate differentiation more effectively, even if they lack Peak's scale.
                     </div>
                 </div>
 
@@ -957,10 +997,88 @@
                     <div class="section-label">STRATEGIC DIRECTION</div>
                     <div class="section-content">
                         <ul>
-                            <li>Premier Partner relationships with vendors who also sell direct require explicit positioning on when prospects should choose the partner vs. the vendor, addressing competitive ambiguity upfront</li>
-                            <li>Roll-up consolidation strategies achieve scale but require differentiation narratives beyond "largest provider" to command pricing premiums and win enterprise deals</li>
-                            <li>Category ownership requires choosing between deepening vertical expertise (e.g., "Retail Mobility Operations") or broadening platform positioning (e.g., "Enterprise Mobility Lifecycle Management")</li>
+                            <li>Roll-up strategies create scale advantages but require brand integration decisions that balance specialist credibility with unified market presence</li>
+                            <li>Brand architecture frameworks help determine which sub-brands maintain independence (when specialist expertise drives buyer preference) vs. consolidation (when unified credibility matters more)</li>
+                            <li>Category confusion creates positioning vulnerability—competitors with clearer narratives can articulate differentiation more effectively regardless of relative scale</li>
+                            <li>Integration decisions impact sales enablement, marketing efficiency, and customer trust—unclear brand relationships create friction across the entire GTM motion</li>
+                            <li><em>Complete brand architecture strategy, integration roadmap, and category positioning framework available in full diagnostic</em></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="finding-section section-unlock">
+                    <div class="section-label">🔓 UNLOCK FULL DIAGNOSTIC</div>
+                    <div class="section-content">
+                        Paid tier includes: Brand Architecture Assessment with strategic recommendations, Sub-Brand Integration Roadmap, Category Positioning Framework, Competitive Differentiation Playbook, and Go-to-Market Alignment Strategy across acquired entities.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finding 3: Customer Proof Point Deficiency -->
+            <div class="finding-card">
+                <div class="finding-header">
+                    <div class="finding-title">
+                        <span class="finding-icon">⭐</span>
+                        <span class="finding-name">Customer Proof Point Deficiency</span>
+                    </div>
+                    <div class="priority-badge priority-high">HIGH PRIORITY</div>
+                </div>
+                <div class="score-line">Score: 42/100 • Weight: 20% • Impact: Deal velocity, win rate, pricing power</div>
+
+                <div class="finding-section section-observed">
+                    <div class="section-label">WHAT WE OBSERVED</div>
+                    <div class="section-content">
+                        Despite 35+ years of operation and Fortune 500 customer claims, Peak Technologies presents minimal public proof points. The website features no named customer logos, no case studies with quantified outcomes, and no industry-specific success metrics. G2 reviews exist but focus on product ease-of-use rather than business outcomes—comments like "helps with inventory" lack the quantification that builds buyer confidence. No ROI calculator or outcome estimation tools appear on the site. The Executive Briefing Center (60,000 sq ft facility in Littleton, MA, launched 2025) represents significant investment in customer experience, yet no public information shows utilization rates, customer testimonials from visits, or conversion impact. For a services business where delivery quality and relationship continuity drive outcomes, the absence of named references, retention statistics, or customer satisfaction scores creates credibility gaps. Prospects evaluating Peak against competitors with published case studies and outcome metrics face unnecessary uncertainty, extending sales cycles and reducing win rates on competitive deals.
+                    </div>
+                </div>
+
+                <div class="finding-section section-direction">
+                    <div class="section-label">STRATEGIC DIRECTION</div>
+                    <div class="section-content">
+                        <ul>
+                            <li>Customer proof points serve multiple commercial functions: reducing buyer risk, accelerating deal velocity, justifying premium pricing, and enabling sales team credibility</li>
+                            <li>Services businesses depend on relationship quality and delivery consistency—quantified outcomes and retention metrics provide objective evidence beyond sales claims</li>
+                            <li>Industry-specific proof points enable vertical specialization: manufacturing customers want manufacturing outcomes, retail wants retail benchmarks</li>
+                            <li>Executive Briefing Centers represent significant investment—quantifying conversion impact and customer experience outcomes justifies the facility and creates proof points for the program itself</li>
+                            <li><em>Customer proof development playbook, case study interview templates, and outcome quantification frameworks available in full diagnostic</em></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="finding-section section-unlock">
+                    <div class="section-label">🔓 UNLOCK FULL DIAGNOSTIC</div>
+                    <div class="section-content">
+                        Paid tier includes: Customer Reference Program Design, Case Study Development Framework with interview scripts, Outcome Quantification Methodology, Industry Benchmarking Strategy, and ROI Calculator Development Template.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finding 4: Competitive Positioning Ambiguity -->
+            <div class="finding-card">
+                <div class="finding-header">
+                    <div class="finding-title">
+                        <span class="finding-icon">🎯</span>
+                        <span class="finding-name">Competitive Positioning Ambiguity</span>
+                    </div>
+                    <div class="priority-badge priority-medium">MEDIUM PRIORITY</div>
+                </div>
+                <div class="score-line">Score: 48/100 • Weight: 30% • Impact: Win rate, sales cycle, pricing power</div>
+
+                <div class="finding-section section-observed">
+                    <div class="section-label">WHAT WE OBSERVED</div>
+                    <div class="section-content">
+                        Peak Technologies occupies a complex position as a Zebra Technologies Premier Partner, which creates strategic ambiguity in market positioning. The website prominently features Zebra partnership content and positions Peak as the implementer of Zebra mobile workforce solutions, yet Zebra also sells directly to enterprise customers and has its own professional services organization. This creates a partner-competitor dynamic that lacks clear articulation: when should a prospect choose Peak vs. Zebra direct? The "industry's largest provider of end-to-end solutions" claim is unsubstantiated publicly—no market share data, analyst reports, or third-party validation visible. The aggressive roll-up strategy (18 acquisitions since 2021) positions Peak as a category consolidator attempting to create scale advantages, but the differentiation narrative beyond "largest" remains unclear. Win/loss drivers are unknown publicly—does Peak win on service quality, vertical expertise, implementation speed, total cost of ownership, or relationship depth? Without articulating these drivers, the sales team lacks consistent differentiation messaging across deals.
+                    </div>
+                </div>
+
+                <div class="finding-section section-direction">
+                    <div class="section-label">STRATEGIC DIRECTION</div>
+                    <div class="section-content">
+                        <ul>
+                            <li>Premier Partner relationships with vendors who also sell direct require explicit positioning on when prospects should choose the partner vs. the vendor</li>
                             <li>Market leadership claims need third-party validation—analyst recognition, customer benchmarks, or proprietary market research to substantiate positioning</li>
+                            <li>Win/loss analysis reveals true differentiation drivers and helps prioritize positioning investments where they matter most to buyer decisions</li>
+                            <li>Category ownership requires choosing between deepening vertical expertise or broadening platform positioning—both are valid but require different strategies</li>
                             <li><em>Complete competitive positioning playbook, category creation framework, and win/loss analysis methodology available in full diagnostic</em></li>
                         </ul>
                     </div>
@@ -969,47 +1087,36 @@
                 <div class="finding-section section-unlock">
                     <div class="section-label">🔓 UNLOCK FULL DIAGNOSTIC</div>
                     <div class="section-content">
-                        Paid tier includes: Competitive Intelligence Dashboard tracking Zebra, Honeywell implementers, and logistics competitors; Partner-Competitor Positioning Framework; Category Ownership Playbook with naming and messaging strategy; Win/Loss Analysis Template; and Analyst Relations Strategy for Gartner/Forrester recognition.
+                        Paid tier includes: Competitive Intelligence Dashboard, Partner-Competitor Positioning Framework, Category Ownership Playbook, Win/Loss Analysis Template, and Analyst Relations Strategy for market validation.
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Finding 3: Value Articulation -->
-            <div class="finding-card">
-                <div class="finding-header">
-                    <div class="finding-title">
-                        <span class="finding-icon">📣</span>
-                        <span class="finding-name">Messaging Clarity Gap</span>
-                    </div>
-                    <div class="priority-badge priority-medium">MEDIUM PRIORITY</div>
-                </div>
-                <div class="score-line">Score: 55/100 • Weight: 25% • Impact: Conversion velocity, deal size, competitive differentiation</div>
+        <!-- QUICK HITS SECTION -->
+        <div class="page-break">
+            <div class="quick-hits">
+                <h3><span>⚡</span> Quick Hits: What You Can Do This Week</h3>
+                <p class="subtitle-text">Tactical wins your team can implement immediately without consulting or major investment</p>
 
-                <div class="finding-section section-observed">
-                    <div class="section-label">WHAT WE OBSERVED</div>
-                    <div class="section-content">
-                        Peak Technologies presents dual value propositions that create positioning confusion: "ROI-driven, customizable managed mobility technology services" emphasizes the managed services angle (ongoing support, device lifecycle management), while "industry's largest provider of end-to-end solutions that modernize the factory, optimize the warehouse, revolutionize the retail experience and reimagine field services" positions as a solutions integrator and digital transformation partner. These are fundamentally different buyer journeys—managed services buyers seek operational efficiency and cost reduction, while transformation buyers seek strategic differentiation and competitive advantage. The website lacks quantified outcome metrics that would substantiate either positioning: no uptime percentages, cost reduction figures, productivity improvements, or customer ROI data. The multiple acquired sub-brands (VisionID, Siena Analytics, ISG Technologies, Coridian, Miles Data, Inovity, etc.) compound the clarity issue—do these operate as distinct offerings or integrated solutions? The target market appears broad (manufacturing, retail, warehousing, healthcare, logistics, field services) without clear ICP prioritization or segment-specific messaging. This breadth suggests opportunity but creates qualification challenges and dilutes messaging impact.
-                    </div>
+                <div class="quick-hit-item">
+                    <div class="quick-hit-title">Homepage Hero Clarity</div>
+                    <div class="quick-hit-description">Pick ONE primary value proposition for the hero section. Either lead with "ROI-driven managed mobility services" OR "digital transformation partner"—not both. Create separate landing pages or clear navigation for the secondary positioning. This single change reduces buyer confusion and improves message retention.</div>
                 </div>
 
-                <div class="finding-section section-direction">
-                    <div class="section-label">STRATEGIC DIRECTION</div>
-                    <div class="section-content">
-                        <ul>
-                            <li>Dual positioning (managed services vs. transformation partner) requires segmentation strategy—different messaging for operational buyers vs. strategic buyers</li>
-                            <li>Acquired brand portfolio needs integration clarity: maintain sub-brands for specialist credibility or consolidate for unified market presence</li>
-                            <li>Broad ICP definition across six industries creates messaging dilution—segmented value propositions by vertical would improve conversion and competitive differentiation</li>
-                            <li>Quantified customer outcomes transform abstract positioning ("ROI-driven") into concrete proof points that accelerate buyer confidence and justify premium pricing</li>
-                            <li><em>Messaging framework by buyer persona, brand architecture strategy, and outcome quantification methodology available in full diagnostic</em></li>
-                        </ul>
-                    </div>
+                <div class="quick-hit-item">
+                    <div class="quick-hit-title">Add Customer Logos</div>
+                    <div class="quick-hit-description">Display 5-10 recognizable customer logos on the homepage (with permission). If Fortune 500 customers exist, show their logos. If logos aren't available, add "Trusted by Fortune 500 companies in retail, manufacturing, and healthcare" with specific vertical callouts. This builds immediate credibility without requiring case study development.</div>
                 </div>
 
-                <div class="finding-section section-unlock">
-                    <div class="section-label">🔓 UNLOCK FULL DIAGNOSTIC</div>
-                    <div class="section-content">
-                        Paid tier includes: Value Proposition Matrix segmented by buyer type and vertical; Brand Architecture Strategy for acquired portfolio; Messaging Hierarchy Framework; Customer Outcome Database with quantified ROI; and ICP Prioritization Model with TAM analysis by segment.
-                    </div>
+                <div class="quick-hit-item">
+                    <div class="quick-hit-title">Publish One Quantified Case Study</div>
+                    <div class="quick-hit-description">Take your best customer relationship and create a 300-word case study with ONE quantified outcome (e.g., "47% reduction in device downtime" or "$450K annual savings in mobile workforce costs"). Get customer approval and publish prominently on the homepage. Single proof point with numbers beats ten vague testimonials.</div>
+                </div>
+
+                <div class="quick-hit-item">
+                    <div class="quick-hit-title">Create "Why Peak vs. Zebra Direct?" FAQ</div>
+                    <div class="quick-hit-description">Add a dedicated page or section explaining when customers should choose Peak implementation vs. Zebra direct sales. Address the ambiguity head-on with clear positioning: "Choose Peak when you need [X, Y, Z]. Work with Zebra direct when [A, B, C]." This preempts the objection and demonstrates category expertise.</div>
                 </div>
             </div>
         </div>
@@ -1018,7 +1125,7 @@
         <div class="page-break">
             <div class="journey-intro">
                 <h2>How Remidi Works Helps</h2>
-                <p>We partner with growth-stage B2B and B2C companies to transform commercial insights into revenue. Our Commercial Health Platform™ combines AI-accelerated research, expert pattern recognition from 50+ commercialization projects, and tactical playbooks to help you move from insight to action in weeks, not quarters.</p>
+                <p>We partner with growth-stage B2B companies to transform commercial insights into revenue. Our Commercial Health Platform™ combines AI-accelerated research, expert pattern recognition from 50+ commercialization projects, and tactical playbooks to help you move from insight to action in weeks, not quarters.</p>
             </div>
 
             <div class="journey-steps">
@@ -1028,7 +1135,7 @@
                         <div class="step-title">Expert Kickoff Call</div>
                     </div>
                     <div class="step-meta">Duration: 30 minutes • Complimentary</div>
-                    <p style="margin-bottom: 15px; color: #475569;">Calibrate findings with your internal data, validate hypotheses, and prioritize opportunities by impact and effort.</p>
+                    <p>Calibrate findings with your internal data, validate hypotheses, and prioritize opportunities by impact and effort.</p>
                     <ul class="step-deliverables">
                         <li>Calibrated scores with confidence intervals based on your metrics</li>
                         <li>Prioritized opportunity list (impact × effort matrix)</li>
@@ -1042,12 +1149,12 @@
                         <div class="step-title">Full Diagnostic</div>
                     </div>
                     <div class="step-meta">Investment: $6K • Timeline: 2 weeks</div>
-                    <p style="margin-bottom: 15px; color: #475569;">Comprehensive assessment incorporating internal metrics, competitive deep-dive, and tactical 90-day roadmap.</p>
+                    <p>Comprehensive assessment incorporating internal metrics, competitive deep-dive, and tactical 90-day roadmap.</p>
                     <ul class="step-deliverables">
-                        <li>Employee sentiment analysis with retention strategy</li>
+                        <li>Website optimization roadmap with conversion impact analysis</li>
+                        <li>Brand architecture strategy for acquired portfolio</li>
+                        <li>Customer proof development playbook with case study templates</li>
                         <li>Competitive positioning framework and category strategy</li>
-                        <li>Messaging architecture across buyer personas and verticals</li>
-                        <li>Pricing optimization recommendations</li>
                         <li>90-day implementation roadmap with specific initiatives</li>
                     </ul>
                 </div>
@@ -1058,7 +1165,7 @@
                         <div class="step-title">Ongoing Support</div>
                     </div>
                     <div class="step-meta">Investment: $2-3K/mo • Flexible engagement</div>
-                    <p style="margin-bottom: 15px; color: #475569;">Strategic advisory for companies executing commercial improvements post-acquisition or during growth phases.</p>
+                    <p>Strategic advisory for companies executing commercial improvements post-acquisition or during growth phases.</p>
                     <ul class="step-deliverables">
                         <li>Monthly check-ins on initiative progress</li>
                         <li>Messaging and positioning refinement</li>

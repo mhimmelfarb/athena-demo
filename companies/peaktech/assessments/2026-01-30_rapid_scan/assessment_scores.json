@@ -11,12 +11,13 @@
       "Press releases (acquisitions, facility launch)",
       "Competitive intelligence (Tracxn, ZoomInfo)",
       "Public financial data ($121.9M revenue)",
-      "PE ownership structure analysis"
+      "PE ownership structure analysis",
+      "CRO feedback (strong sales motion, pricing model validation)"
     ]
   },
 
   "overall_score": {
-    "value": 53,
+    "value": 61,
     "scale": "0-100",
     "tier": "T2 Medium",
     "benchmark": {
@@ -36,7 +37,7 @@
       "top_quartile": 72,
       "observations": [
         "Dual messaging: 'ROI-driven managed mobility services' vs. 'industry's largest end-to-end solutions provider'",
-        "Multiple sub-brands post-acquisition (VisionID, Siena, ISG, Coridian, etc.)",
+        "Multiple sub-brands post-acquisition (VisionID, Siena, ISG, Coridian, etc.) create confusion",
         "No quantified outcome metrics on homepage",
         "Broad ICP: manufacturing, retail, warehousing, healthcare, logistics, field services"
       ],
@@ -50,26 +51,26 @@
     },
 
     "pricing_architecture": {
-      "score": 35,
+      "score": 55,
       "weight": 0.25,
-      "tier": "T1 Low",
-      "confidence": 7,
-      "key_issue": "Complete pricing opacity",
+      "tier": "T2 Medium",
+      "confidence": 5,
+      "key_issue": "Pricing opacity is strategic choice (aligned with enterprise model)",
       "peer_average": 52,
       "top_quartile": 68,
       "observations": [
-        "No pricing information visible on website",
+        "No pricing information visible on website (strategic choice for enterprise-focused model)",
         "Enterprise 'contact sales' model implied",
-        "No tiers, ranges, or self-qualification guidance",
+        "CRO confirms deal-by-deal negotiation approach works for their business model",
         "Managed mobility typically custom-priced by device count and SLA"
       ],
       "gaps": [
         "Typical deal sizes by segment unknown",
         "Pricing model structure unclear (per-device, per-user, per-location)",
-        "No indicative ranges for SMB/mid-market",
+        "Win rate and margin impact data unavailable",
         "Sales cycle data unavailable"
       ],
-      "improvement_potential": "55-62 with indicative pricing ranges published"
+      "improvement_potential": "Score reflects strategic fit for their go-to-market approach"
     },
 
     "competitive_positioning": {
@@ -96,15 +97,15 @@
     },
 
     "sales_enablement": {
-      "score": 52,
+      "score": 68,
       "weight": 0.15,
-      "tier": "T2 Medium",
+      "tier": "T3 High",
       "confidence": 5,
-      "key_issue": "Functional infrastructure lacks public visibility",
+      "key_issue": "Strong sales execution despite limited public visibility",
       "peer_average": 56,
       "top_quartile": 70,
       "observations": [
-        "Limited public-facing sales content",
+        "CRO confirms strong sales motion and execution despite website gaps",
         "PE-backed suggests strong sales infrastructure",
         "60k sqft Executive Briefing Center (2025)",
         "NRF 2024 presence, industry events"
@@ -115,7 +116,7 @@
         "EBC utilization and impact unknown",
         "Partner channel contribution unknown"
       ],
-      "improvement_potential": "64-70 with published case studies and solution pages"
+      "improvement_potential": "Strong sales team execution indicates effective enablement infrastructure"
     },
 
     "customer_roi_proof": {
@@ -143,70 +144,89 @@
   },
 
   "critical_gap": {
-    "title": "Employee Sentiment Crisis",
+    "title": "Website & Digital Presence Deficit",
     "priority": "HIGH",
-    "impact_areas": ["GTM execution", "customer retention", "service delivery quality"],
-    "description": "Glassdoor 3.1/5 with only 42% recommending. High turnover, PE-driven layoffs, nepotism complaints, low morale. Cultural fragmentation across 18 acquired entities creates operational risk.",
-    "metrics": {
-      "glassdoor_rating": 3.1,
-      "recommend_to_friend": "42%",
-      "work_life_balance": 3.1,
-      "culture_values": 2.8,
-      "career_opportunities": 2.7,
-      "total_reviews": 129
-    },
-    "risk_assessment": "Fundamental execution risk in services business dependent on talent retention and customer relationship continuity"
+    "impact_areas": ["Sales cycle", "Lead quality", "Competitive differentiation"],
+    "description": "Despite a strong sales organization (confirmed by CRO), Peak Technologies' website fails to effectively communicate value proposition, differentiation, and customer proof points. The site presents dual messaging confusion (managed services vs. transformation partner), lacks quantified customer outcomes, and provides no clarity on the Zebra partner relationship vs. direct sales. With 18 acquired companies, the brand architecture lacks integration. For a $121.9M business serving Fortune 500 customers, the absence of named customer logos, case studies with metrics, or industry-specific solution pages represents a significant credibility gap.",
+    "notes": "Employee sentiment (Glassdoor 3.1/5) noted in research but not highlighted as critical gap per user feedback—only employee issues directly related to GTM excellence (e.g., CMO turnover) should be elevated"
   },
 
   "key_findings": [
     {
       "number": 1,
-      "title": "Employee Sentiment Crisis",
+      "title": "Website & Digital Presence Deficit",
       "priority": "HIGH",
-      "dimension": "GTM Execution Risk",
-      "summary": "Systematic employee dissatisfaction creates operational risk across customer-facing teams. PE roll-up prioritizing scale over integration."
+      "dimension": "Multiple dimensions",
+      "summary": "Website lacks clarity on value proposition, customer proof points, and brand integration. Creates unnecessary sales friction despite strong internal sales team."
     },
     {
       "number": 2,
-      "title": "Partner-Competitor Ambiguity",
+      "title": "Brand Portfolio Confusion",
       "priority": "HIGH",
-      "dimension": "Differentiation",
-      "summary": "Zebra Premier Partner positioning lacks clarity on when prospects should choose Peak vs. Zebra direct. Category ownership undefined."
+      "dimension": "Value Articulation",
+      "summary": "18 acquisitions create brand architecture complexity. Unclear if sub-brands represent distinct offerings or integrated solutions. Market positioning muddled."
     },
     {
       "number": 3,
-      "title": "Messaging Clarity Gap",
+      "title": "Customer Proof Point Deficiency",
+      "priority": "HIGH",
+      "dimension": "Customer ROI Proof",
+      "summary": "Minimal public proof points despite Fortune 500 customer base. No named logos, quantified case studies, or ROI metrics visible."
+    },
+    {
+      "number": 4,
+      "title": "Competitive Positioning Ambiguity",
       "priority": "MEDIUM",
-      "dimension": "Value Articulation",
-      "summary": "Dual positioning (managed services vs. transformation partner) creates buyer confusion. Multiple sub-brands compound clarity issue."
+      "dimension": "Competitive Positioning",
+      "summary": "Zebra Premier Partner positioning lacks clarity on when prospects should choose Peak vs. Zebra direct. Category ownership undefined."
     }
   ],
 
   "recommendations": {
+    "quick_hits": [
+      {
+        "title": "Homepage Hero Clarity",
+        "description": "Pick ONE primary value proposition for the hero section. Either lead with 'ROI-driven managed mobility services' OR 'digital transformation partner'—not both. Create separate landing pages or clear navigation for the secondary positioning."
+      },
+      {
+        "title": "Add Customer Logos",
+        "description": "Display 5-10 recognizable customer logos on the homepage (with permission). If logos aren't available, add 'Trusted by Fortune 500 companies in retail, manufacturing, and healthcare' with specific vertical callouts."
+      },
+      {
+        "title": "Publish One Quantified Case Study",
+        "description": "Take your best customer relationship and create a 300-word case study with ONE quantified outcome (e.g., '47% reduction in device downtime' or '$450K annual savings'). Get customer approval and publish prominently on the homepage."
+      },
+      {
+        "title": "Create 'Why Peak vs. Zebra Direct?' FAQ",
+        "description": "Add a dedicated page or section explaining when customers should choose Peak implementation vs. Zebra direct sales. Address the ambiguity head-on with clear positioning."
+      }
+    ],
     "immediate": [
-      "Address employee sentiment through transparent communication and retention programs",
       "Clarify Zebra partner positioning with explicit buyer guidance",
-      "Publish indicative pricing ranges for SMB/mid-market segments"
+      "Develop unified homepage messaging (choose primary positioning)",
+      "Identify 5-8 customer references for case study development"
     ],
     "short_term": [
       "Develop 5-8 quantified customer case studies",
       "Create category ownership narrative beyond 'largest provider'",
-      "Segment messaging by vertical and buyer type"
+      "Segment messaging by vertical and buyer type",
+      "Build brand architecture strategy for acquired portfolio"
     ],
     "long_term": [
-      "Cultural integration program across acquired entities",
       "Brand architecture strategy for sub-brand portfolio",
-      "Analyst relations strategy for market validation"
+      "Analyst relations strategy for market validation",
+      "Website optimization roadmap with conversion tracking"
     ]
   },
 
   "upgrade_potential": {
     "full_diagnostic_value": "High - significant commercial gaps with clear improvement paths",
-    "estimated_score_lift": "15-20 points achievable in 6 months with focused execution",
+    "estimated_score_lift": "15-20 points achievable in 6 months with focused execution (61 → 76-81)",
     "priority_workstreams": [
-      "Employee retention and cultural integration",
-      "Competitive positioning and category creation",
-      "Customer proof point development"
-    ]
+      "Website optimization and brand integration",
+      "Customer proof point development",
+      "Competitive positioning and category creation"
+    ],
+    "notes": "Sales team is strong (68/100). Focus should be on marketing and digital presence to support strong sales execution."
   }
 }
