@@ -1,1854 +1,270 @@
-import React, { useState, useEffect } from 'react';
-
-const RemidiLandingPage = () => {
-  const [arr, setArr] = useState(10);
-  const [acv, setAcv] = useState(50);
-  const [winRate, setWinRate] = useState(25);
-  const [salesCycle, setSalesCycle] = useState(90);
-  const [nrr, setNrr] = useState(100);
-
-  const [benchmarks, setBenchmarks] = useState({
-    winRate: 25,
-    salesCycle: 75,
-    nrr: 105
-  });
-
-  const [results, setResults] = useState({
-    score: 5.0,
-    interpretation: '',
-    revenueAtRisk: '$2.0M',
-    biggestGap: 'Win Rate',
-    gapDescription: '',
-    calcARR: '$10.0M',
-    calcScore: '5.0/10',
-    calcWinRate: '+5%',
-    calcCycle: '-15 days',
-    calcImpact: '$2.0M'
-  });
-
-  useEffect(() => {
-    // Load HubSpot form script
-    const script = document.createElement('script');
-    script.src = 'https://js.hsforms.net/forms/embed/45784330.js';
-    script.defer = true;
-    document.body.appendChild(script);
-
-    // Add favicon
-    const favicon = document.createElement('link');
-    favicon.rel = 'icon';
-    favicon.type = 'image/png';
-    favicon.href = '/rw-logo.png';
-    document.head.appendChild(favicon);
-
-    return () => {
-      document.body.removeChild(script);
-      document.head.removeChild(favicon);
-    };
-  }, []);
-
-  useEffect(() => {
-    calculateResults();
-  }, [arr, acv, winRate, salesCycle, nrr]);
-
-  const calculateResults = () => {
-    // Calculate current customer base
-    const currentCustomers = Math.round((arr * 1000) / acv);
-
-    // Industry benchmarks based on ACV for Win Rate and Sales Cycle
-    let benchmarkWinRate, benchmarkSalesCycle;
-
-    if (acv < 25) {
-      benchmarkWinRate = 30;
-      benchmarkSalesCycle = 45;
-    } else if (acv < 100) {
-      benchmarkWinRate = 25;
-      benchmarkSalesCycle = 75;
-    } else {
-      benchmarkWinRate = 20;
-      benchmarkSalesCycle = 120;
-    }
-
-    // NRR benchmarks based on ARR (from research data)
-    // Source: Performance metrics research showing NRR improves with scale
-    let benchmarkNRR;
-
-    if (arr < 2) {
-      benchmarkNRR = 99;
-    } else if (arr < 3) {
-      benchmarkNRR = 101;
-    } else if (arr < 5) {
-      benchmarkNRR = 103;
-    } else if (arr < 7) {
-      benchmarkNRR = 103;
-    } else if (arr < 10) {
-      benchmarkNRR = 104;
-    } else if (arr < 15) {
-      benchmarkNRR = 105;
-    } else if (arr < 20) {
-      benchmarkNRR = 107;
-    } else if (arr < 30) {
-      benchmarkNRR = 108;
-    } else if (arr < 50) {
-      benchmarkNRR = 110;
-    } else {
-      benchmarkNRR = 113;
-    }
-
-    // Update benchmark state for display
-    setBenchmarks({
-      winRate: benchmarkWinRate,
-      salesCycle: benchmarkSalesCycle,
-      nrr: benchmarkNRR
-    });
-
-    // Calculate gaps
-    const winRateGap = benchmarkWinRate - winRate;
-    const salesCycleGap = salesCycle - benchmarkSalesCycle;
-    const nrrGap = benchmarkNRR - nrr;
-
-    // WIN RATE IMPACT
-    let revenueFromWinRate = 0;
-    if (winRateGap > 0) {
-      const impliedOpportunities = currentCustomers / (winRate / 100);
-      const customersAtBenchmark = impliedOpportunities * (benchmarkWinRate / 100);
-      const additionalCustomers = customersAtBenchmark - currentCustomers;
-      revenueFromWinRate = (additionalCustomers * acv) / 1000;
-    }
-
-    // NRR IMPACT
-    let revenueFromNRR = 0;
-    if (nrrGap > 0) {
-      const additionalCustomersRetained = currentCustomers * (nrrGap / 100);
-      revenueFromNRR = (additionalCustomersRetained * acv) / 1000;
-    }
-
-    // SALES CYCLE IMPACT
-    let revenueFromCycle = 0;
-    if (salesCycleGap > 0) {
-      const velocityImprovement = (salesCycle / benchmarkSalesCycle) - 1;
-      const additionalDealsPerYear = currentCustomers * velocityImprovement * 0.5;
-      revenueFromCycle = (additionalDealsPerYear * acv) / 1000;
-    }
-
-    const totalRevenue = revenueFromWinRate + revenueFromNRR + revenueFromCycle;
-
-    // Performance score
-    const winRateScore = Math.max(0, Math.min(3.5, 3.5 * (winRate / benchmarkWinRate)));
-    const salesCycleScore = Math.max(0, Math.min(3, 3 * (benchmarkSalesCycle / salesCycle)));
-    const nrrScore = Math.max(0, Math.min(3.5, 3.5 * (nrr / benchmarkNRR)));
-    const totalScore = winRateScore + salesCycleScore + nrrScore;
-
-    // Determine primary gap
-    const gaps = [
-      {
-        name: "Win Rate",
-        impact: revenueFromWinRate,
-        desc: `Your ${winRate}% win rate is ${winRateGap.toFixed(1)}% below benchmark. That's ${Math.round((revenueFromWinRate * 1000) / acv)} fewer customers won annually.`
-      },
-      {
-        name: "Sales Velocity",
-        impact: revenueFromCycle,
-        desc: `Your ${salesCycle}-day cycle is ${salesCycleGap} days slower than benchmark. Faster cycles would let you close ${Math.round((revenueFromCycle * 1000) / acv)} more deals per year.`
-      },
-      {
-        name: "Retention & Expansion",
-        impact: revenueFromNRR,
-        desc: `Your ${nrr}% NRR is ${nrrGap.toFixed(0)}% below benchmark. You're losing ${Math.round((revenueFromNRR * 1000) / acv)} customers annually that benchmark companies retain.`
-      }
-    ];
-
-    gaps.sort((a, b) => b.impact - a.impact);
-    const topGap = gaps[0];
-
-    let scoreInterpretation;
-    if (totalScore < 5) {
-      scoreInterpretation = 'Significant underperformance vs. industry benchmarks';
-    } else if (totalScore < 7) {
-      scoreInterpretation = 'Below benchmark with clear opportunities to improve';
-    } else if (totalScore < 9) {
-      scoreInterpretation = 'Near benchmark performance with optimization opportunities';
-    } else {
-      scoreInterpretation = 'Strong performance at or above industry benchmarks';
-    }
-
-    setResults({
-      score: totalScore.toFixed(1),
-      interpretation: scoreInterpretation,
-      revenueAtRisk: totalRevenue > 0 ? `$${totalRevenue.toFixed(1)}M` : '$0',
-      biggestGap: topGap.impact > 0 ? topGap.name : 'Optimization',
-      gapDescription: topGap.impact > 0 ? topGap.desc : 'Performance at or above benchmarks across all metrics',
-      calcARR: `$${arr.toFixed(1)}M`,
-      calcScore: `${totalScore.toFixed(1)}/10`,
-      calcWinRate: winRateGap > 0 ? `+${winRateGap.toFixed(1)}%` : 'At benchmark',
-      calcCycle: salesCycleGap > 0 ? `-${salesCycleGap} days` : 'At benchmark',
-      calcImpact: `$${totalRevenue.toFixed(1)}M`
-    });
-  };
-
-  const getScoreClass = () => {
-    const score = parseFloat(results.score);
-    if (score < 5) return 'score-low';
-    if (score < 7) return 'score-medium';
-    return 'score-high';
-  };
-
-  return (
-    <div className="remidi-landing-page">
-      <style>{`
-        :root {
-          --color-primary: #3D5A80;
-          --color-accent: #EE6C4D;
-          --color-light-bg: #E0FBFC;
-          --color-bg: #f8fafc;
-          --color-white: #ffffff;
-          --color-text-dark: #293241;
-          --color-text-gray: #6b7280;
-          --color-text-light: #9ca3af;
-          --color-border: #e5e7eb;
-        }
-
-        .remidi-landing-page {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-          background: var(--color-bg);
-          color: var(--color-text-dark);
-          line-height: 1.6;
-        }
-
-        nav {
-          background: var(--color-white);
-          border-bottom: 1px solid var(--color-border);
-          padding: 1.25rem 0;
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-        }
-
-        nav .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .logo {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-weight: 700;
-          font-size: 1.25rem;
-          color: var(--color-primary);
-        }
-
-        .logo img {
-          height: 40px;
-          width: auto;
-        }
-
-        .nav-cta {
-          background: var(--color-accent);
-          color: var(--color-white);
-          padding: 0.625rem 1.5rem;
-          border-radius: 6px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.2s;
-          font-size: 0.95rem;
-        }
-
-        .nav-cta:hover {
-          background: #d45a3e;
-          transform: translateY(-1px);
-        }
-
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 2rem;
-        }
-
-        .hero {
-          padding: 5rem 2rem 4rem;
-          background: var(--color-white);
-        }
-
-        .hero-label {
-          display: inline-block;
-          font-size: 0.875rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-primary);
-          margin-bottom: 1.5rem;
-          padding: 0.5rem 1rem;
-          background: var(--color-light-bg);
-          border-radius: 4px;
-        }
-
-        h1 {
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
-          font-weight: 800;
-          line-height: 1.1;
-          margin-bottom: 1.5rem;
-          color: var(--color-text-dark);
-        }
-
-        .hero-subtitle {
-          font-size: clamp(1.125rem, 2.5vw, 1.375rem);
-          color: var(--color-text-gray);
-          max-width: 800px;
-          margin-bottom: 1rem;
-          line-height: 1.6;
-        }
-
-        .hero-tagline {
-          font-size: clamp(1.125rem, 2.5vw, 1.25rem);
-          color: var(--color-primary);
-          max-width: 800px;
-          margin-bottom: 2.5rem;
-          font-weight: 600;
-        }
-
-        .hero-cta-group {
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
-        }
-
-        .btn-primary {
-          background: var(--color-accent);
-          color: var(--color-white);
-          padding: 1rem 2rem;
-          border-radius: 8px;
-          font-weight: 600;
-          text-decoration: none;
-          display: inline-block;
-          transition: all 0.3s;
-          font-size: 1.1rem;
-          border: none;
-          cursor: pointer;
-        }
-
-        .btn-primary:hover {
-          background: #d45a3e;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(238, 108, 77, 0.3);
-        }
-
-        .btn-secondary {
-          background: transparent;
-          color: var(--color-primary);
-          padding: 1rem 2rem;
-          border-radius: 8px;
-          font-weight: 600;
-          text-decoration: none;
-          display: inline-block;
-          transition: all 0.3s;
-          font-size: 1.1rem;
-          border: 2px solid var(--color-primary);
-        }
-
-        .btn-secondary:hover {
-          background: var(--color-primary);
-          color: var(--color-white);
-        }
-
-        section {
-          padding: 4rem 2rem;
-        }
-
-        .section-alt {
-          background: var(--color-white);
-        }
-
-        .section-label {
-          font-size: 0.875rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--color-accent);
-          margin-bottom: 1rem;
-        }
-
-        h2 {
-          font-size: clamp(1.875rem, 4vw, 2.5rem);
-          font-weight: 800;
-          line-height: 1.2;
-          margin-bottom: 1.5rem;
-          color: var(--color-text-dark);
-        }
-
-        .lead-text {
-          font-size: 1.25rem;
-          color: var(--color-text-gray);
-          max-width: 800px;
-          margin-bottom: 3rem;
-        }
-
-        .problem-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2rem;
-          margin-top: 3rem;
-        }
-
-        .problem-card {
-          background: var(--color-white);
-          padding: 2rem;
-          border-radius: 12px;
-          border: 2px solid var(--color-border);
-          transition: all 0.3s;
-        }
-
-        .problem-card:hover {
-          border-color: var(--color-primary);
-          box-shadow: 0 4px 12px rgba(61, 90, 128, 0.1);
-        }
-
-        .problem-icon {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-        }
-
-        .problem-card h3 {
-          font-size: 1.125rem;
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-        }
-
-        .problem-card p {
-          color: var(--color-text-gray);
-        }
-
-        .callout-box {
-          margin-top: 3rem;
-          padding: 2rem;
-          background: var(--color-light-bg);
-          border-left: 4px solid var(--color-accent);
-          border-radius: 8px;
-        }
-
-        .callout-box p {
-          color: var(--color-text-dark);
-          font-size: 1.125rem;
-          font-weight: 600;
-        }
-
-        .solution-steps {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 2rem;
-          margin-top: 2rem;
-        }
-
-        .step {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .step-number {
-          font-size: 1.5rem;
-          font-weight: 800;
-          color: var(--color-accent);
-          flex-shrink: 0;
-        }
-
-        .step-content h3 {
-          font-size: 1.125rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-        }
-
-        .step-content p {
-          color: var(--color-text-gray);
-          font-size: 0.95rem;
-        }
-
-        .screenshot-section {
-          margin-top: 3rem;
-          padding: 2rem;
-          background: var(--color-white);
-          border-radius: 12px;
-          border: 2px solid var(--color-border);
-          display: grid;
-          grid-template-columns: 1fr 1.5fr;
-          gap: 2rem;
-          align-items: center;
-        }
-
-        .screenshot-content h3 {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          color: var(--color-text-dark);
-        }
-
-        .screenshot-content p {
-          color: var(--color-text-gray);
-          font-size: 1.1rem;
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-        }
-
-        .screenshot-content .screenshot-caption {
-          font-size: 0.9rem;
-          font-style: italic;
-          margin-bottom: 0;
-        }
-
-        .screenshot-image img {
-          width: 100%;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .example-box {
-          margin-top: 3rem;
-          padding: 2.5rem;
-          background: var(--color-white);
-          border: 2px solid var(--color-border);
-          border-radius: 12px;
-        }
-
-        .example-box h3 {
-          font-size: 1.5rem;
-          margin-bottom: 1.5rem;
-        }
-
-        .example-lead {
-          color: var(--color-text-gray);
-          margin-bottom: 2rem;
-          font-size: 1.1rem;
-        }
-
-        .example-items {
-          display: grid;
-          gap: 1rem;
-        }
-
-        .example-item {
-          padding: 1.25rem;
-          background: var(--color-light-bg);
-          border-left: 3px solid var(--color-accent);
-          border-radius: 4px;
-        }
-
-        .example-item strong {
-          color: var(--color-accent);
-          display: block;
-          margin-bottom: 0.25rem;
-        }
-
-        .calculator-section {
-          background: linear-gradient(135deg, var(--color-primary) 0%, #2a4260 100%);
-          padding: 4rem 2rem;
-        }
-
-        .calculator-container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-
-        .calculator-header {
-          text-align: center;
-          margin-bottom: 2.5rem;
-        }
-
-        .calculator-header h2 {
-          color: var(--color-white);
-          margin-bottom: 0.75rem;
-        }
-
-        .calculator-header p {
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 1.125rem;
-        }
-
-        .calculator-body {
-          background: var(--color-white);
-          border-radius: 16px;
-          padding: 2.5rem 2rem;
-          display: grid;
-          grid-template-columns: 2fr 3fr;
-          gap: 2rem;
-          align-items: start;
-          box-sizing: border-box;
-        }
-
-        .input-section {
-          /* Left column - sliders */
-          max-width: 100%;
-          box-sizing: border-box;
-        }
-
-        .input-group {
-          margin-bottom: 1.75rem;
-        }
-
-        .input-group:last-child {
-          margin-bottom: 0;
-        }
-
-        .input-label {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0.75rem;
-        }
-
-        .input-label span:first-child {
-          font-size: 0.95rem;
-          font-weight: 600;
-        }
-
-        .input-label span:last-child {
-          font-size: 1.125rem;
-          font-weight: 700;
-          color: var(--color-primary);
-        }
-
-        .slider {
-          width: 100%;
-          height: 8px;
-          border-radius: 4px;
-          background: var(--color-bg);
-          outline: none;
-          -webkit-appearance: none;
-          margin-bottom: 0.5rem;
-        }
-
-        .slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: var(--color-accent);
-          cursor: pointer;
-        }
-
-        .slider::-moz-range-thumb {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: var(--color-accent);
-          cursor: pointer;
-          border: none;
-        }
-
-        .slider-scale {
-          display: flex;
-          justify-content: space-between;
-          font-size: 0.75rem;
-          color: var(--color-text-light);
-        }
-
-        .results-section {
-          background: var(--color-light-bg);
-          border: 2px solid var(--color-primary);
-          border-radius: 12px;
-          padding: 1.5rem 0.875rem;
-          max-width: 100%;
-          box-sizing: border-box;
-          /* Right column - no top margin since side-by-side */
-        }
-
-        .results-header {
-          text-align: center;
-          margin-bottom: 1rem;
-          padding-bottom: 1rem;
-          border-bottom: 2px solid var(--color-border);
-        }
-
-        .results-header h3 {
-          font-size: 1.125rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-        }
-
-        .results-score {
-          display: flex;
-          justify-content: center;
-          align-items: baseline;
-          gap: 0.5rem;
-          margin: 0.75rem 0;
-        }
-
-        .score-value {
-          font-size: 3rem;
-          font-weight: 800;
-          line-height: 1;
-        }
-
-        .score-max {
-          font-size: 1.25rem;
-          color: var(--color-text-gray);
-        }
-
-        .score-low { color: #dc2626; }
-        .score-medium { color: #f59e0b; }
-        .score-high { color: #10b981; }
-
-        .score-interpretation {
-          color: var(--color-text-gray);
-          font-size: 0.85rem;
-        }
-
-        .results-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 0.75rem;
-          margin-top: 1rem;
-        }
-
-        .result-item {
-          background: var(--color-white);
-          padding: 0.875rem;
-          border-radius: 8px;
-        }
-
-        .result-item h4 {
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-text-gray);
-          margin-bottom: 0.4rem;
-        }
-
-        .result-item .value {
-          font-size: 1.75rem;
-          font-weight: 800;
-          color: var(--color-primary);
-          line-height: 1;
-          margin-bottom: 0.4rem;
-        }
-
-        .result-item .description {
-          color: var(--color-text-gray);
-          font-size: 0.8rem;
-          line-height: 1.4;
-        }
-
-        .calculator-cta {
-          margin-top: 2rem;
-          padding: 2rem;
-          background: var(--color-primary);
-          border-radius: 12px;
-          text-align: center;
-        }
-
-        .calculator-cta h3 {
-          font-size: 1.5rem;
-          color: var(--color-white);
-          margin-bottom: 0.75rem;
-        }
-
-        .calculator-cta p {
-          color: rgba(255, 255, 255, 0.9);
-          margin-bottom: 1.5rem;
-        }
-
-        .pricing-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
-          margin-top: 3rem;
-          align-items: stretch;
-        }
-
-        .pricing-card {
-          background: var(--color-white);
-          border: 2px solid var(--color-border);
-          border-radius: 12px;
-          padding: 2.5rem;
-          transition: all 0.3s;
-          position: relative;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .pricing-card:hover {
-          border-color: var(--color-primary);
-          box-shadow: 0 8px 24px rgba(61, 90, 128, 0.15);
-          transform: translateY(-4px);
-        }
-
-        .pricing-card.featured {
-          border-color: var(--color-accent);
-          box-shadow: 0 4px 16px rgba(238, 108, 77, 0.2);
-        }
-
-        .pricing-badge {
-          position: absolute;
-          top: -12px;
-          right: 2rem;
-          background: var(--color-accent);
-          color: var(--color-white);
-          padding: 0.375rem 1rem;
-          border-radius: 20px;
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-
-        .pricing-header h3 {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-          min-height: 2rem;
-        }
-
-        .pricing-price {
-          font-size: 2.5rem;
-          font-weight: 800;
-          color: var(--color-primary);
-          margin: 1rem 0;
-          line-height: 1;
-          min-height: 3rem;
-        }
-
-        .pricing-price small {
-          font-size: 1rem;
-          color: var(--color-text-gray);
-          font-weight: 400;
-        }
-
-        .pricing-description {
-          color: var(--color-text-gray);
-          margin-bottom: 2rem;
-          padding-bottom: 1.5rem;
-          border-bottom: 1px solid var(--color-border);
-          min-height: 6rem;
-        }
-
-        .pricing-features {
-          list-style: none;
-          margin-bottom: 2rem;
-          flex-grow: 1;
-        }
-
-        .pricing-features li {
-          padding: 0.75rem 0;
-          display: flex;
-          align-items: flex-start;
-          gap: 0.75rem;
-          color: var(--color-text-gray);
-        }
-
-        .pricing-features li::before {
-          content: '✓';
-          color: var(--color-accent);
-          font-weight: 700;
-          flex-shrink: 0;
-        }
-
-        .pricing-cta {
-          width: 100%;
-          background: transparent;
-          color: var(--color-primary);
-          padding: 1rem;
-          border-radius: 8px;
-          font-weight: 600;
-          text-decoration: none;
-          display: block;
-          text-align: center;
-          transition: all 0.3s;
-          border: 2px solid var(--color-primary);
-          margin-top: auto;
-        }
-
-        .pricing-cta:hover {
-          background: var(--color-primary);
-          color: var(--color-white);
-        }
-
-        .featured .pricing-cta {
-          background: var(--color-accent);
-          color: var(--color-white);
-          border-color: var(--color-accent);
-        }
-
-        .featured .pricing-cta:hover {
-          background: #d45a3e;
-        }
-
-        .pricing-note {
-          margin-top: 1rem;
-          font-size: 0.875rem;
-          color: var(--color-text-light);
-          text-align: center;
-          line-height: 1.4;
-        }
-
-        .pricing-price.free {
-          color: var(--color-accent);
-        }
-
-        .pricing-cta-secondary {
-          background: transparent;
-          color: var(--color-primary);
-          border: 2px solid var(--color-primary);
-        }
-
-        .pricing-cta-secondary:hover {
-          background: var(--color-primary);
-          color: white;
-        }
-
-        .pricing-badge {
-          white-space: nowrap;
-        }
-
-        .comparison-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2rem;
-          margin-top: 3rem;
-        }
-
-        .comparison-card {
-          background: var(--color-white);
-          border: 2px solid var(--color-border);
-          border-radius: 12px;
-          padding: 2rem;
-        }
-
-        .comparison-label {
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-text-light);
-          margin-bottom: 0.75rem;
-        }
-
-        .comparison-card h3 {
-          font-size: 1.25rem;
-          margin-bottom: 1rem;
-        }
-
-        .comparison-list {
-          list-style: none;
-        }
-
-        .comparison-list li {
-          padding: 0.5rem 0;
-          color: var(--color-text-gray);
-          font-size: 0.9rem;
-        }
-
-        .comparison-list li.positive::before {
-          content: '✓ ';
-          color: var(--color-accent);
-          font-weight: 700;
-        }
-
-        .comparison-list li.negative {
-          opacity: 0.6;
-        }
-
-        .comparison-list li.negative::before {
-          content: '✗ ';
-          color: var(--color-text-light);
-        }
-
-        .cta-section {
-          background: var(--color-white);
-          padding: 5rem 2rem;
-          text-align: center;
-          border-top: 1px solid var(--color-border);
-        }
-
-        .cta-section h2 {
-          color: var(--color-text-dark);
-          margin-bottom: 1rem;
-        }
-
-        .cta-section p {
-          color: var(--color-text-gray);
-          font-size: 1.25rem;
-          max-width: 700px;
-          margin: 0 auto 2rem;
-        }
-
-        .cta-section .btn-primary {
-          background: var(--color-accent);
-          font-size: 1.2rem;
-          padding: 1.25rem 3rem;
-        }
-
-        .cta-section .btn-primary:hover {
-          background: #d45a3e;
-        }
-
-        footer {
-          background: var(--color-white);
-          border-top: 1px solid var(--color-border);
-          padding: 3rem 2rem;
-          text-align: center;
-          color: var(--color-text-gray);
-        }
-
-        footer p {
-          font-size: 0.9rem;
-        }
-
-        footer a {
-          color: var(--color-primary);
-          text-decoration: none;
-        }
-
-        footer a:hover {
-          color: var(--color-accent);
-        }
-
-        /* Tablet styles */
-        @media (max-width: 1024px) {
-          .calculator-body {
-            grid-template-columns: 2fr 3fr;
-            gap: 1.5rem;
-          }
-
-          .pricing-grid {
-            grid-template-columns: 1fr;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-          }
-
-          .comparison-grid {
-            grid-template-columns: 1fr;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-          }
-        }
-
-        /* Stack calculator on smaller tablets */
-        @media (max-width: 768px) {
-          .calculator-body {
-            grid-template-columns: 1fr;
-          }
-
-          .logo img {
-            height: 32px;
-          }
-        }
-
-        /* Mobile styles */
-        @media (max-width: 768px) {
-          .container {
-            padding: 0 1rem;
-          }
-
-          nav .container {
-            padding: 0 1rem;
-          }
-
-          .logo {
-            font-size: 1.1rem;
-            gap: 0.5rem;
-          }
-
-          .nav-cta {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-          }
-
-          .hero {
-            padding: 2.5rem 1rem 2rem;
-          }
-
-          .hero-label {
-            font-size: 0.75rem;
-            padding: 0.375rem 0.75rem;
-            margin-bottom: 1rem;
-          }
-
-          h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-          }
-
-          .hero-subtitle {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-          }
-
-          .hero-cta-group {
-            flex-direction: column;
-          }
-
-          .btn-primary, .btn-secondary {
-            width: 100%;
-            text-align: center;
-            padding: 0.875rem 1.5rem;
-            font-size: 1rem;
-          }
-
-          section {
-            padding: 3rem 1rem;
-          }
-
-          h2 {
-            font-size: 1.5rem;
-            line-height: 1.3;
-          }
-
-          .lead-text {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-          }
-
-          .problem-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-top: 2rem;
-          }
-
-          .problem-card {
-            padding: 1.5rem;
-          }
-
-          .problem-icon {
-            font-size: 2rem;
-          }
-
-          .callout-box {
-            padding: 1.25rem;
-            margin-top: 2rem;
-          }
-
-          .callout-box p {
-            font-size: 1rem;
-          }
-
-          .solution-steps {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-          }
-
-          .step {
-            gap: 0.75rem;
-          }
-
-          .step-number {
-            font-size: 1.25rem;
-          }
-
-          .step-content h3 {
-            font-size: 1rem;
-          }
-
-          .step-content p {
-            font-size: 0.9rem;
-          }
-
-          .screenshot-section {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            padding: 1.5rem;
-          }
-
-          .screenshot-content h3 {
-            font-size: 1.25rem;
-          }
-
-          .screenshot-content p {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-          }
-
-          .example-box {
-            padding: 1.5rem;
-            margin-top: 2rem;
-          }
-
-          .example-box h3 {
-            font-size: 1.25rem;
-          }
-
-          .example-lead {
-            font-size: 1rem;
-          }
-
-          .example-item {
-            padding: 1rem;
-          }
-
-          .calculator-section {
-            padding: 3rem 1rem;
-          }
-
-          .calculator-container {
-            max-width: 100%;
-          }
-
-          .calculator-header {
-            margin-bottom: 2rem;
-          }
-
-          .calculator-header h2 {
-            font-size: 1.5rem;
-          }
-
-          .calculator-header p {
-            font-size: 1rem;
-          }
-
-          .calculator-body {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 1.5rem 1rem;
-            border-radius: 12px;
-          }
-
-          .input-group {
-            margin-bottom: 1.5rem;
-          }
-
-          .input-label {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.25rem;
-          }
-
-          .input-label span:first-child {
-            font-size: 0.875rem;
-          }
-
-          .input-label span:last-child {
-            font-size: 1rem;
-          }
-
-          .slider {
-            height: 10px;
-          }
-
-          .slider::-webkit-slider-thumb {
-            width: 24px;
-            height: 24px;
-          }
-
-          .slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
-          }
-
-          .results-section {
-            padding: 1.5rem 1rem;
-            margin-top: 0; /* No margin needed, grid gap handles spacing */
-          }
-
-          .results-header h3 {
-            font-size: 1.125rem;
-          }
-
-          .score-value {
-            font-size: 3rem;
-          }
-
-          .score-max {
-            font-size: 1.25rem;
-          }
-
-          .score-interpretation {
-            font-size: 0.9rem;
-          }
-
-          .results-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-
-          .result-item {
-            padding: 1.25rem;
-          }
-
-          .result-item h4 {
-            font-size: 0.75rem;
-          }
-
-          .result-item .value {
-            font-size: 1.75rem;
-          }
-
-          .result-item .description {
-            font-size: 0.8rem;
-          }
-
-          .calculator-cta {
-            padding: 1.5rem 1rem;
-          }
-
-          .calculator-cta h3 {
-            font-size: 1.25rem;
-          }
-
-          .calculator-cta p {
-            font-size: 0.9rem;
-          }
-
-          .pricing-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-          }
-
-          .pricing-card {
-            padding: 1.5rem;
-          }
-
-          .pricing-badge {
-            top: -10px;
-            right: 1rem;
-            font-size: 0.7rem;
-            padding: 0.25rem 0.75rem;
-          }
-
-          .pricing-header h3 {
-            font-size: 1.25rem;
-          }
-
-          .pricing-price {
-            font-size: 2rem;
-          }
-
-          .pricing-description {
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-          }
-
-          .pricing-features li {
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
-          }
-
-          .pricing-cta {
-            padding: 0.875rem;
-          }
-
-          .comparison-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-          }
-
-          .comparison-card {
-            padding: 1.5rem;
-          }
-
-          .comparison-card h3 {
-            font-size: 1.125rem;
-          }
-
-          .cta-section {
-            padding: 3rem 1rem;
-          }
-
-          .cta-section h2 {
-            font-size: 1.5rem;
-          }
-
-          .cta-section p {
-            font-size: 1rem;
-          }
-
-          .cta-section .btn-primary {
-            font-size: 1rem;
-            padding: 1rem 2rem;
-          }
-
-          footer {
-            padding: 2rem 1rem;
-          }
-
-          footer p {
-            font-size: 0.8rem;
-          }
-        }
-
-        /* Small mobile styles */
-        @media (max-width: 380px) {
-          h1 {
-            font-size: 1.75rem;
-          }
-
-          h2 {
-            font-size: 1.35rem;
-          }
-
-          .hero-label {
-            font-size: 0.7rem;
-          }
-
-          .score-value {
-            font-size: 2.5rem;
-          }
-
-          .pricing-price {
-            font-size: 1.75rem;
-          }
-
-          .logo img {
-            height: 28px;
-          }
-        }
-      `}</style>
-
-      <nav>
-        <div className="container">
-          <div className="logo">
-            <img src="/rw-logo.png" alt="Remidi Works" />
-            Remidi Works
-          </div>
-          <a href="#pricing" className="nav-cta">See Pricing</a>
-        </div>
-      </nav>
-
-      <section className="hero">
-        <div className="container">
-          <div className="hero-label">For B2B SaaS Companies ~$1M-$50M ARR</div>
-          <h1>Find and Fix<br/>Your GTM Gaps</h1>
-          <p className="hero-subtitle">We diagnose which positioning, pricing, or sales enablement gaps are costing you revenue—benchmarked against companies in your category. Then we coach your team through fixing them with guided workflows and expert validation.</p>
-          <div className="hero-cta-group">
-            <a href="#calculator" className="btn-primary">See Your Performance Gap →</a>
-            <a href="#solution" className="btn-secondary">How It Works</a>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="container">
-          <div className="section-label">The Problem</div>
-          <h2>Every company could improve their GTM. The hard part is knowing which problems to fix first and how.</h2>
-          <p className="lead-text">Every B2B company has a list of 20+ things they could fix. New messaging. Pricing changes. Battle cards. ROI calculators. Case studies. The question isn't what's wrong—it's which problems are actually costing you revenue.</p>
-
-          <div className="problem-grid">
-            <div className="problem-card">
-              <div className="problem-icon">📊</div>
-              <h3>Marketing's Priorities</h3>
-              <p>Rebrand the website, build more top-of-funnel content, launch ABM campaigns, get more MQLs in the pipeline.</p>
-            </div>
-            <div className="problem-card">
-              <div className="problem-icon">💰</div>
-              <h3>Sales' Priorities</h3>
-              <p>Lower pricing, build competitive battle cards, create better demos, get more qualified leads from marketing.</p>
-            </div>
-            <div className="problem-card">
-              <div className="problem-icon">🎯</div>
-              <h3>Product's Priorities</h3>
-              <p>Add features competitors have, build integrations customers request, improve the UI, close feature gaps.</p>
-            </div>
-            <div className="problem-card">
-              <div className="problem-icon">👔</div>
-              <h3>CEO's Problem</h3>
-              <p>Everyone has a different opinion about what's broken. No data to know who's right. Deals are still dying and nobody knows why.</p>
-            </div>
-          </div>
-
-          <div className="callout-box">
-            <p>Result: You spend 6 months fixing the wrong problem while the real revenue killers go unaddressed.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-alt" id="solution">
-        <div className="container">
-          <div className="section-label">The Solution</div>
-          <h2>Systematic Diagnosis + Guided Execution</h2>
-          <p className="lead-text">We analyze your entire commercial model across 30 factors—value articulation, pricing architecture, competitive positioning, sales enablement, buyer trust—benchmarked against comparable companies in your category. Then we give you the execution platform to actually fix what matters.</p>
-
-          <div className="solution-steps">
-            <div className="step">
-              <div className="step-number">01</div>
-              <div className="step-content">
-                <h3>Diagnostic</h3>
-                <p>Score your GTM across 5 dimensions with 30 underlying factors. No surveys, no 6-week consulting engagements. Just your website, sales materials, and competitive intel.</p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-number">02</div>
-              <div className="step-content">
-                <h3>Prioritized Roadmap</h3>
-                <p>Not a balanced scorecard. A prioritized punch list: "Your pricing is fine. Your buyer enablement is costing you $2M. Fix it first, here's how."</p>
-              </div>
-            </div>
-            <div className="step">
-              <div className="step-number">03</div>
-              <div className="step-content">
-                <h3>Guided Execution</h3>
-                <p>Platform with workflow templates, progress tracking, and expert coaching. We review your work, validate you're on track, measure the revenue impact quarterly.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="screenshot-section">
-            <div className="screenshot-content">
-              <h3>What Your Diagnostic Looks Like</h3>
-              <p>See exactly where you're underperforming vs. category benchmarks across all 5 GTM dimensions.</p>
-              <p className="screenshot-caption">Real diagnostic for a logistics tech company showing Buyer Enablement as the primary revenue-killing gap.</p>
-            </div>
-            <div className="screenshot-image">
-              <img
-                src="/portfolio-company-view.png"
-                alt="GTM diagnostic dashboard showing 5 dimension scores and priority gaps"
-              />
-            </div>
-          </div>
-
-          <div className="example-box">
-            <h3>The Output: Benchmark Data, Not Consultant Opinions</h3>
-            <p className="example-lead">Example from a recent $25M ARR SaaS company:</p>
-            <div className="example-items">
-              <div className="example-item">
-                <strong>Priority 1:</strong>
-                <span>Pricing architecture is costing you $1.8M annually. You have no usage tiers and your enterprise pricing is 40% below market.</span>
-              </div>
-              <div className="example-item">
-                <strong>Priority 2:</strong>
-                <span>Your buyers can't self-qualify. 60% of deals stall in procurement because they don't have ROI calculators or business case templates.</span>
-              </div>
-              <div className="example-item">
-                <strong>Priority 3:</strong>
-                <span>Your competitive positioning is fine. Stop obsessing over the website redesign. Sales needs battle cards, not new messaging.</span>
-              </div>
-            </div>
-            <p style={{ marginTop: '2rem', color: 'var(--color-text-gray)' }}>Then you get workflow templates to fix each priority: pricing tier calculator, ROI template builder, battle card framework—with expert review at each milestone.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="calculator-section" id="calculator">
-        <div className="calculator-container">
-          <div className="calculator-header">
-            <h2>Are You Underperforming Your Category?</h2>
-            <p>Compare your metrics to industry benchmarks in 60 seconds</p>
-          </div>
-
-          <div className="calculator-body">
-            <div className="input-section">
-              <div className="input-group">
-                <div className="input-label">
-                  <span>Annual Recurring Revenue (ARR)</span>
-                  <span>${arr}M</span>
+import React from 'react';
+import './Home.css';
+
+function Home() {
+    return (
+        <>
+            <header>
+                <div className="container">
+                    <div className="logo">Remidi Works</div>
                 </div>
-                <input
-                  type="range"
-                  className="slider"
-                  min="1"
-                  max="100"
-                  step="1"
-                  value={arr}
-                  onChange={(e) => setArr(parseInt(e.target.value))}
-                />
-                <div className="slider-scale">
-                  <span>$1M</span>
-                  <span>$100M</span>
+            </header>
+
+            <section className="hero">
+                <div className="container">
+                    <h1>Portfolio-wide GTM strategy measurement. Smarter operating decisions.</h1>
+                    <p className="subhead">Reliable visibility into portfolio GTM health showing where to focus to unlock value and tracks whether it's working.</p>
+                    <div className="cta-group">
+                        <a href="https://athena-demo-six.vercel.app" className="btn-primary" target="_blank" rel="noopener noreferrer">See the portfolio demo</a>
+                        <a href="https://calendly.com/michaelhimmelfarb" className="btn-secondary" target="_blank" rel="noopener noreferrer">Or request a portfolio scan</a>
+                    </div>
                 </div>
-              </div>
+            </section>
 
-              <div className="input-group">
-                <div className="input-label">
-                  <span>Average Contract Value (ACV)</span>
-                  <span>${acv}K</span>
+            <section>
+                <div className="container-narrow">
+                    <h2>You measure demand gen execution and sales execution. But not GTM strategy.</h2>
+                    
+                    {/* GTM Gap Graphic */}
+                    <div style={{ margin: '40px 0', textAlign: 'center' }}>
+                        <img src="/4.svg" alt="GTM Strategy Gap Diagram showing Demand Gen Execution → GTM Strategy Layer → Sales Execution" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }} />
+                    </div>
+                    
+                    <p>Your portfolio companies report the standard metrics: MQLs, pipeline coverage, close rates, churn. Those numbers tell you about execution—how hard teams are working.</p>
+                    
+                    <p>But they don't tell you if the underlying strategy is sound:</p>
+                    
+                    <ul>
+                        <li style={{ marginBottom: '16px' }}><span style={{ fontSize: '20px', marginRight: '12px' }}>🎯</span> <strong>Defensible Positioning</strong> — Is the company actually differentiated, or just a commodity?</li>
+                        <li style={{ marginBottom: '16px' }}><span style={{ fontSize: '20px', marginRight: '12px' }}>💰</span> <strong>Monetization Logic</strong> — Is the pricing architecture designed to capture maximum value?</li>
+                        <li style={{ marginBottom: '16px' }}><span style={{ fontSize: '20px', marginRight: '12px' }}>💡</span> <strong>Value Articulation</strong> — Can the market (and the sales team) clearly understand why this product wins?</li>
+                        <li style={{ marginBottom: '16px' }}><span style={{ fontSize: '20px', marginRight: '12px' }}>🤝</span> <strong>Buyer Enablement</strong> — Is structural friction in the buying process killing conversion?</li>
+                    </ul>
+                    
+                    <p>This is the strategic layer—the connective tissue between marketing and sales. It's invisible in your current dashboards, and it stays invisible until a quarter is missed.</p>
+                    
+                    <p>When this layer is broken, it doesn't matter how much you invest in execution. You're just accelerating burn on a flawed foundation. That's where 20-30% of potential revenue leaks out—and where your IRR gets crushed.</p>
                 </div>
-                <input
-                  type="range"
-                  className="slider"
-                  min="5"
-                  max="500"
-                  step="5"
-                  value={acv}
-                  onChange={(e) => setAcv(parseInt(e.target.value))}
-                />
-                <div className="slider-scale">
-                  <span>$5K</span>
-                  <span>$500K</span>
+            </section>
+
+            <section className="alt-bg">
+                <div className="container-narrow">
+                    <h2>Portfolio-wide GTM strategy visibility</h2>
+                    
+                    <p className="subhead-section">Remidi provides what your current portfolio dashboards don't:</p>
+                    
+                    <div className="benefit-grid">
+                        <div className="benefit-item">
+                            <h4>Standardized Strategic Scoring</h4>
+                            <p>Replace gut feel with a rigorous framework applied across your entire portfolio. Compare GTM strategy health with the same objectivity you use for EBITDA and net retention.</p>
+                        </div>
+                        
+                        <div className="benefit-item">
+                            <h4>Vindicate Operating Interventions</h4>
+                            <p>Show LPs which GTM pivots actually worked. Replace subjective progress reports with objective before-and-after scores that prove your operating playbook delivers value.</p>
+                        </div>
+                        
+                        <div className="benefit-item">
+                            <h4>LP-Ready Accountability</h4>
+                            <p>Upgrade your quarterly reporting. Show LPs exactly where you identified strategic risk, what you fixed, and how the asset improved—with the same rigor you report revenue metrics.</p>
+                        </div>
+                        
+                        <div className="benefit-item">
+                            <h4>Smarter Resource Allocation</h4>
+                            <p>Stop peanut-buttering operating resources across your portfolio. Identify the 20% of companies where a strategic GTM fix will drive 80% of your incremental growth.</p>
+                        </div>
+                        
+                        <div className="benefit-item benefit-full-width">
+                            <h4>Cross-Portfolio Benchmarking</h4>
+                            <p>See how your portfolio's GTM health compares to other middle-market B2B SaaS companies and funds (as data scales). Identify best-in-class patterns you can replicate across your holdings.</p>
+                        </div>
+                    </div>
+                    
+                    {/* Portfolio Dashboard */}
+                    <div style={{ margin: '40px 0', textAlign: 'center' }}>
+                        <img src="/1.svg" alt="Portfolio Dashboard showing company health scores and individual company scorecard" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }} />
+                    </div>
                 </div>
-              </div>
+            </section>
 
-              <div className="input-group">
-                <div className="input-label">
-                  <span>Win Rate <span style={{ fontSize: '0.85em', color: 'var(--color-text-light)' }}>(Benchmark: {benchmarks.winRate}%)</span></span>
-                  <span>{winRate}%</span>
+            <section>
+                <div className="container-narrow">
+                    <h2>Three steps. One integrated system.</h2>
+                    <p className="subhead-section">Built to work with the data you're already collecting.</p>
+                    
+                    {/* Process Flow Graphic */}
+                    <div style={{ margin: '60px auto 0', maxWidth: '900px' }}>
+                        <svg viewBox="0 0 900 200" style={{ maxWidth: '100%', height: 'auto' }}>
+                            {/* Stage 1: SCAN */}
+                            <g>
+                                <circle cx="150" cy="80" r="50" fill="#f0f7ff" stroke="#3D5A80" strokeWidth="2"/>
+                                <circle cx="146" cy="76" r="15" fill="none" stroke="#3D5A80" strokeWidth="2.5"/>
+                                <line x1="157" y1="87" x2="167" y2="97" stroke="#3D5A80" strokeWidth="2.5" strokeLinecap="round"/>
+                                <text x="150" y="160" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="700" fill="#3D5A80" letterSpacing="0.5">STEP 1: SCAN</text>
+                            </g>
+                            
+                            {/* Arrow 1 */}
+                            <defs>
+                                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="#98C1D9" />
+                                </marker>
+                            </defs>
+                            <path d="M 220 80 L 330 80" stroke="#98C1D9" strokeWidth="2" fill="none" markerEnd="url(#arrow)"/>
+                            
+                            {/* Stage 2: TRACK */}
+                            <g>
+                                <circle cx="450" cy="80" r="50" fill="#f0f7ff" stroke="#3D5A80" strokeWidth="2"/>
+                                <rect x="428" y="68" width="44" height="26" rx="2" fill="none" stroke="#3D5A80" strokeWidth="2"/>
+                                <line x1="433" y1="76" x2="445" y2="88" stroke="#3D5A80" strokeWidth="2" strokeLinecap="round"/>
+                                <line x1="445" y1="88" x2="453" y2="76" stroke="#3D5A80" strokeWidth="2" strokeLinecap="round"/>
+                                <line x1="453" y1="76" x2="465" y2="84" stroke="#3D5A80" strokeWidth="2" strokeLinecap="round"/>
+                                <text x="450" y="160" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="700" fill="#3D5A80" letterSpacing="0.5">STEP 2: TRACK</text>
+                            </g>
+                            
+                            {/* Arrow 2 */}
+                            <path d="M 520 80 L 630 80" stroke="#98C1D9" strokeWidth="2" fill="none" markerEnd="url(#arrow)"/>
+                            
+                            {/* Stage 3: DIAGNOSE */}
+                            <g>
+                                <circle cx="750" cy="80" r="50" fill="#f0f7ff" stroke="#3D5A80" strokeWidth="2"/>
+                                <rect x="733" y="64" width="34" height="42" rx="1.5" fill="none" stroke="#3D5A80" strokeWidth="2"/>
+                                <line x1="739" y1="74" x2="761" y2="74" stroke="#3D5A80" strokeWidth="1.5"/>
+                                <line x1="739" y1="82" x2="761" y2="82" stroke="#3D5A80" strokeWidth="1.5"/>
+                                <line x1="739" y1="90" x2="753" y2="90" stroke="#3D5A80" strokeWidth="1.5"/>
+                                <text x="750" y="160" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="12" fontWeight="700" fill="#3D5A80" letterSpacing="0.5">STEP 3: DIAGNOSE</text>
+                            </g>
+                        </svg>
+                    </div>
+                    
+                    {/* Three tile cards directly below each circle */}
+                    <div className="process-tiles" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px', marginTop: '20px', maxWidth: '900px', marginLeft: 'auto', marginRight: 'auto' }}>
+                        <div className="benefit-item">
+                            <p style={{ marginBottom: '12px' }}>You provide basic information on each portfolio company (URL, revenue stage, category, key metrics you're already tracking). We deliver a portfolio dashboard showing which companies have strategic GTM gaps and where they're concentrated.</p>
+                            <p className="timeline" style={{ marginBottom: 0 }}>Timeline: 7 business days</p>
+                        </div>
+                        
+                        <div className="benefit-item">
+                            <p style={{ marginBottom: 0 }}>We update scores on your chosen cadence (monthly or quarterly) based on the metrics you're already collecting—supplemented by our market research and competitive intelligence. Track which companies are improving and whether your operating interventions are working. The system signals revenue plateaus 6 months before they hit the P&L.</p>
+                        </div>
+                        
+                        <div className="benefit-item">
+                            <p style={{ marginBottom: 0 }}>For companies that need intervention, we provide detailed diagnostics including root cause analysis of what's specifically broken, revenue impact modeling showing which gaps cost the most, quick wins you can implement immediately, a 90-day prioritized roadmap with measurable milestones, and revised GTM strategy guidelines your team can execute against.</p>
+                        </div>
+                    </div>
                 </div>
-                <input
-                  type="range"
-                  className="slider"
-                  min="10"
-                  max="60"
-                  step="5"
-                  value={winRate}
-                  onChange={(e) => setWinRate(parseInt(e.target.value))}
-                />
-                <div className="slider-scale">
-                  <span>10%</span>
-                  <span>60%</span>
+            </section>
+
+            <section className="alt-bg">
+                <div className="container-narrow">
+                    <h2>The Charter Member Benchmark</h2>
+                    <p className="subhead-section">An invitation-only program for 10-15 middle-market PE firms to build the first comprehensive B2B SaaS GTM strategy benchmark.</p>
+                    
+                    <div className="callout">
+                        <h4>Charter Member Advantages</h4>
+                        <p><strong>Priority access to aggregated benchmark data</strong> as the dataset scales—see how your portfolio compares to peers on GTM strategy health.</p>
+                        <p><strong>Methodology governance.</strong> Quarterly steering committee input on which dimensions matter most and how to evolve the scoring framework.</p>
+                        <p><strong>Enhanced LP narrative.</strong> Show LPs you're not just operating on gut feel—you're using objective, data-backed GTM strategy scores to drive portfolio value.</p>
+                        <p><strong>Preferred pricing locked in permanently</strong> for your current and future portfolio companies.</p>
+                    </div>
+                    
+                    <p><strong>Data commitment:</strong> Portfolio companies provide anonymized standard metrics only (ARR, NRR, GRR, Win Rate, Sales Cycle, CAC, LTV). Zero PII, institutional-grade confidentiality.</p>
+                    
+                    <p><strong>Why this matters:</strong> The firms that define the benchmark shape the standard. Early participants gain permanent pricing advantages and first access to cross-portfolio intelligence as the dataset scales.</p>
+                    
+                    {/* Data Flywheel */}
+                    <div style={{ margin: '40px 0', textAlign: 'center' }}>
+                        <img src="/5.svg" alt="Data Flywheel showing network effects: More portfolio companies → More precise benchmarks → Better LP reporting → More valuable platform → Attracts more participants" style={{ maxWidth: '100%', height: 'auto' }} />
+                    </div>
                 </div>
-              </div>
+            </section>
 
-              <div className="input-group">
-                <div className="input-label">
-                  <span>Sales Cycle Length <span style={{ fontSize: '0.85em', color: 'var(--color-text-light)' }}>(Benchmark: {benchmarks.salesCycle} days)</span></span>
-                  <span>{salesCycle} days</span>
+            <section>
+                <div className="container-narrow">
+                    <h2>Who built this</h2>
+                    
+                    <p className="subhead-section">Built by operators from world-class companies</p>
+                    
+                    {/* LOGO GRID PLACEHOLDER - Add your company logos here */}
+                    <div style={{ margin: '40px 0', padding: '40px', background: '#f8f9fa', borderRadius: '8px', textAlign: 'center' }}>
+                        <p style={{ color: '#6b7280', fontStyle: 'italic' }}>Company logos from leadership roles will be displayed here</p>
+                    </div>
+                    
+                    <p>Our team has built global analytics businesses at Nielsen, led GTM organizations at multiple growth-stage B2B companies, and advised PE-backed portfolio companies on commercial strategy.</p>
+                    
+                    <p>We've run 50+ B2B pricing transformations, diagnosed GTM strategy gaps across dozens of sectors, and built the proprietary methodology that powers Remidi's diagnostic framework.</p>
+                    
+                    <p>This isn't consulting theory. It's a systematic approach built from years of operating experience—packaged as measurement infrastructure PE firms can use across their entire portfolios.</p>
                 </div>
-                <input
-                  type="range"
-                  className="slider"
-                  min="30"
-                  max="365"
-                  step="15"
-                  value={salesCycle}
-                  onChange={(e) => setSalesCycle(parseInt(e.target.value))}
-                />
-                <div className="slider-scale">
-                  <span>30 days</span>
-                  <span>365 days</span>
+            </section>
+
+            <section className="alt-bg">
+                <div className="container-narrow">
+                    <h2>When a portfolio company needs intervention</h2>
+                    <p className="subhead-section">Step 3 diagnostics provide the strategic foundation for operating decisions.</p>
+                    
+                    <p>Remidi's detailed company-level diagnostics give you everything you need to understand what's broken and build the roadmap to fix it:</p>
+                    
+                    <ul>
+                        <li><strong>6-dimension health score</strong> isolating exactly where the GTM strategy is failing</li>
+                        <li><strong>Root cause analysis</strong> showing what's specifically broken (not just symptoms)</li>
+                        <li><strong>Revenue impact modeling</strong> quantifying which gaps cost the most</li>
+                        <li><strong>Quick wins</strong> you can implement immediately to stop the bleeding</li>
+                        <li><strong>90-day prioritized roadmap</strong> with measurable milestones</li>
+                        <li><strong>Revised GTM strategy guidelines</strong> your team can execute against</li>
+                    </ul>
+                    
+                    <p>This becomes the foundation for hiring decisions (do we need a new CMO or can the current team execute?), org restructuring (is the problem structural?), or bringing in implementation support.</p>
+                    
+                    {/* Company Scorecard Detailed */}
+                    <div style={{ margin: '40px 0', textAlign: 'center' }}>
+                        <img src="/3.svg" alt="Individual company scorecard showing 6 dimension bars with scores, top priorities highlighted with revenue impact" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }} />
+                    </div>
                 </div>
-              </div>
+            </section>
 
-              <div className="input-group">
-                <div className="input-label">
-                  <span>Net Revenue Retention <span style={{ fontSize: '0.85em', color: 'var(--color-text-light)' }}>(Benchmark: {benchmarks.nrr}%)</span></span>
-                  <span>{nrr}%</span>
+            <section>
+                <div className="container-narrow">
+                    <h2>Hands-on implementation support</h2>
+                    
+                    <p>For hands-on implementation, we work with <strong>HG Partners</strong>—a boutique firm that uses the Remidi diagnostic methodology to coach execution and drive change.</p>
+                    
+                    <p>HG Partners operates as an extension of your operating team and works with a limited number of portfolio companies each quarter.</p>
+                    
+                    <p><a href="http://hg-partners.com" className="text-link" target="_blank" rel="noopener noreferrer">Learn more about HG Partners</a></p>
                 </div>
-                <input
-                  type="range"
-                  className="slider"
-                  min="80"
-                  max="150"
-                  step="5"
-                  value={nrr}
-                  onChange={(e) => setNrr(parseInt(e.target.value))}
-                />
-                <div className="slider-scale">
-                  <span>80%</span>
-                  <span>150%</span>
+            </section>
+
+            <section className="final-cta">
+                <div className="container">
+                    <h2>See what portfolio GTM intelligence looks like</h2>
+                    <p className="subtext">Built for middle-market PE firms with B2B SaaS portfolios ($5M-$60M ARR)</p>
+                    
+                    <div className="cta-options">
+                        <div className="cta-card">
+                            <h3>Portfolio Health Scan</h3>
+                            <p>Get a standardized health score across your portfolio companies in 7 business days. See which companies have strategic GTM gaps and where to prioritize operating resources.</p>
+                            <a href="https://calendly.com/michaelhimmelfarb" className="btn-primary" target="_blank" rel="noopener noreferrer">Request portfolio scan</a>
+                        </div>
+                        
+                        <div className="cta-card">
+                            <h3>See the Live Demo</h3>
+                            <p>View a working portfolio dashboard showing how 8 companies compare on GTM strategy health. See the diagnostic methodology in action.</p>
+                            <a href="https://athena-demo-six.vercel.app" className="btn-primary" target="_blank" rel="noopener noreferrer">View portfolio demo</a>
+                        </div>
+                    </div>
+                    
+                    <p className="disclaimer">All portfolio data handled with institutional-grade confidentiality.<br />
+                    Charter Member applications reviewed on rolling basis.</p>
                 </div>
-              </div>
-            </div>
+            </section>
 
-            <div className="results-section">
-              <div className="results-header">
-                <h3>Your Performance vs. Industry Benchmark</h3>
-                <div className="results-score">
-                  <span className={`score-value ${getScoreClass()}`}>{results.score}</span>
-                  <span className="score-max">/10</span>
+            <footer>
+                <div className="container">
+                    <p>© 2026 Remidi Works. All rights reserved.</p>
                 </div>
-                <p className="score-interpretation">{results.interpretation}</p>
-              </div>
+            </footer>
+        </>
+    );
+}
 
-              <div className="results-grid">
-                <div className="result-item">
-                  <h4>Recoverable Revenue</h4>
-                  <div className="value">{results.revenueAtRisk}</div>
-                  <div className="description">Annual opportunity from closing performance gap to industry benchmark</div>
-                </div>
-
-                <div className="result-item">
-                  <h4>Primary Performance Gap</h4>
-                  <div className="value">{results.biggestGap}</div>
-                  <div className="description">{results.gapDescription}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="calculator-cta">
-            <h3>Want to Know WHY You're Underperforming?</h3>
-            <p>Get a free GTM diagnostic showing exactly which gaps are causing your low win rate or long sales cycle—and how to fix them.<br/><strong>Delivered within 48 hours.</strong></p>
-            <a href="#free-report" className="btn-primary">Get Your Free Diagnostic →</a>
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing">
-        <div className="container">
-          <div className="section-label">Pricing</div>
-          <h2>Pick Your Starting Point</h2>
-          <p className="lead-text">No long-term contracts. Clear pricing. Expert validation, not just AI.</p>
-
-          <div className="pricing-grid">
-            <div className="pricing-card">
-              <div className="pricing-header">
-                <h3>Opportunity Finder</h3>
-                <div className="pricing-price free">FREE</div>
-                <p className="pricing-description">Get an honest assessment of your GTM health and 1-3 quick-win opportunities. We analyze your website, customer reviews, competitive positioning, and public pricing data.</p>
-              </div>
-              <ul className="pricing-features">
-                <li>Website and public data analysis</li>
-                <li>GTM Health Score across 5 dimensions</li>
-                <li>1-3 quick-win opportunities identified</li>
-                <li>Benchmarked vs. your category</li>
-                <li>Delivered in 48 hours</li>
-                <li>Optional 15-min results review call</li>
-              </ul>
-              <a href="#free-report" className="pricing-cta">Get Your Free Assessment</a>
-              <p className="pricing-note">Best for: "Should I even look into this?"</p>
-            </div>
-
-            <div className="pricing-card featured">
-              <div className="pricing-badge">Pilot Pricing</div>
-              <div className="pricing-header">
-                <h3>90-Day Growth Plan</h3>
-                <div className="pricing-price">$8,000</div>
-                <p className="pricing-description">Expert assessment, top revenue opportunities, 90-day execution plan. Delivered in under 2 weeks.</p>
-              </div>
-              <ul className="pricing-features">
-                <li><strong>Complete 5-dimension assessment (10-day delivery)</strong></li>
-                <li>Top 3-5 revenue growth opportunities identified</li>
-                <li>Board-ready executive summary slide</li>
-                <li>Prioritized 90-day execution roadmap</li>
-                <li>12 hours of expert engagement (analysis + coaching)</li>
-                <li>90-minute live walkthrough + follow-up session</li>
-                <li>Platform access for progress tracking</li>
-              </ul>
-              <a href="#free-report" className="pricing-cta">Get Started</a>
-              <p className="pricing-note">Pilot pricing for first 10 customers<br/>Standard pricing $12,500 starting Q3</p>
-            </div>
-
-            <div className="pricing-card">
-              <div className="pricing-badge" style={{ background: 'var(--color-primary)' }}>Coming Q3 2026</div>
-              <div className="pricing-header">
-                <h3>GTM Companion</h3>
-                <div className="pricing-price">$399<small>/month</small></div>
-                <p className="pricing-description">Your AI marketing partner, custom-configured for your business. After initial setup, your team gets step-by-step guidance on GTM execution with expert support when you need it.</p>
-              </div>
-              <ul className="pricing-features">
-                <li>Custom GTM diagnostic configured for your company</li>
-                <li>Interactive AI guidance tailored to your business</li>
-                <li>Quarterly progress reviews with benchmarks</li>
-                <li>Continuous improvement recommendations</li>
-                <li>Expert Pack available (1:1 coaching on-demand)</li>
-                <li>Growing benchmark database access</li>
-              </ul>
-              <a href="#free-report" className="pricing-cta pricing-cta-secondary">Join Waitlist</a>
-              <p className="pricing-note">Launching Q3 2026<br/>Early waitlist gets founding member discount</p>
-            </div>
-          </div>
-
-          <div className="callout-box">
-            <h3>What's Included in the 90-Day Growth Plan</h3>
-            <p style={{ marginBottom: '1.5rem', color: 'var(--color-text-gray)' }}>
-              This isn't just an AI-generated report. You get a complete commercial assessment with expert validation,
-              strategic recommendations, and hands-on coaching to help you execute.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-              <div>
-                <strong style={{ color: 'var(--color-text-dark)', display: 'block', marginBottom: '0.5rem' }}>📊 The Analysis</strong>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-gray)' }}>
-                  5-dimension commercial health assessment with evidence-based scoring across Value Articulation,
-                  Buyer Trust, Differentiation, Buyer Enablement, and Social Proof
-                </p>
-              </div>
-              <div>
-                <strong style={{ color: 'var(--color-text-dark)', display: 'block', marginBottom: '0.5rem' }}>🎯 The Roadmap</strong>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-gray)' }}>
-                  Prioritized action plan showing your top 3-5 revenue growth opportunities, expected impact ranges,
-                  and 90-day execution milestones. Plus board-ready executive summary for stakeholder communication
-                </p>
-              </div>
-              <div>
-                <strong style={{ color: 'var(--color-text-dark)', display: 'block', marginBottom: '0.5rem' }}>💡 Expert Coaching</strong>
-                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-gray)' }}>
-                  12 hours of engagement including initial analysis, 90-minute live walkthrough, follow-up session,
-                  and coaching calls. Use for strategy validation, execution support, or quarterly check-ins
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="callout-box" style={{ marginTop: '2rem' }}>
-            <p style={{ marginBottom: '0.5rem' }}><strong>Want ongoing support after your 90-day plan?</strong></p>
-            <p style={{ color: 'var(--color-text-gray)', fontSize: '0.95rem' }}>
-              Quarterly update assessments available for $2,500/quarter. Track progress, refresh benchmarks,
-              and get updated recommendations as your business evolves.
-            </p>
-          </div>
-
-          <div className="callout-box" style={{ marginTop: '2rem', background: 'var(--color-light-bg)', borderColor: 'var(--color-light-bg)' }}>
-            <h3>Why Under 2 Weeks vs. 4-6 Weeks?</h3>
-            <p style={{ color: 'var(--color-text-gray)' }}>
-              Traditional commercial assessments take 4-6 weeks because consultants manually research everything.
-              We use AI to accelerate data gathering and pattern recognition, then add expert validation,
-              strategic thinking, and prioritization. You get the same depth of analysis—backed by real
-              expertise, not just AI output—in a fraction of the time.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-alt">
-        <div className="container">
-          <div className="section-label">Why This, Not That</div>
-          <h2>vs. Your Other Options</h2>
-
-          <div className="comparison-grid">
-            <div className="comparison-card">
-              <div className="comparison-label">Traditional Consulting</div>
-              <h3>Bain / McKinsey</h3>
-              <ul className="comparison-list">
-                <li className="positive">Strategic thinking</li>
-                <li className="positive">Executive credibility</li>
-                <li className="negative">$100K+ price tag</li>
-                <li className="negative">6-8 week timeline</li>
-                <li className="negative">No benchmark data</li>
-                <li className="negative">No execution support</li>
-              </ul>
-            </div>
-
-            <div className="comparison-card">
-              <div className="comparison-label">Hiring</div>
-              <h3>VP Product Marketing</h3>
-              <ul className="comparison-list">
-                <li className="positive">Dedicated resource</li>
-                <li className="positive">Owns execution</li>
-                <li className="negative">$200K+ fully loaded</li>
-                <li className="negative">3-6 month ramp time</li>
-                <li className="negative">No external benchmarks</li>
-                <li className="negative">Their opinions, not data</li>
-              </ul>
-            </div>
-
-            <div className="comparison-card">
-              <div className="comparison-label">Remidi Works</div>
-              <h3>Platform + Expert Validation</h3>
-              <ul className="comparison-list">
-                <li className="positive">Category benchmark data</li>
-                <li className="positive">Systematic methodology</li>
-                <li className="positive">$2K-$3K/month platform</li>
-                <li className="positive">5-14 day turnaround</li>
-                <li className="positive">Guided execution workflows</li>
-                <li className="positive">Expert validation + coaching</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-section" id="free-report">
-        <div className="container">
-          <h2>Ready to Get Started?</h2>
-          <p>Request your free GTM Opportunity Finder report or book a 15-minute call to discuss your specific situation.</p>
-
-          <div className="hs-form-frame" data-region="na1" data-form-id="29ab8810-c12e-4d57-8eb5-a17c5fa94d5b" data-portal-id="45784330"></div>
-
-          <div style={{ marginTop: '2rem' }}>
-            <a href="https://calendly.com/michaelhimmelfarb" className="btn-primary">Or Schedule a Call</a>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <div className="container">
-          <p>© 2026 Remidi Works. Built by <a href="https://www.linkedin.com/in/michaelhimmelfarb/">Michael Himmelfarb</a>, Ex-Nielsen Global GM | 3x CMO | PE Operating Partner</p>
-          <p style={{ marginTop: '1rem' }}>Questions? Email <a href="mailto:michael@remidiworks.com">michael@remidiworks.com</a></p>
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default RemidiLandingPage;
+export default Home;
