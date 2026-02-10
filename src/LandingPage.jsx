@@ -6,7 +6,7 @@ function Home() {
         <>
             <header>
                 <div className="container">
-                    <div className="logo">Remidi Works</div>
+                    <img src="/rw-logo.png" alt="Remidi Works" className="logo" />
                 </div>
             </header>
 
