@@ -23,6 +23,27 @@ function Home() {
                         <a href="https://calendly.com/michaelhimmelfarb" className="btn-secondary" target="_blank" rel="noopener noreferrer">Or request a portfolio scan</a>
                     </div>
                 </div>
+
+                {/* Portfolio preview */}
+                <div style={{ marginTop: '60px', textAlign: 'center' }}>
+                    <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '12px', fontWeight: 500 }}>Live portfolio dashboard showing GTM health across 10 companies →</p>
+                    <img src="/portfolio-dashboard.png" alt="Portfolio dashboard preview" style={{ maxWidth: '90%', height: 'auto', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', border: '1px solid #e5e7eb' }} />
+                </div>
+            </section>
+
+            <section>
+                <div className="container-narrow">
+                    <h2>What a Remidi diagnostic looks like</h2>
+                    <p className="subhead-section">Actual output from a portfolio company diagnostic (redacted for confidentiality)</p>
+
+                    <div style={{ margin: '40px 0', textAlign: 'center' }}>
+                        <img src="/portfolio-company-dashboard.png" alt="Sample diagnostic showing GTM health scores and specific findings with revenue impact" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }} />
+                    </div>
+
+                    <p>This diagnostic identified a critical gap in case study quality costing 15-25% of winnable deals. The finding was based on public data analysis, then validated and refined through an expert review that incorporated internal data only the company could provide.</p>
+
+                    <p>Every Remidi diagnostic follows this pattern: initial scores from observable public data, followed by expert-led calibration using your proprietary information to dramatically improve accuracy.</p>
+                </div>
             </section>
 
             <section>
@@ -160,44 +181,64 @@ function Home() {
 
             <section className="alt-bg">
                 <div className="container-narrow">
-                    <h2>The Charter Member Benchmark</h2>
-                    <p className="subhead-section">An invitation-only program for 10-15 middle-market PE firms to build the first comprehensive B2B SaaS GTM strategy benchmark.</p>
-                    
+                    <h2>Building the first B2B SaaS GTM strategy benchmark</h2>
+                    <p className="subhead-section">An invitation to shape the methodology and gain permanent advantages as an early participant.</p>
+
+                    <p>There's no existing benchmark for GTM strategy health. PE firms measure financial metrics (ARR, NRR, CAC) and demand gen execution (MQLs, pipeline), but nothing systematically measures the strategic layer between them.</p>
+
+                    <p>Remidi is building that benchmark by aggregating anonymized diagnostic data across participating PE portfolios. Early participants shape the methodology and gain permanent advantages.</p>
+
                     <div className="callout">
-                        <h4>Charter Member Advantages</h4>
-                        <p><strong>Priority access to aggregated benchmark data</strong> as the dataset scales—see how your portfolio compares to peers on GTM strategy health.</p>
-                        <p><strong>Methodology governance.</strong> Quarterly steering committee input on which dimensions matter most and how to evolve the scoring framework.</p>
-                        <p><strong>Enhanced LP narrative.</strong> Show LPs you're not just operating on gut feel—you're using objective, data-backed GTM strategy scores to drive portfolio value.</p>
-                        <p><strong>Preferred pricing locked in permanently</strong> for your current and future portfolio companies.</p>
+                        <h4>Early participant advantages</h4>
+                        <p><strong>Preferred pricing locked permanently</strong> for current and future portfolio companies—a significant advantage as the platform scales.</p>
+                        <p><strong>Priority access to aggregated benchmark data</strong> as the dataset grows. See how your portfolio compares to peers on GTM strategy health before this intelligence becomes widely available.</p>
+                        <p><strong>Methodology governance.</strong> Quarterly steering discussions on which dimensions matter most and how scoring evolves. The firms that define the benchmark shape the standard.</p>
+                        <p><strong>Enhanced LP narrative.</strong> Show LPs you're operating on objective, data-backed GTM strategy scores—not gut feel. Demonstrate systematic value creation with before-and-after metrics.</p>
                     </div>
-                    
-                    <p><strong>Data commitment:</strong> Portfolio companies provide anonymized standard metrics only (ARR, NRR, GRR, Win Rate, Sales Cycle, CAC, LTV). Zero PII, institutional-grade confidentiality.</p>
-                    
-                    <p><strong>Why this matters:</strong> The firms that define the benchmark shape the standard. Early participants gain permanent pricing advantages and first access to cross-portfolio intelligence as the dataset scales.</p>
-                    
-                    {/* Data Flywheel */}
+
+                    <p><strong>Data commitment:</strong> Portfolio companies provide standard anonymized metrics you're already tracking (ARR, NRR, GRR, Win Rate, Sales Cycle, CAC, LTV). Zero PII. Institutional-grade confidentiality.</p>
+
+                    <p><strong>Participation is limited</strong> to maintain data quality and ensure every firm shapes the methodology. Early participants gain permanent pricing advantages and first access to cross-portfolio intelligence.</p>
+
                     <div style={{ margin: '40px 0', textAlign: 'center' }}>
-                        <img src="/5.svg" alt="Data Flywheel showing network effects: More portfolio companies → More precise benchmarks → Better LP reporting → More valuable platform → Attracts more participants" style={{ maxWidth: '100%', height: 'auto' }} />
+                        <img src="/5.svg" alt="Data Flywheel showing network effects" style={{ maxWidth: '100%', height: 'auto' }} />
                     </div>
                 </div>
             </section>
 
             <section>
                 <div className="container-narrow">
-                    <h2>Who built this</h2>
-                    
-                    <p className="subhead-section">Built by operators from world-class companies</p>
-                    
-                    {/* LOGO GRID PLACEHOLDER - Add your company logos here */}
-                    <div style={{ margin: '40px 0', padding: '40px', background: '#f8f9fa', borderRadius: '8px', textAlign: 'center' }}>
-                        <p style={{ color: '#6b7280', fontStyle: 'italic' }}>Company logos from leadership roles will be displayed here</p>
+                    <h2>Who does the work</h2>
+
+                    <p className="subhead-section">Remidi is led by an operator, not a consultant. You work directly with someone who's diagnosed and fixed GTM strategy gaps dozens of times.</p>
+
+                    <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start', margin: '40px 0', flexWrap: 'wrap' }}>
+                        <div style={{ flex: '0 0 200px' }}>
+                            <img src="/headshot.png" alt="Michael Himmelfarb" style={{ width: '200px', height: '200px', borderRadius: '8px', objectFit: 'cover' }} />
+                        </div>
+
+                        <div style={{ flex: '1', minWidth: '300px' }}>
+                            <h3 style={{ marginTop: 0 }}>Michael Himmelfarb</h3>
+                            <p style={{ fontSize: '16px', color: '#6b7280', marginBottom: '24px' }}>Founder & Lead Diagnostician</p>
+
+                            <p>Michael personally conducts every Remidi portfolio diagnostic and company deep-dive.</p>
+
+                            <p>He spent 14 years at Nielsen as SVP of Global Consumer Panel & Shopper Analytics, running measurement systems across 27 countries covering price sensitivity, loyalty, marketing attribution, and new product analysis. Six Sigma Black Belt trained in systematic diagnostics. Holds a patent in demographic estimation from satellite imaging.</p>
+
+                            <p>As CMO at four B2B SaaS companies (Otto.vet, TrackX, KouponMedia), Michael scaled GTM strategies from early revenue ($1-10M ARR) through growth stage.</p>
+
+                            <p>Operating Partner roles at Mercury Fund (advising ~12 portfolio companies) and Manifold Group. Has worked with portfolio companies at Edison Partners, Jump Capital, and Serra Ventures on commercial strategy.</p>
+
+                            <p><strong>50+ pricing transformations. ~40 companies advised on GTM strategy, marketing, and product positioning.</strong> Remidi's methodology is built from this operating experience—packaged as systematic measurement infrastructure PE firms can use across entire portfolios.</p>
+
+                            <p><a href="https://www.linkedin.com/in/michaelhimmelfarb" target="_blank" rel="noopener noreferrer" className="text-link">Connect on LinkedIn</a></p>
+                        </div>
                     </div>
-                    
-                    <p>Our team has built global analytics businesses at Nielsen, led GTM organizations at multiple growth-stage B2B companies, and advised PE-backed portfolio companies on commercial strategy.</p>
-                    
-                    <p>We've run 50+ B2B pricing transformations, diagnosed GTM strategy gaps across dozens of sectors, and built the proprietary methodology that powers Remidi's diagnostic framework.</p>
-                    
-                    <p>This isn't consulting theory. It's a systematic approach built from years of operating experience—packaged as measurement infrastructure PE firms can use across their entire portfolios.</p>
+
+                    <div className="callout" style={{ marginTop: '40px' }}>
+                        <h4>Advisory support from PE operators and SaaS executives</h4>
+                        <p>Michael works with a small group of advisors who provide expertise in PE portfolio management, SaaS unit economics, and commercial strategy. This ensures Remidi's methodology reflects both operator experience and investor perspective.</p>
+                    </div>
                 </div>
             </section>
 
