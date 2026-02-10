@@ -11,7 +11,10 @@ const colors = {
   white: '#FFFFFF',
   red: '#C1292E',
   yellow: '#F4A300',
-  green: '#2D936C'
+  green: '#2D936C',
+  // Darker grays for better readability
+  darkGray: '#374151',
+  mediumGray: '#4b5563'
 };
 
 // Universe benchmark baseline (from our 100-company database)
@@ -57,6 +60,13 @@ const PEER_BENCHMARKS = {
 
 // Helper: format currency
 const formatCurrency = (num) => num >= 1000000 ? `$${(num / 1000000).toFixed(1)}M` : `$${(num / 1000).toFixed(0)}K`;
+
+// Helper: get current date formatted
+const getCurrentDate = () => {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const now = new Date();
+  return `${months[now.getMonth()]} ${now.getFullYear()}`;
+};
 
 // Helper: get indexed score (0 = peer median)
 const getIndexedScore = (value, peer, inverse = false) => {
@@ -209,7 +219,7 @@ const defaultPortfolioData = [
 ];
 
 // Mini gauge component (semicircle)
-const MiniGauge = ({ score, size = 48 }) => {
+const MiniGauge = ({ score, size = 56 }) => {
   const percentage = (score / 10) * 100;
   const getColor = (s) => {
     if (s >= 7) return colors.green;
@@ -222,19 +232,19 @@ const MiniGauge = ({ score, size = 48 }) => {
   const offset = circumference - (percentage / 100) * circumference;
   
   return (
-    <svg width={size} height={size / 2 + 10} viewBox={`0 0 ${size} ${size / 2 + 10}`}>
+    <svg width={size} height={size / 2 + 12} viewBox={`0 0 ${size} ${size / 2 + 12}`}>
       <path
         d={`M 4 ${size / 2} A ${radius} ${radius} 0 0 1 ${size - 4} ${size / 2}`}
         fill="none"
         stroke="#e5e7eb"
-        strokeWidth="6"
+        strokeWidth="7"
         strokeLinecap="round"
       />
       <path
         d={`M 4 ${size / 2} A ${radius} ${radius} 0 0 1 ${size - 4} ${size / 2}`}
         fill="none"
         stroke={getColor(score)}
-        strokeWidth="6"
+        strokeWidth="7"
         strokeLinecap="round"
         strokeDasharray={circumference}
         strokeDashoffset={offset}
@@ -242,9 +252,9 @@ const MiniGauge = ({ score, size = 48 }) => {
       />
       <text
         x={size / 2}
-        y={size / 2 + 4}
+        y={size / 2 + 6}
         textAnchor="middle"
-        fontSize="14"
+        fontSize="16"
         fontWeight="700"
         fill={colors.darkNavy}
       >
@@ -587,141 +597,185 @@ export default function InvestorPortfolioDashboard() {
       {/* Header */}
       <header style={{ 
         backgroundColor: colors.navy, 
-        padding: '16px 24px',
-        borderBottom: `3px solid ${colors.coral}`
+        padding: '20px 24px',
+        borderBottom: `4px solid ${colors.coral}`
       }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span style={{ 
                 backgroundColor: colors.coral, 
-                width: '32px', 
-                height: '32px', 
-                borderRadius: '6px',
+                width: '36px', 
+                height: '36px', 
+                borderRadius: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 700,
                 color: '#fff',
-                fontSize: '10px'
+                fontSize: '11px'
               }}>RW</span>
-              <span style={{ fontSize: '20px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>Remidi Works</span>
+              <span style={{ fontSize: '22px', fontWeight: 700, color: '#fff', letterSpacing: '-0.5px' }}>Remidi Works</span>
             </Link>
-            <span style={{ fontSize: '11px', color: colors.lightBlue }}>GTM Strategy Measurement</span>
+            
+            <div style={{ color: '#fff', fontSize: '14px' }}>
+              <span style={{ opacity: 0.8 }}>Fund:</span> <span style={{ fontWeight: 600, marginLeft: '6px' }}>{fundMeta.fundName}</span>
+            </div>
           </div>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-            <div style={{ color: '#fff', fontSize: '13px' }}>
-              <span style={{ opacity: 0.7 }}>Fund:</span> <span style={{ fontWeight: 600 }}>{fundMeta.fundName}</span>
+          {/* PROMINENT REPORT TITLE */}
+          <div style={{ marginTop: '16px' }}>
+            <h1 style={{ 
+              fontSize: '32px', 
+              fontWeight: 800, 
+              color: '#fff', 
+              margin: 0,
+              letterSpacing: '-0.5px',
+              lineHeight: 1.2
+            }}>
+              GTM Strategy Report
+            </h1>
+            <div style={{ fontSize: '14px', color: colors.lightBlue, marginTop: '6px', fontWeight: 500 }}>
+              {fundMeta.fundType} Portfolio Assessment • {getCurrentDate()}
             </div>
           </div>
         </div>
       </header>
       
       <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '24px' }}>
-        {/* Redesigned Key Metrics Cards - Investor-First */}
+        
+        {/* AT A GLANCE - Executive Summary */}
+        <div style={{ 
+          backgroundColor: colors.cream, 
+          borderRadius: '12px', 
+          padding: '20px 24px',
+          marginBottom: '20px',
+          borderLeft: `5px solid ${colors.coral}`,
+          boxShadow: '0 2px 4px rgba(0,0,0,0.06)'
+        }}>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: colors.darkGray, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
+            📊 At a Glance
+          </div>
+          <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', fontSize: '14px', lineHeight: 1.6, color: colors.darkGray }}>
+            <div>
+              <span style={{ fontWeight: 600 }}>{priorityCompanies}</span> companies need attention
+            </div>
+            <div>
+              <span style={{ fontWeight: 700, color: colors.coral, fontSize: '15px' }}>{formatCurrency(totalUpside)}</span> total upside
+            </div>
+            <div>
+              Portfolio GTM health: <span style={{ fontWeight: 600 }}>{avgHealth.toFixed(1)}/10</span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Redesigned Key Metrics Cards - BIGGER NUMBERS */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
           
-          {/* Card 1: Portfolio GTM Health */}
+          {/* Card 1: Portfolio GTM Health - BIGGER */}
           <div style={{ 
             backgroundColor: '#fff', 
             borderRadius: '12px', 
-            padding: '20px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
+            padding: '24px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
           }}>
-            <div style={{ fontSize: '11px', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+            <div style={{ fontSize: '12px', color: colors.mediumGray, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '16px', fontWeight: 600 }}>
               Portfolio GTM Health
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <MiniGauge score={avgHealth} size={70} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <MiniGauge score={avgHealth} size={80} />
               <div>
-                <div style={{ fontSize: '24px', fontWeight: 700, color: colors.darkNavy }}>
-                  {avgHealth.toFixed(1)}/10
+                <div style={{ fontSize: '36px', fontWeight: 800, color: colors.darkNavy, lineHeight: 1 }}>
+                  {avgHealth.toFixed(1)}
                 </div>
-                <div style={{ fontSize: '11px', color: avgRelative >= 0 ? colors.green : colors.coral, fontWeight: 600 }}>
+                <div style={{ fontSize: '13px', color: avgRelative >= 0 ? colors.green : colors.coral, fontWeight: 700, marginTop: '6px' }}>
                   {avgRelative >= 0 ? '+' : ''}{avgRelative.toFixed(1)} vs universe
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Card 2: Portfolio Upside */}
+          {/* Card 2: Portfolio Upside - HUGE NUMBERS */}
           <div style={{ 
             backgroundColor: colors.cream, 
             borderRadius: '12px', 
-            padding: '20px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-            borderLeft: `4px solid ${colors.coral}`
+            padding: '24px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
+            borderLeft: `5px solid ${colors.coral}`
           }}>
-            <div style={{ fontSize: '11px', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+            <div style={{ fontSize: '12px', color: colors.mediumGray, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '16px', fontWeight: 600 }}>
               Total Portfolio Upside
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: colors.coral, marginBottom: '4px' }}>
+            <div style={{ fontSize: '44px', fontWeight: 800, color: colors.coral, marginBottom: '6px', lineHeight: 1 }}>
               {formatCurrency(totalUpside)}
             </div>
-            <div style={{ fontSize: '11px', color: '#6b7280' }}>
+            <div style={{ fontSize: '13px', color: colors.mediumGray, fontWeight: 500 }}>
               Estimated ARR opportunity
             </div>
           </div>
           
-          {/* Card 3: Priority Companies */}
+          {/* Card 3: Priority Companies - BIGGER */}
           <div style={{ 
             backgroundColor: '#fff', 
             borderRadius: '12px', 
-            padding: '20px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
+            padding: '24px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.08)'
           }}>
-            <div style={{ fontSize: '11px', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+            <div style={{ fontSize: '12px', color: colors.mediumGray, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '16px', fontWeight: 600 }}>
               Need Attention
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: colors.darkNavy, marginBottom: '4px' }}>
+            <div style={{ fontSize: '44px', fontWeight: 800, color: colors.darkNavy, marginBottom: '6px', lineHeight: 1 }}>
               {priorityCompanies}
             </div>
-            <div style={{ display: 'flex', gap: '8px', fontSize: '11px', color: '#6b7280' }}>
+            <div style={{ display: 'flex', gap: '10px', fontSize: '13px', color: colors.mediumGray, fontWeight: 500 }}>
               <span>{underperformers.length} underperformers</span>
             </div>
           </div>
           
-          {/* Card 4: Next Action - UPGRADED */}
+          {/* Card 4: Next Action - UPGRADED WITH URGENCY */}
           <div style={{ 
             backgroundColor: '#fff', 
             borderRadius: '12px', 
-            padding: '20px',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+            padding: '24px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.08)',
             cursor: priorityFocus ? 'pointer' : 'default',
-            transition: 'transform 0.15s ease, box-shadow 0.15s ease'
+            transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+            border: priorityFocus ? `2px solid ${colors.coral}` : '2px solid transparent'
           }}
           onClick={() => priorityFocus && setSelectedCompany(priorityFocus)}
           onMouseEnter={(e) => {
             if (priorityFocus) {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
+              e.currentTarget.style.transform = 'translateY(-3px)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.15)';
             }
           }}
           onMouseLeave={(e) => {
             if (priorityFocus) {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08)';
+              e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.08)';
             }
           }}
           >
-            <div style={{ fontSize: '11px', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
-              Next Action
+            <div style={{ fontSize: '12px', color: colors.mediumGray, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '12px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '16px' }}>🎯</span> Next Action
             </div>
             {priorityFocus ? (
               <>
-                <div style={{ fontSize: '16px', fontWeight: 700, color: colors.darkNavy, marginBottom: '6px' }}>
+                <div style={{ fontSize: '18px', fontWeight: 700, color: colors.darkNavy, marginBottom: '8px', lineHeight: 1.3 }}>
                   Review {priorityFocus.name}
                 </div>
-                <div style={{ fontSize: '11px', color: '#6b7280', lineHeight: 1.4, marginBottom: '8px' }}>
-                  {priorityFocus.topGaps[0]?.issue || 'Multiple GTM gaps identified'}
+                <div style={{ fontSize: '12px', color: colors.mediumGray, lineHeight: 1.5, marginBottom: '10px', fontWeight: 500 }}>
+                  {priorityFocus.topGaps[0]?.issue || 'Multiple GTM gaps'}
                 </div>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: colors.coral }}>
-                  → {formatCurrency(priorityFocus.estimatedUpside)} at risk
+                <div style={{ fontSize: '24px', fontWeight: 800, color: colors.red, lineHeight: 1 }}>
+                  {formatCurrency(priorityFocus.estimatedUpside)}
+                </div>
+                <div style={{ fontSize: '12px', color: colors.red, fontWeight: 600, marginTop: '4px' }}>
+                  at risk
                 </div>
               </>
             ) : (
-              <div style={{ fontSize: '14px', color: colors.green, fontWeight: 600 }}>
+              <div style={{ fontSize: '16px', color: colors.green, fontWeight: 700, paddingTop: '20px' }}>
                 All companies on track ✓
               </div>
             )}
