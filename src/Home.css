@@ -1,0 +1,381 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3D5A80;
+}
+
+/* Container Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.container-narrow {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Hero Section */
+.hero {
+    padding: 80px 0 100px;
+    background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+.subhead {
+    font-size: 20px;
+    color: #4b5563;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 800px;
+}
+
+/* CTA Buttons */
+.cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: #3D5A80;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2d4560;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(61, 90, 128, 0.3);
+}
+
+.btn-secondary {
+    background: white;
+    color: #3D5A80;
+    border: 2px solid #3D5A80;
+}
+
+.btn-secondary:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+}
+
+section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
+}
+
+section h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+section p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 16px;
+}
+
+section ul {
+    list-style: none;
+    margin: 24px 0;
+}
+
+section ul li {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 12px;
+}
+
+.alt-bg {
+    background: #f9fafb;
+}
+
+.subhead-section {
+    font-size: 19px;
+    color: #6b7280;
+    margin-bottom: 32px;
+}
+
+/* Benefit Grid */
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin: 48px 0;
+}
+
+.benefit-item {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.benefit-item:hover {
+    border-color: #3D5A80;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.benefit-item h4 {
+    color: #3D5A80;
+    margin-bottom: 12px;
+}
+
+.benefit-item p {
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
+.benefit-full-width {
+    grid-column: 1 / -1;
+}
+
+/* Process Tiles */
+.process-tiles {
+    margin-top: 40px;
+}
+
+.timeline {
+    font-size: 14px;
+    color: #9ca3af;
+    font-style: italic;
+    margin-top: 16px;
+}
+
+/* Callout Box */
+.callout {
+    background: #f0f7ff;
+    border-left: 4px solid #3D5A80;
+    padding: 32px;
+    border-radius: 8px;
+    margin: 32px 0;
+}
+
+.callout h4 {
+    color: #3D5A80;
+    margin-bottom: 20px;
+}
+
+.callout p {
+    margin-bottom: 16px;
+}
+
+.callout p:last-child {
+    margin-bottom: 0;
+}
+
+/* Text Link */
+.text-link {
+    color: #3D5A80;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.text-link:hover {
+    color: #2d4560;
+}
+
+/* Final CTA Section */
+.final-cta {
+    background: linear-gradient(135deg, #3D5A80 0%, #2d4560 100%);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.final-cta h2 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.final-cta h3 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.final-cta p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.subtext {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 48px;
+}
+
+/* CTA Options */
+.cta-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin: 48px 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cta-card h3 {
+    color: #3D5A80;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.cta-card p {
+    color: #374151;
+    margin-bottom: 24px;
+}
+
+.cta-card .btn-primary {
+    width: 100%;
+    text-align: center;
+}
+
+.disclaimer {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 40px;
+    line-height: 1.6;
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+
+    .benefit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-group {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cta-options {
+        grid-template-columns: 1fr;
+    }
+
+    .final-cta h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container,
+    .container-narrow {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: 60px 0 80px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .subhead {
+        font-size: 18px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
