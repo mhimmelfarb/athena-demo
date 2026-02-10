@@ -24,6 +24,11 @@ header {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+header .container {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .logo {
     font-size: 24px;
     font-weight: 700;
