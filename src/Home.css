@@ -26,12 +26,24 @@ header {
 
 header .container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
-.logo {
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
     height: 40px;
     width: auto;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3D5A80;
 }
 
 /* Container Utilities */

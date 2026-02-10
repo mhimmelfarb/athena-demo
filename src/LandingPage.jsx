@@ -6,7 +6,10 @@ function Home() {
         <>
             <header>
                 <div className="container">
-                    <img src="/rw-logo.png" alt="Remidi Works" className="logo" />
+                    <div className="logo-container">
+                        <img src="/rw-logo.png" alt="Remidi Works" className="logo-img" />
+                        <span className="logo-text">Remidi Works</span>
+                    </div>
                 </div>
             </header>
 
