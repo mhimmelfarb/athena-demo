@@ -339,22 +339,23 @@ const ScoreBar = ({ score, label, compact = false, showTooltip = false }) => {
       onMouseEnter={() => showTooltip && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
         <span style={{ 
-          fontSize: compact ? '10px' : '11px', 
-          color: '#6b7280',
+          fontSize: compact ? '12px' : '14px', 
+          color: colors.mediumGray,
           cursor: showTooltip ? 'help' : 'default',
-          borderBottom: showTooltip ? '1px dotted #9ca3af' : 'none'
+          borderBottom: showTooltip ? '1px dotted #9ca3af' : 'none',
+          fontWeight: 500
         }}>{label}</span>
-        <span style={{ fontSize: compact ? '10px' : '11px', fontWeight: 600, color: colors.darkNavy }}>{score.toFixed(1)}</span>
+        <span style={{ fontSize: compact ? '13px' : '15px', fontWeight: 700, color: colors.darkNavy }}>{score.toFixed(1)}</span>
       </div>
-      <div style={{ height: compact ? '4px' : '6px', backgroundColor: '#e5e7eb', borderRadius: '3px', overflow: 'hidden' }}>
+      <div style={{ height: compact ? '6px' : '8px', backgroundColor: '#e5e7eb', borderRadius: '4px', overflow: 'hidden' }}>
         <div 
           style={{ 
             height: '100%', 
             width: `${score * 10}%`, 
             backgroundColor: getColor(score),
-            borderRadius: '3px',
+            borderRadius: '4px',
             transition: 'width 0.5s ease'
           }} 
         />
@@ -643,33 +644,7 @@ export default function InvestorPortfolioDashboard() {
       </header>
       
       <main style={{ maxWidth: '1400px', margin: '0 auto', padding: '24px' }}>
-        
-        {/* AT A GLANCE - Executive Summary */}
-        <div style={{ 
-          backgroundColor: colors.cream, 
-          borderRadius: '12px', 
-          padding: '20px 24px',
-          marginBottom: '20px',
-          borderLeft: `5px solid ${colors.coral}`,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.06)'
-        }}>
-          <div style={{ fontSize: '13px', fontWeight: 700, color: colors.darkGray, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-            📊 At a Glance
-          </div>
-          <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', fontSize: '14px', lineHeight: 1.6, color: colors.darkGray }}>
-            <div>
-              <span style={{ fontWeight: 600 }}>{priorityCompanies}</span> companies need attention
-            </div>
-            <div>
-              <span style={{ fontWeight: 700, color: colors.coral, fontSize: '15px' }}>{formatCurrency(totalUpside)}</span> total upside
-            </div>
-            <div>
-              Portfolio GTM health: <span style={{ fontWeight: 600 }}>{avgHealth.toFixed(1)}/10</span>
-            </div>
-          </div>
-        </div>
-        
-        {/* Redesigned Key Metrics Cards - BIGGER NUMBERS */}
+        {/* Key Metrics Cards - BIGGER NUMBERS */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
           
           {/* Card 1: Portfolio GTM Health - BIGGER */}
@@ -797,15 +772,16 @@ export default function InvestorPortfolioDashboard() {
               <button
                 onClick={() => setActiveTab('portfolio')}
                 style={{
-                  padding: '16px 24px',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: activeTab === 'portfolio' ? colors.navy : '#6b7280',
+                  padding: '18px 28px',
+                  fontSize: '15px',
+                  fontWeight: 700,
+                  color: activeTab === 'portfolio' ? colors.navy : colors.mediumGray,
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: activeTab === 'portfolio' ? `2px solid ${colors.coral}` : '2px solid transparent',
+                  borderBottom: activeTab === 'portfolio' ? `3px solid ${colors.coral}` : '3px solid transparent',
                   cursor: 'pointer',
-                  marginBottom: '-1px'
+                  marginBottom: '-2px',
+                  transition: 'color 0.15s ease'
                 }}
               >
                 Portfolio View
@@ -813,15 +789,16 @@ export default function InvestorPortfolioDashboard() {
               <button
                 onClick={() => setActiveTab('benchmark')}
                 style={{
-                  padding: '16px 24px',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: activeTab === 'benchmark' ? colors.navy : '#6b7280',
+                  padding: '18px 28px',
+                  fontSize: '15px',
+                  fontWeight: 700,
+                  color: activeTab === 'benchmark' ? colors.navy : colors.mediumGray,
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: activeTab === 'benchmark' ? `2px solid ${colors.coral}` : '2px solid transparent',
+                  borderBottom: activeTab === 'benchmark' ? `3px solid ${colors.coral}` : '3px solid transparent',
                   cursor: 'pointer',
-                  marginBottom: '-1px'
+                  marginBottom: '-2px',
+                  transition: 'color 0.15s ease'
                 }}
               >
                 Peer Benchmarks
@@ -829,15 +806,16 @@ export default function InvestorPortfolioDashboard() {
               <button
                 onClick={() => setActiveTab('diligence')}
                 style={{
-                  padding: '16px 24px',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: activeTab === 'diligence' ? colors.navy : '#6b7280',
+                  padding: '18px 28px',
+                  fontSize: '15px',
+                  fontWeight: 700,
+                  color: activeTab === 'diligence' ? colors.navy : colors.mediumGray,
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: activeTab === 'diligence' ? `2px solid ${colors.coral}` : '2px solid transparent',
+                  borderBottom: activeTab === 'diligence' ? `3px solid ${colors.coral}` : '3px solid transparent',
                   cursor: 'pointer',
-                  marginBottom: '-1px'
+                  marginBottom: '-2px',
+                  transition: 'color 0.15s ease'
                 }}
               >
                 🔍 Diligence Mode
@@ -847,29 +825,32 @@ export default function InvestorPortfolioDashboard() {
             {/* PORTFOLIO VIEW TAB - Merged Enhanced View */}
             {activeTab === 'portfolio' && (
               <div>
-                {/* Header with action CTAs */}
+                {/* Header with action CTAs - BIGGER BUTTONS */}
                 <div style={{ 
-                  padding: '12px 20px', 
+                  padding: '16px 24px', 
                   backgroundColor: '#f9fafb', 
-                  borderBottom: '1px solid #e5e7eb', 
+                  borderBottom: '2px solid #e5e7eb', 
                   display: 'flex', 
                   justifyContent: 'space-between', 
                   alignItems: 'center' 
                 }}>
-                  <div style={{ fontSize: '12px', color: '#6b7280' }}>
+                  <div style={{ fontSize: '14px', color: colors.mediumGray, fontWeight: 500 }}>
                     {portfolioData.length} companies • Sorted by upside potential
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ display: 'flex', gap: '10px' }}>
                     <button style={{
-                      padding: '6px 12px',
-                      fontSize: '11px',
+                      padding: '10px 16px',
+                      fontSize: '13px',
                       backgroundColor: '#fff',
                       color: colors.navy,
-                      border: `1px solid ${colors.navy}`,
-                      borderRadius: '4px',
+                      border: `2px solid ${colors.navy}`,
+                      borderRadius: '6px',
                       cursor: 'pointer',
-                      fontWeight: 600,
-                      transition: 'all 0.15s ease'
+                      fontWeight: 700,
+                      transition: 'all 0.15s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.backgroundColor = colors.navy;
@@ -881,18 +862,21 @@ export default function InvestorPortfolioDashboard() {
                     }}
                     onClick={() => alert('Board report download coming soon')}
                     >
-                      📊 Download Report
+                      <span>📊</span> Download Report
                     </button>
                     <button style={{
-                      padding: '6px 12px',
-                      fontSize: '11px',
+                      padding: '10px 16px',
+                      fontSize: '13px',
                       backgroundColor: colors.coral,
                       color: '#fff',
                       border: 'none',
-                      borderRadius: '4px',
+                      borderRadius: '6px',
                       cursor: 'pointer',
-                      fontWeight: 600,
-                      transition: 'all 0.15s ease'
+                      fontWeight: 700,
+                      transition: 'all 0.15s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.backgroundColor = '#d85a3d';
@@ -902,21 +886,21 @@ export default function InvestorPortfolioDashboard() {
                     }}
                     onClick={() => alert('Scheduling feature coming soon')}
                     >
-                      📅 Schedule Deep Dives
+                      <span>📅</span> Schedule Review
                     </button>
                   </div>
                 </div>
                 
-                {/* Table Header */}
+                {/* Table Header - BIGGER AND BOLDER */}
                 <div style={{ 
                   display: 'grid', 
-                  gridTemplateColumns: '1.5fr 80px 80px 80px 120px', 
-                  padding: '12px 20px',
+                  gridTemplateColumns: '2fr 100px 100px 110px 140px', 
+                  padding: '16px 24px',
                   backgroundColor: '#f9fafb',
-                  borderBottom: '1px solid #e5e7eb',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  color: '#6b7280',
+                  borderBottom: '2px solid #e5e7eb',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  color: colors.darkNavy,
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px'
                 }}>
@@ -927,7 +911,7 @@ export default function InvestorPortfolioDashboard() {
                   <div style={{ textAlign: 'right' }}>$ Upside</div>
                 </div>
                 
-                {/* Company List - Sorted by Upside with Visual Indicators */}
+                {/* Company List - BIGGER TEXT, MORE SPACING */}
                 <div>
                   {sortedCompanies.map((company, idx) => {
                     const isHovered = hoveredCompany === company.id;
@@ -941,36 +925,37 @@ export default function InvestorPortfolioDashboard() {
                         onMouseLeave={() => setHoveredCompany(null)}
                         style={{
                           display: 'grid',
-                          gridTemplateColumns: '1.5fr 80px 80px 80px 120px',
+                          gridTemplateColumns: '2fr 100px 100px 110px 140px',
                           alignItems: 'center',
-                          padding: '14px 20px',
-                          borderBottom: '1px solid #f3f4f6',
+                          padding: '20px 24px',
+                          borderBottom: '2px solid #f3f4f6',
                           cursor: 'pointer',
                           backgroundColor: isSelected ? colors.cream : isHovered ? '#fafbfc' : 'transparent',
                           transition: 'background-color 0.15s ease',
                           position: 'relative'
                         }}
                       >
-                        {/* Company Name & Status */}
+                        {/* Company Name & Status - MUCH BIGGER */}
                         <div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-                            <span style={{ fontSize: '14px', fontWeight: 600, color: colors.darkNavy }}>{company.name}</span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+                            <span style={{ fontSize: '20px', fontWeight: 700, color: colors.darkNavy }}>{company.name}</span>
                             <StatusBadge status={company.status} />
                           </div>
-                          <div style={{ fontSize: '11px', color: '#6b7280' }}>{company.sector}</div>
+                          <div style={{ fontSize: '14px', color: colors.mediumGray, fontWeight: 500 }}>{company.sector}</div>
                           
-                          {/* Hover preview of top gaps */}
+                          {/* Hover preview of top gaps - BIGGER TEXT */}
                           {isHovered && company.topGaps && company.topGaps.length > 0 && (
                             <div style={{
-                              marginTop: '8px',
-                              padding: '8px',
-                              backgroundColor: '#f9fafb',
-                              borderRadius: '4px',
-                              fontSize: '10px',
-                              color: '#6b7280',
-                              lineHeight: 1.4
+                              marginTop: '10px',
+                              padding: '10px 12px',
+                              backgroundColor: '#fef2f2',
+                              borderRadius: '6px',
+                              fontSize: '13px',
+                              color: colors.mediumGray,
+                              lineHeight: 1.5,
+                              fontWeight: 500
                             }}>
-                              <div style={{ fontWeight: 600, color: colors.coral, marginBottom: '4px' }}>Top Gap:</div>
+                              <div style={{ fontWeight: 700, color: colors.red, marginBottom: '4px' }}>Critical Gap:</div>
                               {company.topGaps[0].issue}
                             </div>
                           )}
@@ -978,7 +963,7 @@ export default function InvestorPortfolioDashboard() {
                         
                         {/* GTM Health Score */}
                         <div style={{ textAlign: 'center' }}>
-                          <MiniGauge score={company.healthScore} size={44} />
+                          <MiniGauge score={company.healthScore} size={56} />
                         </div>
                         
                         {/* vs Universe (with context) */}
@@ -991,17 +976,18 @@ export default function InvestorPortfolioDashboard() {
                           <PriorityIndicator priority={company.priority} />
                         </div>
                         
-                        {/* $ Upside (prominent for >$1M) */}
+                        {/* $ Upside - HUGE NUMBERS */}
                         <div style={{ textAlign: 'right' }}>
                           <div style={{ 
-                            fontSize: company.estimatedUpside > 1000000 ? '16px' : '14px', 
-                            fontWeight: 700, 
-                            color: company.estimatedUpside > 1000000 ? colors.coral : colors.darkNavy 
+                            fontSize: company.estimatedUpside > 1000000 ? '28px' : '24px', 
+                            fontWeight: 800, 
+                            color: company.estimatedUpside > 1000000 ? colors.coral : colors.darkNavy,
+                            lineHeight: 1
                           }}>
                             {formatCurrency(company.estimatedUpside || 0)}
                           </div>
                           {company.arr && (
-                            <div style={{ fontSize: '10px', color: '#9ca3af' }}>
+                            <div style={{ fontSize: '13px', color: colors.mediumGray, marginTop: '6px', fontWeight: 600 }}>
                               {((company.estimatedUpside / company.arr) * 100).toFixed(0)}% of ARR
                             </div>
                           )}
@@ -1123,12 +1109,12 @@ export default function InvestorPortfolioDashboard() {
               boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
               marginBottom: '16px'
             }}>
-              <div style={{ marginBottom: '16px' }}>
-                <h3 style={{ fontSize: '14px', fontWeight: 700, color: colors.darkNavy, marginBottom: '4px' }}>
+              <div style={{ marginBottom: '20px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, color: colors.darkNavy, marginBottom: '6px' }}>
                   Portfolio Dimension Insights
                 </h3>
-                <p style={{ fontSize: '11px', color: '#6b7280' }}>
-                  Gaps to top quartile with estimated portfolio upside
+                <p style={{ fontSize: '13px', color: colors.mediumGray, fontWeight: 500 }}>
+                  Gaps to top quartile with portfolio upside
                 </p>
               </div>
               
@@ -1140,24 +1126,26 @@ export default function InvestorPortfolioDashboard() {
                 const hasGap = gap > 0.3;
                 
                 return (
-                  <div key={key} style={{ marginBottom: '16px' }}>
+                  <div key={key} style={{ marginBottom: '20px' }}>
                     <ScoreBar score={value} label={label} showTooltip={true} />
                     
                     {hasGap && (
                       <div style={{ 
-                        marginTop: '6px', 
-                        padding: '8px 10px', 
+                        marginTop: '8px', 
+                        padding: '12px 14px', 
                         backgroundColor: '#fef3c7', 
-                        borderRadius: '4px',
-                        fontSize: '10px',
-                        color: '#92400e',
-                        lineHeight: 1.4
+                        borderRadius: '6px',
+                        fontSize: '13px',
+                        color: '#78350f',
+                        lineHeight: 1.5,
+                        fontWeight: 500,
+                        border: '2px solid #fbbf24'
                       }}>
-                        <div style={{ fontWeight: 600, marginBottom: '2px' }}>
-                          Gap to top quartile: {gap.toFixed(1)} pts
+                        <div style={{ fontWeight: 700, marginBottom: '4px' }}>
+                          Gap to top quartile: <span style={{ fontSize: '14px' }}>{gap.toFixed(1)} pts</span>
                         </div>
-                        <div>
-                          Portfolio upside: ~{formatCurrency(upside)}
+                        <div style={{ fontWeight: 700, color: colors.coral, fontSize: '15px' }}>
+                          Portfolio upside: {formatCurrency(upside)}
                         </div>
                       </div>
                     )}
@@ -1174,9 +1162,9 @@ export default function InvestorPortfolioDashboard() {
                 padding: '20px',
                 boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
               }}>
-                <div style={{ marginBottom: '16px', paddingBottom: '16px', borderBottom: '1px solid #e5e7eb' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: colors.darkNavy, margin: 0 }}>
+                <div style={{ marginBottom: '18px', paddingBottom: '18px', borderBottom: '2px solid #e5e7eb' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10px' }}>
+                    <h3 style={{ fontSize: '20px', fontWeight: 800, color: colors.darkNavy, margin: 0, lineHeight: 1.2 }}>
                       {selectedCompany.name}
                     </h3>
                     <button 
@@ -1184,7 +1172,7 @@ export default function InvestorPortfolioDashboard() {
                       style={{
                         background: 'none',
                         border: 'none',
-                        fontSize: '18px',
+                        fontSize: '24px',
                         color: '#9ca3af',
                         cursor: 'pointer',
                         padding: '0',
@@ -1194,15 +1182,15 @@ export default function InvestorPortfolioDashboard() {
                       ×
                     </button>
                   </div>
-                  <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '14px', color: colors.mediumGray, marginBottom: '10px', fontWeight: 500 }}>
                     {selectedCompany.sector} • {selectedCompany.stage}
                   </div>
                   <StatusBadge status={selectedCompany.status} />
                 </div>
                 
-                {/* Dimension Scores */}
-                <div style={{ marginBottom: '20px' }}>
-                  <div style={{ fontSize: '11px', fontWeight: 600, color: '#6b7280', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                {/* Dimension Scores - BIGGER TEXT */}
+                <div style={{ marginBottom: '24px' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 700, color: colors.darkNavy, marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                     GTM Health Dimensions
                   </div>
                   <ScoreBar score={selectedCompany.valueArticulation} label="Value Articulation" compact={true} />
@@ -1212,24 +1200,24 @@ export default function InvestorPortfolioDashboard() {
                   <ScoreBar score={selectedCompany.socialProof} label="Social Proof" compact={true} />
                 </div>
                 
-                {/* Top Gaps */}
+                {/* Top Gaps - BIGGER, BOLDER */}
                 {selectedCompany.topGaps && selectedCompany.topGaps.length > 0 && (
-                  <div style={{ marginBottom: '20px' }}>
-                    <div style={{ fontSize: '11px', fontWeight: 600, color: '#6b7280', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <div style={{ marginBottom: '24px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: colors.darkNavy, marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Critical GTM Gaps
                     </div>
                     {selectedCompany.topGaps.map((gap, idx) => (
                       <div key={idx} style={{ 
-                        marginBottom: '10px', 
-                        padding: '10px 12px', 
+                        marginBottom: '12px', 
+                        padding: '14px 16px', 
                         backgroundColor: '#fef2f2', 
-                        borderRadius: '6px',
-                        borderLeft: `3px solid ${colors.red}`
+                        borderRadius: '8px',
+                        borderLeft: `4px solid ${colors.red}`
                       }}>
-                        <div style={{ fontSize: '11px', fontWeight: 600, color: colors.red, marginBottom: '4px' }}>
+                        <div style={{ fontSize: '14px', fontWeight: 700, color: colors.red, marginBottom: '6px' }}>
                           {gap.dimension} ({gap.score.toFixed(1)}/10)
                         </div>
-                        <div style={{ fontSize: '11px', color: '#6b7280', lineHeight: 1.4 }}>
+                        <div style={{ fontSize: '14px', color: colors.mediumGray, lineHeight: 1.5, fontWeight: 500 }}>
                           {gap.issue}
                         </div>
                       </div>
@@ -1237,45 +1225,45 @@ export default function InvestorPortfolioDashboard() {
                   </div>
                 )}
                 
-                {/* Top Opportunities */}
+                {/* Top Opportunities - BIGGER, BOLDER */}
                 {selectedCompany.topOpportunities && selectedCompany.topOpportunities.length > 0 && (
                   <div>
-                    <div style={{ fontSize: '11px', fontWeight: 600, color: '#6b7280', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: colors.darkNavy, marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Improvement Opportunities
                     </div>
                     {selectedCompany.topOpportunities.map((opp, idx) => (
                       <div key={idx} style={{ 
-                        marginBottom: '10px', 
-                        padding: '10px 12px', 
+                        marginBottom: '12px', 
+                        padding: '14px 16px', 
                         backgroundColor: '#f0fdf4', 
-                        borderRadius: '6px',
-                        borderLeft: `3px solid ${colors.green}`
+                        borderRadius: '8px',
+                        borderLeft: `4px solid ${colors.green}`
                       }}>
-                        <div style={{ fontSize: '11px', fontWeight: 600, color: colors.green, marginBottom: '4px' }}>
+                        <div style={{ fontSize: '14px', fontWeight: 700, color: colors.green, marginBottom: '6px' }}>
                           {opp.dimension}: {opp.currentScore.toFixed(1)} → {opp.targetScore.toFixed(1)}
                         </div>
-                        <div style={{ fontSize: '11px', color: '#6b7280', marginBottom: '4px' }}>
+                        <div style={{ fontSize: '14px', color: colors.mediumGray, marginBottom: '6px', fontWeight: 500 }}>
                           {opp.metric}: {opp.impact}
                         </div>
-                        <div style={{ fontSize: '12px', fontWeight: 600, color: colors.coral }}>
-                          +{formatCurrency(opp.arrImpact)} ARR impact
+                        <div style={{ fontSize: '17px', fontWeight: 800, color: colors.coral }}>
+                          +{formatCurrency(opp.arrImpact)} ARR
                         </div>
                       </div>
                     ))}
                   </div>
                 )}
                 
-                {/* Action Button */}
+                {/* Action Button - BIGGER */}
                 <button style={{
                   width: '100%',
-                  padding: '12px',
-                  marginTop: '16px',
-                  fontSize: '12px',
-                  fontWeight: 600,
+                  padding: '14px',
+                  marginTop: '20px',
+                  fontSize: '14px',
+                  fontWeight: 700,
                   backgroundColor: colors.navy,
                   color: '#fff',
                   border: 'none',
-                  borderRadius: '6px',
+                  borderRadius: '8px',
                   cursor: 'pointer',
                   transition: 'background-color 0.15s ease'
                 }}
