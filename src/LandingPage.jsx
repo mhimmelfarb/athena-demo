@@ -12,7 +12,8 @@ function Home() {
 
             <section className="hero">
                 <div className="container">
-                    <h1>Portfolio-wide GTM strategy measurement. Smarter operating decisions.</h1>
+                    <p className="eyebrow">For Growth Equity & Middle Market PE Investors</p>
+                    <h1>Portfolio-wide GTM Strategy measurement. Smarter operating decisions.</h1>
                     <p className="subhead">Reliable visibility into portfolio GTM health showing where to focus to unlock value and tracks whether it's working.</p>
                     <div className="cta-group">
                         <a href="https://athena-demo-six.vercel.app" className="btn-primary" target="_blank" rel="noopener noreferrer">See the portfolio demo</a>

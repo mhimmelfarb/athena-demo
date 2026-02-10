@@ -49,6 +49,15 @@ header {
     background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
 }
 
+.eyebrow {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #3D5A80;
+    margin-bottom: 16px;
+}
+
 .hero h1 {
     font-size: 48px;
     font-weight: 800;
