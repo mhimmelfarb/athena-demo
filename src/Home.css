@@ -176,6 +176,16 @@ h2 {
     margin-right: auto;
 }
 
+.subhead-section {
+    font-size: 20px;
+    color: var(--color-text-light);
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 h3 {
     font-size: 28px;
     font-weight: 700;
