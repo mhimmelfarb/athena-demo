@@ -18,8 +18,8 @@ function Home() {
                     <div className="hero-content-wrapper">
                         <div className="hero-text">
                             <p className="eyebrow">For Growth Equity & Middle Market PE Investors</p>
-                            <h1>Portfolio-wide GTM Strategy measurement. Smarter operating decisions.</h1>
-                            <p className="subhead">Reliable visibility into portfolio GTM health showing where to focus to unlock value and track progress.</p>
+                            <h1>Your board metrics tell you WHICH companies are struggling. We tell you WHY they're struggling and WHAT to fix first.</h1>
+                            <p className="subhead">Systematic GTM Strategy diagnostics that show you the root cause and prioritized roadmap—not just more dashboards.</p>
                             <div className="cta-group">
                                 <a href="https://athena-demo-six.vercel.app" className="btn-primary" target="_blank" rel="noopener noreferrer">See the portfolio demo</a>
                                 <a href="https://calendly.com/michaelhimmelfarb" className="btn-secondary" target="_blank" rel="noopener noreferrer">Request a portfolio scan</a>
@@ -191,7 +191,17 @@ function Home() {
 
             <footer>
                 <div className="container">
-                    <p>© 2026 Remidi Works. All rights reserved.</p>
+                    <div className="footer-content">
+                        <div className="footer-logo">
+                            <img src="/rw-logo.png" alt="Remidi Works" className="footer-logo-img" />
+                            <span className="footer-logo-text">Remidi Works</span>
+                        </div>
+                        <div className="footer-info">
+                            <p>© 2026 Remidi Works. All rights reserved.</p>
+                            <p>Chicago, IL</p>
+                            <p>Contact: <a href="mailto:info@remidiworks.com" className="footer-link">info@remidiworks.com</a></p>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </>
