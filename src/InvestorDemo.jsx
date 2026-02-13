@@ -872,7 +872,7 @@ const PortfolioCompanyCard = ({ company, onClick, onClose }) => {
 
       {/* Action Buttons */}
       <a 
-        href="/fleetops-board-slide"
+        href="/fleetops-board-slide.html"
         target="_blank"
         rel="noopener noreferrer"
         style={{
@@ -1059,7 +1059,7 @@ export default function InvestorPortfolioDashboard() {
   
   // Calculate portfolio aggregates
   const avgHealth = portfolioData.reduce((sum, c) => sum + c.healthScore, 0) / portfolioData.length;
-  const avgRelative = portfolioData.reduce((sum, c) => sum + c.relativeScore, 0) / portfolioData.length;
+  const avgRelative = avgHealth - UNIVERSE_AVG;
   const totalUpside = portfolioData.reduce((sum, c) => sum + (c.estimatedUpside || 0), 0);
   const underperformers = portfolioData.filter(c => c.status === 'underperformer').sort((a, b) => (b.estimatedUpside || 0) - (a.estimatedUpside || 0));
   const priorityCompanies = portfolioData.filter(c => c.priority === 'critical' || c.priority === 'high').length;
