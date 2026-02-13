@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetOps - GTM Health Board Slide | Remidi Works</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #293241;
+            background: #f8fafc;
+        }
+
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            page-break-after: always;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #3D5A80 0%, #293241 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rw-badge {
+            background: #EE6C4D;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .rw-text {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .company-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 40px;
+        }
+
+        .score-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 40px;
+        }
+
+        .score-box {
+            text-align: right;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .score-value {
+            font-size: 64px;
+            font-weight: 800;
+            color: #C1292E;
+            line-height: 1;
+        }
+
+        .score-denominator {
+            font-size: 32px;
+            color: #6b7280;
+        }
+
+        .score-context {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* DIMENSIONS GRID */
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .dimension-card {
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid;
+        }
+
+        .dimension-card.red {
+            background: #fef2f2;
+            border-color: #ef4444;
+        }
+
+        .dimension-card.yellow {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .dimension-name {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .dimension-score {
+            font-size: 48px;
+            font-weight: 800;
+            color: #C1292E;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .dimension-change {
+            font-size: 14px;
+            color: #C1292E;
+            margin-bottom: 12px;
+        }
+
+        .dimension-meta {
+            font-size: 11px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #991b1b;
+            color: white;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tier-badge.yellow-badge {
+            background: #92400e;
+        }
+
+        /* CRITICAL FINDING */
+        .critical-section {
+            background: #fef2f2;
+            border: 3px solid #C1292E;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .critical-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .critical-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #C1292E;
+        }
+
+        .critical-source {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .critical-text {
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .critical-impact {
+            font-size: 15px;
+            font-weight: 700;
+            color: #C1292E;
+        }
+
+        /* PRIORITIES */
+        .priorities-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #293241;
+        }
+
+        .algorithm-badge {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .priority-item {
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 2px solid;
+        }
+
+        .priority-item.critical {
+            background: #fef2f2;
+            border-color: #991b1b;
+        }
+
+        .priority-item.high {
+            background: #fef3c7;
+            border-color: #92400e;
+        }
+
+        .priority-item.medium {
+            background: #f3f4f6;
+            border-color: #6b7280;
+        }
+
+        .priority-header {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .priority-icon {
+            font-size: 24px;
+        }
+
+        .priority-content {
+            flex: 1;
+        }
+
+        .priority-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .priority-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #293241;
+        }
+
+        .priority-label {
+            background: #C1292E;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .priority-label.high {
+            background: #92400e;
+        }
+
+        .priority-description {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .priority-impact {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .priority-confidence {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* IMPROVEMENT BOX */
+        .improvement-box {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .improvement-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .improvement-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #293241;
+        }
+
+        .improvement-item {
+            margin-bottom: 16px;
+        }
+
+        .improvement-label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .improvement-value {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .improvement-value.red {
+            color: #C1292E;
+        }
+
+        .improvement-value.green {
+            color: #2D936C;
+        }
+
+        .improvement-value.gray {
+            color: #6b7280;
+        }
+
+        /* INSIGHT BOX */
+        .insight-box {
+            background: #e0f2fe;
+            border: 2px solid #98C1D9;
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .insight-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .insight-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #293241;
+        }
+
+        .insight-quote {
+            font-size: 15px;
+            font-style: italic;
+            line-height: 1.7;
+            color: #374151;
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 30px 40px;
+            background: #f9fafb;
+            border-top: 2px solid #e5e7eb;
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        @media print {
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="rw-badge">RW</div>
+                <div class="rw-text">Remidi Works</div>
+            </div>
+            <h1 class="company-title">FleetOps</h1>
+            <p class="subtitle">GTM Strategy Health Assessment • Logistics Tech • Series A</p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- SCORE SECTION -->
+            <div class="score-section">
+                <div>
+                    <span class="status-badge">UNDERPERFORMER</span>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Commercial Maturity Score™</div>
+                    <div>
+                        <span class="score-value">3.9</span><span class="score-denominator">/10</span>
+                        <span style="color: #C1292E; font-size: 28px; margin-left: 10px;">↓</span>
+                    </div>
+                    <div class="score-context">Gap to benchmark: 2.3 points</div>
+                </div>
+            </div>
+
+            <!-- DIMENSIONS GRID -->
+            <div class="dimensions-grid">
+                <div class="dimension-card red">
+                    <div class="dimension-name">Value Articulation</div>
+                    <div class="dimension-score">3.2<span style="font-size: 24px; color: #6b7280;">/10</span></div>
+                    <div class="dimension-change">↓ from 3.5</div>
+                    <div class="dimension-meta">Peer: 5.2 | Top 25%: 7.1</div>
+                    <div class="dimension-meta">▶ See confidence basis</div>
+                    <span class="tier-badge">T1 • High</span>
+                </div>
+
+                <div class="dimension-card yellow">
+                    <div class="dimension-name">Differentiation</div>
+                    <div class="dimension-score">4.9<span style="font-size: 24px; color: #6b7280;">/10</span></div>
+                    <div class="dimension-meta">Peer: 5.5 | Top 25%: 7.8</div>
+                    <div class="dimension-meta">▶ See confidence basis</div>
+                    <span class="tier-badge yellow-badge">T2 • Medium</span>
+                </div>
+
+                <div class="dimension-card red">
+                    <div class="dimension-name">Buyer Enablement</div>
+                    <div class="dimension-score">2.8<span style="font-size: 24px; color: #6b7280;">/10</span></div>
+                    <div class="dimension-change">↓ from 3.2</div>
+                    <div class="dimension-meta">Peer: 5.8 | Top 25%: 7.5</div>
+                    <div class="dimension-meta">▶ See confidence basis</div>
+                    <span class="tier-badge">T1 • High</span>
+                </div>
+            </div>
+
+            <!-- CRITICAL FINDING -->
+            <div class="critical-section">
+                <div class="critical-header">
+                    <div class="critical-title">
+                        <span style="font-size: 24px;">🔴</span>
+                        <span>Critical Finding</span>
+                    </div>
+                    <div class="critical-source">™ Deal Velocity Analysis</div>
+                </div>
+                <p class="critical-text">
+                    Your case studies score <strong>2/10 on the CFO-Ready Index™</strong>. For $100-200K deals with CFO sign-off, benchmark is 7+.
+                </p>
+                <p class="critical-impact">
+                    <strong>Estimated impact:</strong> This gap is likely costing 15-25% of winnable deals.
+                </p>
+            </div>
+
+            <!-- PRIORITY RANKING -->
+            <div class="priorities-section">
+                <div class="section-header">
+                    <h2 class="section-title">Priority Ranking</h2>
+                    <div class="algorithm-badge">™ HGP Priority Algorithm</div>
+                </div>
+
+                <div class="priority-item critical">
+                    <div class="priority-header">
+                        <div class="priority-icon">🔴</div>
+                        <div class="priority-content">
+                            <div class="priority-title-row">
+                                <h3 class="priority-title">1. Case Study Strategy</h3>
+                                <span class="priority-label">CRITICAL</span>
+                            </div>
+                            <p class="priority-description">
+                                Transform operational stats → CFO-ready ROI proof using HGP Proof Point Protocol™
+                            </p>
+                            <div class="priority-impact">
+                                Est. +20-30% win rate
+                            </div>
+                            <div class="priority-confidence">
+                                <strong>✓ Why #1:</strong> Highest confidence (T1 data) + No dependencies + Largest revenue impact
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item high">
+                    <div class="priority-header">
+                        <div class="priority-icon">🟡</div>
+                        <div class="priority-content">
+                            <div class="priority-title-row">
+                                <h3 class="priority-title">2. Pricing Clarity</h3>
+                                <span class="priority-label high">HIGH</span>
+                            </div>
+                            <p class="priority-description">
+                                Publish pricing or ROI calculator showing fleet cost savings
+                            </p>
+                            <div class="priority-confidence">
+                                <strong>✓ Why #2:</strong> Medium confidence (T2 data) + Depends on value articulation work
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="priority-item medium">
+                    <div class="priority-header">
+                        <div class="priority-icon">⚪</div>
+                        <div class="priority-content">
+                            <div class="priority-title-row">
+                                <h3 class="priority-title">3. Value Articulation</h3>
+                            </div>
+                            <p class="priority-description">
+                                Connect route efficiency to customer P&L impact
+                            </p>
+                            <div class="priority-confidence">
+                                <strong>✓ Why #3:</strong> Lower priority: Addressed as part of case study project
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IMPROVEMENT & INSIGHT -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px;">
+                <div class="improvement-box">
+                    <div class="improvement-header">
+                        <span style="font-size: 24px;">📈</span>
+                        <h3 class="improvement-title">Projected Improvement</h3>
+                    </div>
+                    
+                    <div class="improvement-item">
+                        <div class="improvement-label">Current Score</div>
+                        <div class="improvement-value red">2.8/10</div>
+                    </div>
+
+                    <div class="improvement-item">
+                        <div class="improvement-label">After Case Study Project</div>
+                        <div class="improvement-value green">6.5/10</div>
+                    </div>
+
+                    <div class="improvement-item">
+                        <div class="improvement-label">Segment Benchmark</div>
+                        <div class="improvement-value gray">7/10</div>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-header">
+                        <span style="font-size: 24px;">💡</span>
+                        <h3 class="insight-title">Expert Insight</h3>
+                    </div>
+                    <p class="insight-quote">
+                        "Your 'route optimization' claims could translate to $200k+ annual savings for mid-size fleets. That's a story that closes deals — if you quantify it."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>This assessment is based on Remidi Works' proprietary GTM Strategy Health framework</p>
+            <p style="margin-top: 8px;">© 2026 Remidi Works • For Board Use Only</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -707,31 +707,57 @@ const CompanyDiagnostic = ({ company, onBack }) => {
 };
 
 // Portfolio Company Card Component (for right panel)
-const PortfolioCompanyCard = ({ company, onClick }) => {
+const PortfolioCompanyCard = ({ company, onClick, onClose }) => {
   return (
     <div 
-      onClick={onClick}
       style={{ 
         backgroundColor: '#fff', 
         borderRadius: '12px', 
         padding: '20px',
         boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-2px)';
-        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08)';
+        transition: 'all 0.2s ease',
+        position: 'relative'
       }}
     >
-      <div style={{ marginBottom: '18px', paddingBottom: '18px', borderBottom: '2px solid #e5e7eb' }}>
-        <h3 style={{ fontSize: '24px', fontWeight: 800, color: colors.darkNavy, margin: '0 0 8px 0' }}>
-          {company.name}
-        </h3>
+      {/* Close button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        style={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          background: 'none',
+          border: 'none',
+          fontSize: '24px',
+          color: '#9ca3af',
+          cursor: 'pointer',
+          padding: '4px',
+          lineHeight: 1,
+          zIndex: 10
+        }}
+        onMouseEnter={(e) => e.target.style.color = colors.darkNavy}
+        onMouseLeave={(e) => e.target.style.color = '#9ca3af'}
+      >
+        ×
+      </button>
+
+      <div 
+        onClick={onClick}
+        style={{ cursor: 'pointer' }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.opacity = '0.95';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.opacity = '1';
+        }}
+      >
+        <div style={{ marginBottom: '18px', paddingBottom: '18px', borderBottom: '2px solid #e5e7eb' }}>
+          <h3 style={{ fontSize: '24px', fontWeight: 800, color: colors.darkNavy, margin: '0 0 8px 0' }}>
+            {company.name}
+          </h3>
         <div style={{ fontSize: '14px', color: colors.mediumGray, marginBottom: '10px' }}>
           {company.sector} • {company.stage}
         </div>
@@ -842,41 +868,67 @@ const PortfolioCompanyCard = ({ company, onClick }) => {
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <button style={{
-        width: '100%',
-        padding: '12px',
-        marginBottom: '10px',
-        backgroundColor: '#fff',
-        color: colors.navy,
-        border: `2px solid ${colors.navy}`,
-        borderRadius: '8px',
-        fontSize: '14px',
-        fontWeight: 600,
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '6px'
-      }}>
-        <span>📊</span> View Board Slide
-      </button>
+      </div>
 
-      <button style={{
-        width: '100%',
-        padding: '12px',
-        backgroundColor: colors.coral,
-        color: '#fff',
-        border: 'none',
-        borderRadius: '8px',
-        fontSize: '14px',
-        fontWeight: 600,
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '6px'
-      }}>
+      {/* Action Buttons */}
+      <a 
+        href="/fleetops-board-slide"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          width: '100%',
+          padding: '12px',
+          marginBottom: '10px',
+          backgroundColor: '#fff',
+          color: colors.navy,
+          border: `2px solid ${colors.navy}`,
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: 600,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '6px',
+          textDecoration: 'none',
+          transition: 'all 0.2s'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.backgroundColor = colors.navy;
+          e.target.style.color = '#fff';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.backgroundColor = '#fff';
+          e.target.style.color = colors.navy;
+        }}
+      >
+        <span>📊</span> View Board Slide
+      </a>
+
+      <button 
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+        style={{
+          width: '100%',
+          padding: '12px',
+          backgroundColor: colors.coral,
+          color: '#fff',
+          border: 'none',
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: 600,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '6px',
+          transition: 'all 0.2s'
+        }}
+        onMouseEnter={(e) => e.target.style.backgroundColor = '#d85a3d'}
+        onMouseLeave={(e) => e.target.style.backgroundColor = colors.coral}
+      >
         Improve Your Performance →
       </button>
     </div>
@@ -1504,6 +1556,7 @@ export default function InvestorPortfolioDashboard() {
                   const companySlug = selectedCompany.name.toLowerCase().replace(/\s+/g, '');
                   navigate(`/investor?company=${companySlug}`);
                 }}
+                onClose={() => setSelectedCompany(null)}
               />
             )}
           </div>
